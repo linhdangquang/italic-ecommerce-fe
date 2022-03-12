@@ -16,3 +16,15 @@ console.log(sum(1, 2))
 // const myArr: number[] = [1, 2, 3];
 // const stringArr: string[] = ['a', 'b', 'c'];
 // const objectArr: object[] = [{}, {}];
+
+type User = {
+  name: string,
+  age: number,
+}
+
+const getUsers = <T extends User>(users: T[]) => {
+  console.log(users.map(user => user.name))
+  return users.map(user => user.name)
+}
+
+getUsers([{name: 'John', age: 30}, {name: 'Jane', age: 25}])

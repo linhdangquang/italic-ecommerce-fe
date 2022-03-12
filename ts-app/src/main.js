@@ -8,10 +8,8 @@ function sum(a, b) {
     return a + b;
 }
 console.log(sum(1, 2));
-// const name: string = 'John';
-// const age: number = 30;
-// const status: boolean = true;
-// const myObj: object = {};
-// const myArr: number[] = [1, 2, 3];
-// const stringArr: string[] = ['a', 'b', 'c'];
-// const objectArr: object[] = [{}, {}];
+var getUsers = function (users) {
+    console.log(users.map(function (user) { return user.name; }));
+    return users.map(function (user) { return user.name; });
+};
+getUsers([{ name: 'John', age: 30 }, { name: 'Jane', age: 25 }]);
