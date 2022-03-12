@@ -29,7 +29,8 @@
         "prettier/prettier": [
             "error",
             {
-                "semi": true
+                "semi": true,
+                "singleQuote": true
             }
         ],
         "react/jsx-filename-extension": [
