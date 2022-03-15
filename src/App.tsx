@@ -1,40 +1,43 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { NavLink, Route, Routes } from 'react-router-dom';
+import AboutPage from './pages/AboutPage';
+import Home from './pages/Home';
+import ProductsPage from './pages/ProductsPage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+    <div className="mx-auto">
+      <div className="flex items-center justify-center bg-gradient-to-r from-pink-400 to-rose-400">
+        <nav>
+          <ul className="flex">
+            <NavLink
+              className="navLink mx-1 py-4 px-4 text-lg  font-semibold text-white hover:bg-white hover:text-black"
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="navLink mx-1 py-4 px-4 text-lg font-semibold text-white  hover:bg-white hover:text-black"
+              to="/products"
+            >
+              Products
+            </NavLink>
+            <NavLink
+              className="navLink mx-1 py-4 px-4 text-lg font-semibold text-white  hover:bg-white hover:text-black"
+              to="/about"
+            >
+              About
+            </NavLink>
+          </ul>
+        </nav>
+      </div>
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/about" element={<AboutPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }
