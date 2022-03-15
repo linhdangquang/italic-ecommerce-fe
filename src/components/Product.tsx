@@ -1,18 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Product = {
-  id: number;
+  id: string;
   name: string;
   price: string;
 };
 type Props = {
-  key: number;
   product: Product;
 };
 
-function Product(props: Props) {
-  console.log(props);
-  return <div>Product</div>;
+function Product({ product }: Props) {
+  const { name, price, id } = product;
+  return (
+    <div>
+      <h1>Product</h1>
+      <p>{name}</p>
+      <p>{price}</p>
+      <Link to={`/products/${id}`}>BUY</Link>
+    </div>
+  );
 }
 
 export default Product;

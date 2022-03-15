@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
-import Home from './pages/Home';
+import HomePage from './pages/HomePage';
 import ProductsPage from './pages/ProductsPage';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
       </div>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/products" element={<ProductsPage />} />
           <Route path="/about" element={<AboutPage />} />
         </Routes>

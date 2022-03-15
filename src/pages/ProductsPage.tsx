@@ -3,23 +3,23 @@ import Product from '../components/Product';
 
 function ProductsPage() {
   type Product = {
-    id: number;
+    id: string;
     name: string;
     price: string;
   };
   const [products, setProducts] = useState<Product[]>([
     {
-      id: 1,
+      id: '1',
       name: 'Product 1',
       price: '$100',
     },
     {
-      id: 2,
+      id: '2',
       name: 'Product 2',
       price: '$200',
     },
     {
-      id: 3,
+      id: '3',
       name: 'Product 3',
       price: '$300',
     },
@@ -29,9 +29,7 @@ function ProductsPage() {
       <h1>Products</h1>
       <div>
         {products.map((product) => (
-          <div>
-            <Product key={product.id} product={product} />
-          </div>
+          <Product key={product.id} product={product} />
         ))}
       </div>
     </div>
