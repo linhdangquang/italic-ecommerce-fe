@@ -52,7 +52,12 @@
         "no-shadow": "off",
         "@typescript-eslint/no-shadow": [
             "off"
-        ]
+        ],
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/no-noninteractive-tabindex": [
+            "off"
+          ]
+
     },
     "settings": {
         "import/resolver": {

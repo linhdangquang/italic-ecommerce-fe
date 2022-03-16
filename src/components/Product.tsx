@@ -17,7 +17,9 @@ function Product({ product }: Props) {
       <h1>Product</h1>
       <p>{name}</p>
       <p>{price}</p>
-      <Link to={`/products/${id}`}>BUY</Link>
+      <Link to={`/products/${id}`} className="btn">
+        BUY
+      </Link>
     </div>
   );
 }

@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Product from '../components/Product';
 
 function ProductsPage() {
-  type Product = {
+  interface Product {
     id: string;
     name: string;
     price: string;
-  };
+  }
   const [products, setProducts] = useState<Product[]>([
     {
       id: '1',
