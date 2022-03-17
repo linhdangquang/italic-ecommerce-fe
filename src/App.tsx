@@ -1,19 +1,26 @@
 import React from 'react';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
+import AdminLayout from './pages/layouts/AdminLayout';
+import WebLayout from './pages/layouts/WebLayout';
 import ProductsPage from './pages/ProductsPage';
 
 function App() {
   return (
     <div className="mx-auto">
-      <Header />
       <main>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/" element={<WebLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="about" element={<AboutPage />} />
+          </Route>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Navigate to="dashboard" />} />
+            <Route path="dashboard" element={<h1>DASHBOARD</h1>} />
+          </Route>
         </Routes>
       </main>
     </div>
