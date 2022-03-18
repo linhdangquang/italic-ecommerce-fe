@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
+import Header from './components/Header/Header';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import AdminLayout from './pages/layouts/AdminLayout';
