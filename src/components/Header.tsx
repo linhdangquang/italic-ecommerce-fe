@@ -3,38 +3,46 @@ import { Link, NavLink } from 'react-router-dom';
 
 function Header() {
   return (
-    <div className="Header">
-      <div className="navbar rounded-box mb-40 bg-base-100 shadow-xl">
-        <div className="navbar-start">
-          <Link to="/" className="btn btn-ghost text-xl normal-case">
+    <div className="header shadow-md">
+      <div className="flex items-center border-b bg-base-100 py-2 px-20">
+        <div className="pr-2">
+          <NavLink to="/" className="text-xl font-black normal-case">
             LinhDQ
-          </Link>
+          </NavLink>
         </div>
-        <div className="navbar-center">
-          <ul className="menu menu-horizontal p-0">
-            <li>
-              <NavLink to="/" className="NavLink active:bg-pink-300">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="products" className="NavLink active:bg-pink-300">
-                Products
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="about" className="NavLink active:bg-pink-300">
-                About
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="admin" className="NavLink active:bg-pink-300">
-                Dashboard
-              </NavLink>
-            </li>
-          </ul>
+        <div className="  w-full flex-1 items-center px-2 ">
+          <form action="">
+            <div className="form-control w-full border-0 ">
+              <div className="input-group relative  ">
+                <input
+                  type="text"
+                  placeholder="Search for products, categories, brands and more"
+                  className="input h-[40px] w-full !rounded-full border-2 bg-gray-100 !outline-0 ring-0 placeholder:text-slate-600  focus:border-blue-600 "
+                />
+                <button
+                  type="button"
+                  className=" absolute right-2 h-full border-0  bg-transparent"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-gray-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="navbar-end">
+        <div className="flex">
           <div className="dropdown-end dropdown">
             <button
               type="button"
@@ -106,6 +114,46 @@ function Header() {
               </li>
             </ul>
           </div>
+        </div>
+      </div>
+      <div className="flex justify-between overflow-hidden px-20 py-[1px]  ">
+        <ul className="flex gap-6 ">
+          <li>
+            <NavLink
+              to="products"
+              className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+            >
+              Products
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="about"
+              className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="admin"
+              className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+            >
+              Dashboard
+            </NavLink>
+          </li>
+        </ul>
+        <div className="flex items-center justify-center">
+          <ul>
+            <li>
+              <Link
+                to="/"
+                className="  rounded-full bg-gray-100 p-1 px-2 text-[13px]  italic  antialiased transition-transform hover:text-black active:scale-90"
+              >
+                Invite a friend
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </div>

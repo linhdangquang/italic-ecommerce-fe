@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
+import { ProductType } from '../types';
 import Product from '../components/Product';
 
 function ProductsPage() {
-  interface Product {
-    id: string;
-    name: string;
-    price: string;
-  }
-  const [products, setProducts] = useState<Product[]>([
+  const [products, setProducts] = useState<ProductType[]>([
     {
       id: '1',
       name: 'Product 1',

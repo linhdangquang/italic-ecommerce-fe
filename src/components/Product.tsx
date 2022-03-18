@@ -1,13 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ProductType } from '../types';
 
-type Product = {
-  id: string;
-  name: string;
-  price: string;
-};
 type Props = {
-  product: Product;
+  product: ProductType;
 };
 
 function Product({ product }: Props) {
