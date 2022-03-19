@@ -11,7 +11,7 @@ function BottomNav() {
           <li>
             <Link
               to="/"
-              className="  rounded-full bg-gray-100 p-1 px-2 text-[13px]  italic  antialiased transition-transform hover:text-black active:scale-90"
+              className="rounded-full bg-gray-100 p-1 px-2 text-[13px]  italic  antialiased transition-transform hover:text-black active:scale-90"
             >
               Invite a friend
             </Link>

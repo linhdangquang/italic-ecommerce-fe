@@ -22,6 +22,7 @@
         "react-hooks"
     ],
     "rules": {
+        "import/no-unresolved": "off",
         "import/extensions": [
             "error",
             "ignorePackages",
@@ -56,11 +57,13 @@
         "jsx-a11y/anchor-is-valid": "off",
         "jsx-a11y/no-noninteractive-tabindex": [
             "off"
-          ],
-          "no-underscore-dangle": [
+        ],
+        "no-underscore-dangle": [
             "off"
-          ]
-
+        ],
+        "react/no-unescaped-entities": [
+            "off"
+        ]
     },
     "settings": {
         "import/resolver": {
