@@ -9,7 +9,7 @@ function SearchForm() {
             <input
               type="text"
               placeholder="Search for products, categories, brands and more"
-              className="input h-[40px] w-full !rounded-full border-2 bg-gray-100 !outline-0 ring-0 placeholder:text-slate-600  focus:border-blue-600 focus:bg-inherit "
+              className="input h-[40px] w-full !rounded-full border-2 bg-gray-100 !outline-0 ring-0 placeholder:text-slate-600  focus:border-sky-700 focus:bg-inherit "
             />
             <button
               type="button"

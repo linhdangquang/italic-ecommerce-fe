@@ -56,6 +56,9 @@
         "jsx-a11y/anchor-is-valid": "off",
         "jsx-a11y/no-noninteractive-tabindex": [
             "off"
+          ],
+          "no-underscore-dangle": [
+            "off"
           ]
 
     },

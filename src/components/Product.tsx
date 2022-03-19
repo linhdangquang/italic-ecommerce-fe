@@ -7,13 +7,14 @@ type Props = {
 };
 
 function Product({ product }: Props) {
-  const { name, price, id } = product;
+  const { name, price, _id, image } = product;
   return (
     <div>
-      <h1>Product</h1>
       <p>{name}</p>
       <p>{price}</p>
-      <Link to={`/products/${id}`} className="btn">
+      <img src={image} alt={image} />
+
+      <Link to={`/products/${_id}`} className="btn">
         BUY
       </Link>
     </div>

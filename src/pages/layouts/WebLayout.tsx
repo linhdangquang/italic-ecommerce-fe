@@ -8,7 +8,7 @@ function WebLayout(props: Props) {
   return (
     <div className="mx-auto font-OpenSans">
       <Header />
-      <main>
+      <main className="px-20 py-4">
         <Outlet />
       </main>
     </div>
