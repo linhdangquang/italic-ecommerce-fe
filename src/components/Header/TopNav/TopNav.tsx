@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Cart from './Cart';
 import SearchForm from './SearchForm';
 import User from './User';
@@ -15,8 +15,15 @@ function TopNav() {
       <SearchForm />
       <div className="flex items-center">
         <Cart />
+        {/* <div className="flex items-center justify-center">
+          <Link to="/login" className="px-2 text-sm font-black normal-case">
+            Login
+          </Link>
+          <Link to="/login" className="px-2 text-sm font-black normal-case">
+            Signup
+          </Link>
+        </div> */}
         <div>
-          {/* <a href="">SignIn</a> */}
           <User />
         </div>
       </div>

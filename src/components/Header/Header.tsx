@@ -4,7 +4,7 @@ import TopNav from './TopNav/TopNav';
 
 function Header() {
   return (
-    <div className="header shadow-md">
+    <div className="header">
       <TopNav />
       <BottomNav />
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function User() {
   return (
-    <div className="dropdown-end  dropdown">
+    <div className="dropdown-end dropdown">
       <button
         type="button"
         tabIndex={0}
@@ -14,13 +14,10 @@ function User() {
       </button>
       <ul
         tabIndex={0}
-        className="dropdown-content menu rounded-box menu-compact w-52 bg-base-100 p-2 shadow"
+        className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"
       >
         <li>
-          <a className="justify-between">
-            Profile
-            <span className="badge">New</span>
-          </a>
+          <a className="justify-between">Profile</a>
         </li>
         <li>
           <a>Settings</a>
