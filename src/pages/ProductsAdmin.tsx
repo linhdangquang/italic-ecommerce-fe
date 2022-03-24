@@ -1,5 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ProductType } from '../types';
 
 type Props = {
@@ -40,6 +41,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
                 >
                   Delete
                 </button>
+                <Link to={`${product._id}/edit`}>Edit</Link>
               </td>
             </tr>
           ))}
