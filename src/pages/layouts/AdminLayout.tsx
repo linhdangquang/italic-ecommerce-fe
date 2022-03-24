@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { RiHome6Line } from 'react-icons/ri';
 
 type Props = any;
 
@@ -22,8 +23,8 @@ function AdminLayout(props: Props) {
                   className="block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
                 >
                   <span className="flex items-center pl-12 text-sm font-medium">
-                    <i className=" text-xl" />
-                    dasljdksa
+                    <RiHome6Line size="1.25rem" />
+                    Home
                   </span>
                 </Link>
               </li>
