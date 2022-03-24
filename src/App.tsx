@@ -10,6 +10,7 @@ import { ProductType } from './types';
 import { delProduct, getAllProducts, updateProduct } from './api/products';
 import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './pages/EditProduct';
+import PrivateRouter from './components/PrivateRouter';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -47,7 +48,14 @@ function App() {
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="about" element={<AboutPage />} />
           </Route>
-          <Route path="admin" element={<AdminLayout />}>
+          <Route
+            path="admin"
+            element={
+              <PrivateRouter>
+                <AdminLayout />
+              </PrivateRouter>
+            }
+          >
             <Route index element={<Navigate to="dashboard" />} />
             <Route path="dashboard" element={<h1>DASHBOARD</h1>} />
             <Route path="products">
