@@ -8,7 +8,10 @@ function TopNav() {
   return (
     <div className="flex items-center border-b bg-base-100 py-2 px-20">
       <div className="pr-2">
-        <NavLink to="/" className="text-xl font-black normal-case">
+        <NavLink
+          to="/"
+          className="font-DancingScript text-3xl font-bold normal-case"
+        >
           LinhDQ
         </NavLink>
       </div>
