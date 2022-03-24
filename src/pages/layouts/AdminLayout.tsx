@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { RiHome6Line } from 'react-icons/ri';
+import { AiOutlineInbox } from 'react-icons/ai';
 
 type Props = any;
 
@@ -18,17 +19,27 @@ function AdminLayout(props: Props) {
             </div>
             <ul className="flex flex-col py-4">
               <li>
-                <Link
-                  to="/"
-                  className="block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+                <NavLink
+                  to="/admin/dashboard"
+                  className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
                 >
                   <span className="flex items-center pl-12 text-sm font-medium">
                     <RiHome6Line size="1.25rem" />
                     Home
                   </span>
-                </Link>
+                </NavLink>
               </li>
-
+              <li>
+                <NavLink
+                  to="/admin/products"
+                  className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+                >
+                  <span className="flex items-center pl-12 text-sm font-medium">
+                    <AiOutlineInbox size="1.25rem" />
+                    Products
+                  </span>
+                </NavLink>
+              </li>
               <li>
                 <a className="logout-btn block h-12 transform cursor-pointer items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800">
                   <span className="flex items-center pl-12 text-sm font-medium">

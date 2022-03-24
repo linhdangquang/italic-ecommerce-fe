@@ -5,7 +5,7 @@ import { getOneProduct } from '../api/products';
 import { ProductType } from '../types';
 
 type ProductEditProps = {
-  onEdit: (data: ProductType) => void;
+  onEdit: (product: ProductType) => void;
 };
 
 type FormInputs = {
@@ -34,9 +34,9 @@ function EditProduct({ onEdit }: ProductEditProps) {
     getProduct();
   }, [id]);
 
-  const onSubmit: SubmitHandler<FormInputs> = (data: ProductType) => {
-    console.log(data);
-    onEdit(data);
+  const onSubmit: SubmitHandler<FormInputs> = (product: ProductType) => {
+    console.log(product);
+    onEdit(product);
     navigate('/admin/products');
   };
 

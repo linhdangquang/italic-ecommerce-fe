@@ -23,7 +23,7 @@ function App() {
   }, []);
   const removeProduct = (id: string) => {
     // delete in api
-    // delProduct(id);
+    delProduct(id);
 
     // delete in state
     setProducts(products.filter((product) => product._id !== id));
