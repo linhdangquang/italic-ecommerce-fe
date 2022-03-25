@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import AdminLayout from './pages/layouts/AdminLayout/AdminLayout';
-import WebLayout from './pages/layouts/WebLayout';
+import WebLayout from './pages/layouts/WebLayout/WebLayout';
 import ProductDetail from './pages/ProductDetail';
 import ProductsPage from './pages/ProductsPage';
 import { ProductType } from './types';
