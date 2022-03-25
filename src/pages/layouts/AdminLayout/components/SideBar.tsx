@@ -10,9 +10,7 @@ function SideBar(props: Props) {
     <nav className="flex min-h-screen w-64 flex-row pr-14 ">
       <div className="fixed top-0 left-0 z-50 flex h-full min-h-screen w-56 flex-col overflow-hidden rounded-r-3xl bg-white  ">
         <div className="flex h-20 items-center justify-center shadow-md">
-          <h1 className="text-3xl font-black uppercase text-pink-600">
-            LinhDQ
-          </h1>
+          <h1 className="text-3xl font-black uppercase text-sky-600">LinhDQ</h1>
         </div>
         <ul className="flex flex-col py-4">
           <li>

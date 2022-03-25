@@ -4,7 +4,7 @@ type Props = any;
 
 function Header(props: Props) {
   return (
-    <div className=" mx-auto w-full rounded-l-2xl bg-pink-500 bg-gradient-to-br from-pink-300 to-pink-600 pb-24 shadow-md md:px-4">
+    <div className=" mx-auto w-full rounded-l-2xl bg-blue-500 bg-gradient-to-br from-sky-300 to-blue-600 pb-24 shadow-md md:px-4">
       <nav className="flex items-center justify-between py-8">
         <h1 className="px-4 pt-4 text-2xl uppercase text-white">Dashboard</h1>
         <div className="mr-4 flex items-center gap-2">
@@ -16,7 +16,7 @@ function Header(props: Props) {
               <input
                 type="text"
                 placeholder="Search here..."
-                className="rounded border-0 py-2 pl-4 outline-none placeholder:italic  focus:ring-2 focus:ring-pink-700"
+                className="rounded border-0 py-2 pl-4 outline-none placeholder:italic  focus:ring-2 focus:ring-sky-700"
               />
             </div>
           </form>

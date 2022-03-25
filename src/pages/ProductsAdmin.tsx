@@ -23,13 +23,25 @@ function ProductsAdmin({ products, onRemove }: Props) {
       field: 'id',
       headerName: 'ID',
       width: 100,
+      headerClassName: 'bg-slate-200',
     },
-    { field: 'name', headerName: 'Name', width: 500 },
-    { field: 'price', headerName: 'Price', width: 100 },
+    {
+      field: 'name',
+      headerName: 'Name',
+      width: 500,
+      headerClassName: 'bg-slate-200',
+    },
+    {
+      field: 'price',
+      headerName: 'Price',
+      width: 100,
+      headerClassName: 'bg-slate-200',
+    },
     {
       field: 'image',
       headerName: 'Image',
       width: 100,
+      headerClassName: 'bg-slate-200',
       renderCell: (params: GridValueGetterParams) => (
         <img src={params.value} alt={params.value} />
       ),
@@ -38,6 +50,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
       field: '_id',
       width: 250,
       headerName: 'Actions',
+      headerClassName: 'bg-slate-200',
       renderCell: (params: GridValueGetterParams) => (
         <div>
           <Link to={`/admin/products/${params.value}/edit`}>
@@ -68,15 +81,19 @@ function ProductsAdmin({ products, onRemove }: Props) {
     ...product,
     id: idx + 1,
   }));
+
+  const [pageSize, setPageSize] = React.useState<number>(10);
   return (
     <div
-      style={{ height: 680, width: '100%', minWidth: 650, overflow: 'auto' }}
+      style={{ height: 720, width: '100%', minWidth: 650 }}
       className="my-4 rounded-md pb-12"
     >
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
           <div className="flex justify-between">
-            <h1 className="p-2 text-center text-xl font-bold">Products List</h1>
+            <h1 className="p-2 text-center text-xl font-bold text-gray-600">
+              Products List
+            </h1>
             <Link to="/admin/products/add">
               <Button
                 variant="contained"
@@ -89,12 +106,20 @@ function ProductsAdmin({ products, onRemove }: Props) {
             </Link>
           </div>
           <DataGrid
-            className="bg-pink- mx-2 shadow"
+            className="mx-2 "
             rows={rows}
             columns={columns}
-            pageSize={10}
+            pageSize={pageSize}
+            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+            rowsPerPageOptions={[10, 20, 50, 100]}
             components={{
               Toolbar: GridToolbar,
+            }}
+            sx={{
+              boxShadow: '2',
+              '& .MuiDataGrid-cell:hover': {
+                color: 'primary.main',
+              },
             }}
           />
         </div>

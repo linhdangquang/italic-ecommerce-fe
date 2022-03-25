@@ -8,5 +8,5 @@
 }
 
 .AdminLayout__link.active span {
-  @apply text-pink-500 font-bold disabled cursor-not-allowed
+  @apply text-sky-500 font-bold disabled cursor-not-allowed
 }
