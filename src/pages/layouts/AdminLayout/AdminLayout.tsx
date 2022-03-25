@@ -1,6 +1,5 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import Footer from './components/Footer';
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 
@@ -15,7 +14,6 @@ function AdminLayout(props: Props) {
         <div className="main-content py-2">
           <Outlet />
         </div>
-        <Footer />
       </div>
     </div>
   );

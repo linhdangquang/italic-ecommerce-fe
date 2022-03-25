@@ -23,25 +23,25 @@ function ProductsAdmin({ products, onRemove }: Props) {
       field: 'id',
       headerName: 'ID',
       width: 100,
-      headerClassName: 'bg-slate-200',
+      headerClassName: 'bg-sky-400 text-white',
     },
     {
       field: 'name',
       headerName: 'Name',
       width: 500,
-      headerClassName: 'bg-slate-200',
+      headerClassName: 'bg-sky-400 text-white',
     },
     {
       field: 'price',
       headerName: 'Price',
       width: 100,
-      headerClassName: 'bg-slate-200',
+      headerClassName: 'bg-sky-400 text-white',
     },
     {
       field: 'image',
       headerName: 'Image',
       width: 100,
-      headerClassName: 'bg-slate-200',
+      headerClassName: 'bg-sky-400 text-white',
       renderCell: (params: GridValueGetterParams) => (
         <img src={params.value} alt={params.value} />
       ),
@@ -50,7 +50,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
       field: '_id',
       width: 250,
       headerName: 'Actions',
-      headerClassName: 'bg-slate-200',
+      headerClassName: 'bg-sky-400 text-white',
       renderCell: (params: GridValueGetterParams) => (
         <div>
           <Link to={`/admin/products/${params.value}/edit`}>
@@ -93,7 +93,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
           <div className="flex justify-between">
-            <h1 className="p-2 text-center text-2xl font-bold text-gray-800">
+            <h1 className="p-2 text-center text-3xl font-bold text-gray-800 antialiased">
               Products
             </h1>
             <Link to="/admin/products/add">
@@ -112,6 +112,13 @@ function ProductsAdmin({ products, onRemove }: Props) {
             rows={rows}
             columns={columns}
             pageSize={pageSize}
+            classes={{
+              root: 'bg-sky-100',
+              main: 'bg-sky-200',
+              sortIcon: 'text-white',
+              overlay: 'bg-gray-100',
+              columnHeaderTitle: '!font-semibold',
+            }}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
             rowsPerPageOptions={[10, 20, 50, 100]}
             components={{
