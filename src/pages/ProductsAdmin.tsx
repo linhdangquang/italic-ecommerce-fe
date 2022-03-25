@@ -59,10 +59,13 @@ function ProductsAdmin({ products, onRemove }: Props) {
       ),
     },
   ];
-  const rows = products.map((product, idx) => ({ ...product, id: idx + 1 }));
+  const rows: ProductType[] = products.map((product, idx) => ({
+    ...product,
+    id: idx + 1,
+  }));
   return (
     <div
-      style={{ height: 600, width: '100%' }}
+      style={{ height: 680, width: '100%', minWidth: 650, overflow: 'auto' }}
       className="my-4 rounded-md pb-12"
     >
       <div style={{ display: 'flex', height: '100%' }}>
@@ -85,7 +88,6 @@ function ProductsAdmin({ products, onRemove }: Props) {
             rows={rows}
             columns={columns}
             pageSize={10}
-            rowsPerPageOptions={[]}
           />
         </div>
       </div>
