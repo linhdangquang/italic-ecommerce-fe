@@ -56,9 +56,10 @@ function ProductsAdmin({ products, onRemove }: Props) {
           <Link to={`/admin/products/${params.value}/edit`}>
             <Button
               variant="contained"
-              color="secondary"
+              color="info"
               style={{ marginRight: '.75rem' }}
               startIcon={<EditIcon />}
+              size="small"
             >
               Edit
             </Button>
@@ -69,6 +70,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
             }}
             variant="contained"
             color="error"
+            size="small"
             startIcon={<DeleteIcon />}
           >
             Delete
@@ -86,18 +88,18 @@ function ProductsAdmin({ products, onRemove }: Props) {
   return (
     <div
       style={{ height: 720, width: '100%', minWidth: 650 }}
-      className="my-4 rounded-md pb-12"
+      className="my-4 rounded-md px-4  pb-12"
     >
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
           <div className="flex justify-between">
-            <h1 className="p-2 text-center text-xl font-bold text-gray-600">
-              Products List
+            <h1 className="p-2 text-center text-2xl font-bold text-gray-800">
+              Products
             </h1>
             <Link to="/admin/products/add">
               <Button
                 variant="contained"
-                color="primary"
+                color="success"
                 style={{ marginRight: '.75rem' }}
                 startIcon={<AddBoxIcon />}
               >

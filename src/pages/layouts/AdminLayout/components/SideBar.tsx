@@ -35,14 +35,6 @@ function SideBar(props: Props) {
               </span>
             </NavLink>
           </li>
-          <li>
-            <a className="logout-btn block h-12 transform cursor-pointer items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800">
-              <span className="flex items-center pl-12 text-sm font-medium">
-                <i className="ri-logout-circle-line text-xl" />
-                Logout
-              </span>
-            </a>
-          </li>
         </ul>
       </div>
     </nav>
