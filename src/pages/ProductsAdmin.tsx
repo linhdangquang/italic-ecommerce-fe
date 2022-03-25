@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import {
-  DataGrid,
-  GridActionsCellItem,
-  GridColDef,
-  GridValueGetterParams,
-} from '@mui/x-data-grid';
+import React from 'react';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import AddBoxIcon from '@mui/icons-material/AddBox';
 import { ProductType } from '../types';
 
 type Props = {
@@ -34,7 +31,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
     },
     {
       field: '_id',
-      width: 200,
+      width: 250,
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
@@ -43,6 +40,7 @@ function ProductsAdmin({ products, onRemove }: Props) {
               variant="contained"
               color="secondary"
               style={{ marginRight: '.75rem' }}
+              startIcon={<EditIcon />}
             >
               Edit
             </Button>
@@ -65,11 +63,25 @@ function ProductsAdmin({ products, onRemove }: Props) {
   return (
     <div
       style={{ height: 600, width: '100%' }}
-      className="shadow-md shadow-slate-100 drop-shadow-lg"
+      className="my-4 rounded-md pb-12"
     >
       <div style={{ display: 'flex', height: '100%' }}>
         <div style={{ flexGrow: 1 }}>
+          <div className="flex justify-between">
+            <h1 className="p-2 text-center text-xl font-bold">Products List</h1>
+            <Link to="/admin/products/add">
+              <Button
+                variant="contained"
+                color="primary"
+                style={{ marginRight: '.75rem' }}
+                startIcon={<AddBoxIcon />}
+              >
+                Add
+              </Button>
+            </Link>
+          </div>
           <DataGrid
+            className="bg-pink- mx-2 shadow"
             rows={rows}
             columns={columns}
             pageSize={10}
