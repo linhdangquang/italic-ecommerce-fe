@@ -1,5 +1,10 @@
 import React from 'react';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import {
+  DataGrid,
+  GridColDef,
+  GridValueGetterParams,
+  GridToolbar,
+} from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -88,6 +93,9 @@ function ProductsAdmin({ products, onRemove }: Props) {
             rows={rows}
             columns={columns}
             pageSize={10}
+            components={{
+              Toolbar: GridToolbar,
+            }}
           />
         </div>
       </div>
