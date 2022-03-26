@@ -118,16 +118,22 @@ function ProductsAdmin({ products, onRemove }: Props) {
               columnSeparator: 'hidden',
               cell: 'text-gray-700',
               footerContainer: 'border-t-0 text-gray-500',
-              toolbarContainer: 'gap-1 hover:bg-gray-100',
+              toolbarContainer: 'gap-1',
             }}
             onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
             rowsPerPageOptions={[10, 20, 50, 100]}
             components={{
               Toolbar: GridToolbar,
             }}
-            // sx={{
-            //   boxShadow: '2',
-            // }}
+            componentsProps={{
+              toolbar: {
+                sx: {
+                  '& .MuiButton-root': {
+                    fontWeight: 600,
+                  },
+                },
+              },
+            }}
           />
         </div>
       </div>
