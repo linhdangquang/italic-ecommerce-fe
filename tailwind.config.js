@@ -14,5 +14,6 @@ module.exports = {
       },
     },
   },
+  important: '#root',
   plugins: [require('daisyui')],
 };

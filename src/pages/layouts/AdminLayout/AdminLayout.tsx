@@ -7,7 +7,7 @@ type Props = any;
 
 function AdminLayout(props: Props) {
   return (
-    <div className="container-fluid admin-container font-fira flex flex-row bg-gray-100">
+    <div className="container-fluid admin-container font-fira flex flex-row bg-gray-100 font-OpenSans">
       <SideBar />
       <div className="main-content relative ml-4 w-full rounded-l-2xl bg-white">
         <Header />
