@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
@@ -22,12 +25,29 @@ function App() {
     getProducts();
   }, []);
   const removeProduct = (id: string) => {
-    // delete in api
-    delProduct(id);
+    const deleteSwal = withReactContent(Swal);
 
-    // delete in state
-    setProducts(products.filter((product) => product._id !== id));
-    console.log(id);
+    deleteSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          deleteSwal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          // delete in api
+          // await delProduct(id);
+
+          // // delete in state
+          setProducts(products.filter((product) => product._id !== id));
+          console.log(id);
+        }
+      });
   };
 
   const onEditHandler = async (product: ProductType) => {
