@@ -14,6 +14,7 @@ import { delProduct, getAllProducts, updateProduct } from './api/products';
 import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './pages/EditProduct';
 import PrivateRouter from './components/PrivateRouter';
+import SignInPage from './pages/SignInPage';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -50,6 +51,10 @@ function App() {
       });
   };
 
+  const onAddHandler = (product: ProductType) => {
+    // set token api
+  };
+
   const onEditHandler = async (product: ProductType) => {
     const { data } = await updateProduct(product);
     console.log(data);
@@ -67,6 +72,7 @@ function App() {
             <Route path="products" element={<ProductsPage />} />
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="about" element={<AboutPage />} />
+            <Route path="signin" element={<SignInPage />} />
           </Route>
           <Route
             path="admin"
@@ -85,6 +91,7 @@ function App() {
                   <ProductsAdmin products={products} onRemove={removeProduct} />
                 }
               />
+              <Route path="add" onAdd={onAddHandler} />
               <Route
                 path=":id/edit"
                 element={<EditProduct onEdit={onEditHandler} />}
