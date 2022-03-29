@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiOutlineInbox } from 'react-icons/ai';
+import { AiOutlineInbox, AiTwotoneWarning } from 'react-icons/ai';
 import { RiHome6Line } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 
@@ -32,6 +32,17 @@ function SideBar(props: Props) {
               <span className="flex items-center pl-12 text-sm font-medium">
                 <AiOutlineInbox size="1.25rem" />
                 Products
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/categories"
+              className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+            >
+              <span className="flex items-center pl-12 text-sm font-medium">
+                <AiTwotoneWarning size="1.25rem" />
+                Categories
               </span>
             </NavLink>
           </li>
