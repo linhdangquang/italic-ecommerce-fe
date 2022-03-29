@@ -1,5 +1,8 @@
 import { ProductType } from '../types';
+import { isAuthenticated } from '../utils/localstorage';
 import instance from './instance';
+
+const { token } = isAuthenticated();
 
 export const getAllProducts = () => {
   const URL = '/api/products';
@@ -18,5 +21,9 @@ export const getOneProduct = (id: string) => {
 
 export const updateProduct = (data: ProductType) => {
   const URL = `/api/products/${data._id}`;
-  return instance.put(URL, data);
+  return instance.put(URL, data, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };

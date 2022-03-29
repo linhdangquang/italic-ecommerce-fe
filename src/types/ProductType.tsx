@@ -1,7 +1,7 @@
 interface Product {
   _id?: string;
   name: string;
-  price: string;
+  price: number;
   image: string;
 }
 export default Product;

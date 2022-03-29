@@ -13,8 +13,8 @@ import { ProductType } from './types';
 import { delProduct, getAllProducts, updateProduct } from './api/products';
 import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './pages/EditProduct';
-import PrivateRouter from './components/PrivateRouter';
 import SignInPage from './pages/SignInPage';
+import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -53,6 +53,7 @@ function App() {
 
   const onAddHandler = (product: ProductType) => {
     // set token api
+    return true;
   };
 
   const onEditHandler = async (product: ProductType) => {
@@ -77,9 +78,9 @@ function App() {
           <Route
             path="admin"
             element={
-              <PrivateRouter>
+              <RouterAdminPrivate>
                 <AdminLayout />
-              </PrivateRouter>
+              </RouterAdminPrivate>
             }
           >
             <Route index element={<Navigate to="dashboard" />} />

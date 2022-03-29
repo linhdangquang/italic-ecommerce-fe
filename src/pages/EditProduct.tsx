@@ -27,7 +27,7 @@ function EditProduct({ onEdit }: ProductEditProps) {
 
   useEffect(() => {
     const getProduct = async () => {
-      const { data } = await getOneProduct(id);
+      const { data } = await getOneProduct(id as string);
       reset(data);
       console.log(data);
     };

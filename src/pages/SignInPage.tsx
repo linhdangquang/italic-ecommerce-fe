@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
 
-type Props = {};
+type Props = any;
 
 type FormInputs = {
   email: string;
@@ -23,8 +23,8 @@ function SignInPage(props: Props) {
       const { data } = await signInUser(user);
       localStorage.setItem('user', JSON.stringify(data));
       navigate('/');
+      alert(data.message);
     } catch (error) {
-      alert(error.response.data.message);
       console.log(error);
     }
   };
