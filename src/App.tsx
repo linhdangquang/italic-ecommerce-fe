@@ -12,7 +12,7 @@ import ProductsPage from './pages/ProductsPage';
 import { ProductType } from './types';
 import { delProduct, getAllProducts, updateProduct } from './api/products';
 import ProductsAdmin from './pages/ProductsAdmin';
-import EditProduct from './pages/EditProduct';
+import EditProduct from './components/EditProductForm';
 import SignInPage from './pages/SignInPage';
 import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
 
