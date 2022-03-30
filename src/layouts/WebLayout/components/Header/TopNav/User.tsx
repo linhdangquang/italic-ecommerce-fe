@@ -3,15 +3,11 @@ import React from 'react';
 function User() {
   return (
     <div className="dropdown-end dropdown">
-      <button
-        type="button"
-        tabIndex={0}
-        className="avatar btn btn-ghost btn-circle"
-      >
+      <div tabIndex={0} className="avatar btn btn-ghost btn-circle">
         <div className="w-10 rounded-full">
           <img src="https://api.lorem.space/image/face?hash=33791" alt="img" />
         </div>
-      </button>
+      </div>
       <ul
         tabIndex={0}
         className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"

@@ -3,7 +3,7 @@ import React from 'react';
 function Cart() {
   return (
     <div className="dropdown-end dropdown">
-      <button type="button" tabIndex={0} className="btn btn-ghost btn-circle">
+      <div tabIndex={0} className="btn btn-ghost btn-circle">
         <div className="indicator">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +21,8 @@ function Cart() {
           </svg>
           <span className="badge indicator-item badge-sm">8</span>
         </div>
-      </button>
-      <button
-        type="button"
+      </div>
+      <div
         tabIndex={0}
         className="card dropdown-content card-compact mt-3 w-52 bg-base-100 shadow"
       >
@@ -36,7 +35,7 @@ function Cart() {
             </button>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   );
 }

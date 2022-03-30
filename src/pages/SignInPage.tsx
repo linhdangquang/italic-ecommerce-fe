@@ -1,6 +1,9 @@
-import React from 'react';
+import { Alert, Collapse, IconButton } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
+import { toast } from 'react-toastify';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
 
@@ -18,22 +21,31 @@ function SignInPage(props: Props) {
     formState: { errors },
   } = useForm<FormInputs>();
   const navigate = useNavigate();
+  const toastId = React.useRef(null);
   const onSignIn: SubmitHandler<FormInputs> = async (user: UserType) => {
+    const notify = (
+      message: string,
+      type: 'info' | 'success' | 'warning' | 'error' | undefined
+    ) => toast(message, { type });
     try {
       const { data } = await signInUser(user);
       localStorage.setItem('user', JSON.stringify(data));
+      notify('Sign in success', 'success');
       navigate('/');
-      alert(data.message);
     } catch (error) {
-      console.log(error);
+      notify(`Sign in failed ${error.response.data.message}`, 'error');
     }
   };
+  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    setOpen(true);
+  }, [errors.email, errors.password]);
 
   return (
     <div className="hero  min-h-full bg-base-200  py-16 pb-40">
       <div className="hero-content w-full  flex-col  justify-end lg:flex-row-reverse ">
         <div className="min-w-xl pl-4 text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Login now!</h1>
+          <h1 className="text-5xl font-bold text-blacklight">Login now!</h1>
           <p className="pt-6 pb-2">
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui, quas
             aspernatur similique quidem aperiam itaque repellat, voluptatibus
@@ -61,12 +73,26 @@ function SignInPage(props: Props) {
                   className=" input input-bordered input-accent border-2 focus:border-blueSage"
                   type="text"
                   {...register('email', { required: true })}
-                  placeholder="email"
+                  placeholder="Email"
                 />
                 {errors.email && (
-                  <span className="error-message py-1 text-sm text-rose-500">
-                    Email is required
-                  </span>
+                  <Collapse in={open}>
+                    <Alert
+                      severity="error"
+                      action={
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            setOpen(false);
+                          }}
+                        >
+                          <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                      }
+                    >
+                      Email is required
+                    </Alert>
+                  </Collapse>
                 )}
               </div>
               <div className="form-control">
@@ -78,12 +104,26 @@ function SignInPage(props: Props) {
                   type="password"
                   {...register('password', { required: true })}
                   name="password"
-                  placeholder="password"
+                  placeholder="Password"
                 />
                 {errors.password && (
-                  <span className="error-message py-1 text-sm text-rose-500">
-                    Password is required
-                  </span>
+                  <Collapse in={open}>
+                    <Alert
+                      severity="error"
+                      action={
+                        <IconButton
+                          size="small"
+                          onClick={() => {
+                            setOpen(false);
+                          }}
+                        >
+                          <CloseIcon fontSize="inherit" />
+                        </IconButton>
+                      }
+                    >
+                      Password is required
+                    </Alert>
+                  </Collapse>
                 )}
                 <label className="label">
                   <a href="#" className="link link-hover label-text-alt">

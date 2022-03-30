@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import AdminLayout from './layouts/AdminLayout/AdminLayout';
@@ -14,7 +15,7 @@ import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './components/EditProductForm';
 import SignInPage from './pages/SignInPage';
 import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
-import { isAuthenticated } from './utils/localstorage';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -104,6 +105,7 @@ function App() {
           <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </main>
+      <ToastContainer autoClose={2500} limit={5} />
     </div>
   );
 }
