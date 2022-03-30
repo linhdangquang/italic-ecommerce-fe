@@ -11,7 +11,11 @@ export const getAllProducts = () => {
 
 export const delProduct = (id: string) => {
   const URL = `/api/products/${id}`;
-  return instance.delete(URL);
+  return instance.delete(URL, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const getOneProduct = (id: string) => {

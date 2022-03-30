@@ -40,13 +40,15 @@ function App() {
       })
       .then(async (result) => {
         if (result.isConfirmed) {
-          deleteSwal.fire('Deleted!', 'Your file has been deleted.', 'success');
-          // delete in api
-          // await delProduct(id);
-
-          // // delete in state
-          setProducts(products.filter((product) => product._id !== id));
-          console.log(id);
+          try {
+            await delProduct(id);
+            deleteSwal.fire('Deleted!', 'Product has been deleted.', 'success');
+            // delete in state
+            setProducts(products.filter((product) => product._id !== id));
+            console.log(id);
+          } catch (error) {
+            deleteSwal.fire('Error!', 'Not delete product.', 'error');
+          }
         }
       });
   };
