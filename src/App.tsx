@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
@@ -15,6 +14,7 @@ import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './components/EditProductForm';
 import SignInPage from './pages/SignInPage';
 import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
+import { isAuthenticated } from './utils/localstorage';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);

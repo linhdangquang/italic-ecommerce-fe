@@ -30,24 +30,79 @@ function SignInPage(props: Props) {
   };
 
   return (
-    <div>
-      <h1>SignInPage</h1>
-      <form onSubmit={handleSubmit(onSignIn)}>
-        <input
-          type="text"
-          {...register('email', { required: true })}
-          placeholder="email"
-        />
-        {errors.email && <p>email is required</p>}
-        <input
-          type="text"
-          {...register('password', { required: true })}
-          name="password"
-          placeholder="password"
-        />
-        {errors.password && <p>password is required</p>}
-        <button type="submit">Sign In</button>
-      </form>
+    <div className="hero  min-h-full bg-base-200  py-16 pb-40">
+      <div className="hero-content w-full  flex-col  justify-end lg:flex-row-reverse ">
+        <div className="min-w-xl pl-4 text-center lg:text-left">
+          <h1 className="text-5xl font-bold">Login now!</h1>
+          <p className="pt-6 pb-2">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui, quas
+            aspernatur similique quidem aperiam itaque repellat, voluptatibus
+            minima dignissimos fuga, vitae eligendi deleniti maxime ipsam eaque
+            veniam accusantium voluptate sint.
+          </p>
+          <p className="italic">
+            Don't have an account?{' '}
+            <a
+              className=" border-gray-700 font-medium not-italic text-gray-800 hover:border-b"
+              href="/signup"
+            >
+              Sign up
+            </a>
+          </p>
+        </div>
+        <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
+          <div className="card-body">
+            <form onSubmit={handleSubmit(onSignIn)}>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Email</span>
+                </label>
+                <input
+                  className=" input input-bordered input-accent border-2 focus:border-blueSage"
+                  type="text"
+                  {...register('email', { required: true })}
+                  placeholder="email"
+                />
+                {errors.email && (
+                  <span className="error-message py-1 text-sm text-rose-500">
+                    Email is required
+                  </span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Password</span>
+                </label>
+                <input
+                  className="input input-bordered input-accent"
+                  type="password"
+                  {...register('password', { required: true })}
+                  name="password"
+                  placeholder="password"
+                />
+                {errors.password && (
+                  <span className="error-message py-1 text-sm text-rose-500">
+                    Password is required
+                  </span>
+                )}
+                <label className="label">
+                  <a href="#" className="link link-hover label-text-alt">
+                    Forgot password?
+                  </a>
+                </label>
+              </div>
+              <div className="form-control mt-6">
+                <button
+                  type="submit"
+                  className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
+                >
+                  Login
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
