@@ -71,7 +71,8 @@
         ],
         "react/require-default-props": [
             "off"
-        ]
+        ],
+        "no-useless-escape" : "off"
     },
     "settings": {
         "import/resolver": {

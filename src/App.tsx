@@ -16,6 +16,7 @@ import EditProduct from './components/EditProductForm';
 import SignInPage from './pages/SignInPage';
 import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
 import 'react-toastify/dist/ReactToastify.css';
+import SignUpPage from './pages/SignUpPage';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -77,6 +78,7 @@ function App() {
             <Route path="products/:id" element={<ProductDetail />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="signin" element={<SignInPage />} />
+            <Route path="signup" element={<SignUpPage />} />
           </Route>
           <Route
             path="admin"
