@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
 
@@ -42,12 +42,12 @@ function SignInPage(props: Props) {
           </p>
           <p className="italic">
             Don't have an account?{' '}
-            <a
+            <Link
+              to="/signup"
               className=" border-gray-700 font-medium not-italic text-gray-800 hover:border-b"
-              href="/signup"
             >
               Sign up
-            </a>
+            </Link>
           </p>
         </div>
         <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
@@ -74,7 +74,7 @@ function SignInPage(props: Props) {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  className="input input-bordered input-accent"
+                  className="input input-bordered input-accent border-2"
                   type="password"
                   {...register('password', { required: true })}
                   name="password"
