@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { toast, TypeOptions } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
 import { isAuthenticated } from '../utils/localstorage';

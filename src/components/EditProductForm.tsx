@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getOneProduct, updateProduct } from '../api/products';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { ProductType } from '../types';
-import { editProduct } from '../features/Products/productsSlice.js';
+import {
+  updateProduct,
+  selectProductById,
+} from '../features/Products/productsSlice.js';
 
 type FormInputs = {
   name: string;
@@ -24,18 +27,18 @@ function EditProduct() {
   const { id } = useParams();
   const dispatch = useDispatch();
 
+  const product = useSelector((state: any) =>
+    id ? selectProductById(state, id) : null
+  );
+
   useEffect(() => {
-    const getProduct = async () => {
-      const { data } = await getOneProduct(id as string);
-      reset(data);
-      console.log(data);
-    };
-    getProduct();
-  }, [id]);
+    if (product) {
+      reset(product);
+    }
+  }, [id, product, reset]);
 
   const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
-    dispatch(editProduct(product));
-    await updateProduct(product);
+    await dispatch(updateProduct(product));
     navigate('/admin/products');
   };
 

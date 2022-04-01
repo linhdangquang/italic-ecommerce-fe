@@ -16,14 +16,12 @@ import Swal from 'sweetalert2';
 import { ProductType } from '../types';
 import {
   fetchProducts,
-  removeProduct,
+  deleteProduct,
 } from '../features/products/productsSlice.js';
-
-import { delProduct } from '../api/products';
 
 function ProductsAdmin() {
   const dispatch = useDispatch();
-  const deleteProduct = (id: string) => {
+  const delProduct = (id: string) => {
     const deleteSwal = withReactContent(Swal);
     deleteSwal
       .fire({
@@ -38,8 +36,7 @@ function ProductsAdmin() {
       .then(async (result) => {
         if (result.isConfirmed) {
           try {
-            await delProduct(id);
-            dispatch(removeProduct(id));
+            dispatch(deleteProduct(id));
             deleteSwal.fire('Deleted!', 'Product has been deleted.', 'success');
           } catch (error) {
             deleteSwal.fire(
@@ -94,7 +91,7 @@ function ProductsAdmin() {
           </Link>
           <Button
             onClick={() => {
-              deleteProduct(params.value);
+              delProduct(params.value);
             }}
             variant="contained"
             color="error"
@@ -108,15 +105,16 @@ function ProductsAdmin() {
     },
   ];
   const products = useSelector((state: any) => state.products.products);
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
-  const rows: ProductType[] = products.map((product, idx) => ({
+  const productsStatus = useSelector((state: any) => state.products.status);
+  const rows: ProductType[] = products?.map((product, idx) => ({
     ...product,
     id: idx + 1,
   }));
 
   const [pageSize, setPageSize] = React.useState<number>(10);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch, productsStatus]);
   return (
     <div
       style={{ height: 735, width: '100%', minWidth: 650 }}

@@ -50,4 +50,6 @@ const categoriesSlice = createSlice({
 export const { editCategory, removeCategory, addCategory } =
   categoriesSlice.actions;
 
+export const selectAllCategories = (state) => state.categories.categories;
+
 export default categoriesSlice.reducer;
