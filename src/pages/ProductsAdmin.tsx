@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import BeatLoader from 'react-spinners/BeatLoader';
+
 import {
   DataGrid,
   GridColDef,
@@ -104,8 +106,9 @@ function ProductsAdmin() {
       ),
     },
   ];
-  const products = useSelector((state: any) => state.products.products);
-  const productsStatus = useSelector((state: any) => state.products.status);
+  const { products, loading, status } = useSelector(
+    (state: any) => state.products
+  );
   const rows: ProductType[] = products?.map((product, idx) => ({
     ...product,
     id: idx + 1,
@@ -114,7 +117,8 @@ function ProductsAdmin() {
   const [pageSize, setPageSize] = React.useState<number>(10);
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch, productsStatus]);
+  }, [dispatch, status]);
+
   return (
     <div
       style={{ height: 735, width: '100%', minWidth: 650 }}
@@ -137,39 +141,46 @@ function ProductsAdmin() {
               </Button>
             </Link>
           </div>
-          <DataGrid
-            className="mx-2 rounded-lg shadow-md drop-shadow-lg"
-            rows={rows}
-            columns={columns}
-            pageSize={pageSize}
-            classes={{
-              root: 'bg-white',
-              row: 'hover:bg-gray-100 bg-white border border-gray-100',
-              sortIcon: 'text-gray-500',
-              overlay: 'bg-gray-100',
-              columnHeaders: 'border-gray-100',
-              columnHeaderTitle: 'font-bold text-gray-700',
-              menuIconButton: 'text-gray-600',
-              columnSeparator: 'hidden',
-              cell: 'text-gray-700',
-              footerContainer: 'border-t-0 text-gray-500',
-              toolbarContainer: 'gap-1',
-            }}
-            onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-            rowsPerPageOptions={[10, 20, 50, 100]}
-            components={{
-              Toolbar: GridToolbar,
-            }}
-            componentsProps={{
-              toolbar: {
-                sx: {
-                  '& .MuiButton-root': {
-                    fontWeight: 600,
+          {!loading && (
+            <DataGrid
+              className="mx-2 rounded-lg shadow-md drop-shadow-lg"
+              rows={rows}
+              columns={columns}
+              pageSize={pageSize}
+              classes={{
+                root: 'bg-white',
+                row: 'hover:bg-gray-100 bg-white border border-gray-100',
+                sortIcon: 'text-gray-500',
+                overlay: 'bg-gray-100',
+                columnHeaders: 'border-gray-100',
+                columnHeaderTitle: 'font-bold text-gray-700',
+                menuIconButton: 'text-gray-600',
+                columnSeparator: 'hidden',
+                cell: 'text-gray-700',
+                footerContainer: 'border-t-0 text-gray-500',
+                toolbarContainer: 'gap-1',
+              }}
+              onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+              rowsPerPageOptions={[10, 20, 50, 100]}
+              components={{
+                Toolbar: GridToolbar,
+              }}
+              componentsProps={{
+                toolbar: {
+                  sx: {
+                    '& .MuiButton-root': {
+                      fontWeight: 600,
+                    },
                   },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          )}
+          {loading && (
+            <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+              <BeatLoader size={20} color="#34d399" margin={2} />
+            </div>
+          )}
         </div>
       </div>
     </div>
