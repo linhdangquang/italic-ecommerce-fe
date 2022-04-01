@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getOneProduct } from '../api/products';
+import { useDispatch, useSelector } from 'react-redux';
+import { getOneProduct, updateProduct } from '../api/products';
 import { ProductType } from '../types';
-
-type ProductEditProps = {
-  onEdit: (product: ProductType) => void;
-};
+import { editProduct } from '../features/Products/productsSlice.js';
 
 type FormInputs = {
   name: string;
@@ -15,7 +13,7 @@ type FormInputs = {
   image: string;
 };
 
-function EditProduct({ onEdit }: ProductEditProps) {
+function EditProduct() {
   const {
     register,
     handleSubmit,
@@ -24,6 +22,7 @@ function EditProduct({ onEdit }: ProductEditProps) {
   } = useForm<FormInputs>();
   const navigate = useNavigate();
   const { id } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -34,9 +33,9 @@ function EditProduct({ onEdit }: ProductEditProps) {
     getProduct();
   }, [id]);
 
-  const onSubmit: SubmitHandler<FormInputs> = (product: ProductType) => {
-    console.log(product);
-    onEdit(product);
+  const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
+    dispatch(editProduct(product));
+    await updateProduct(product);
     navigate('/admin/products');
   };
 

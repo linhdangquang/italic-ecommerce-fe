@@ -72,7 +72,9 @@
         "react/require-default-props": [
             "off"
         ],
-        "no-useless-escape" : "off"
+        "no-useless-escape" : "off",
+        "no-param-reassign": "off",
+        "no-unused-expressions": "off"
     },
     "settings": {
         "import/resolver": {

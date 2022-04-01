@@ -60,14 +60,6 @@ function App() {
     return true;
   };
 
-  const onEditHandler = async (product: ProductType) => {
-    const { data } = await updateProduct(product);
-    console.log(data);
-    setProducts(
-      products.map((product) => (product._id === data._id ? data : product))
-    );
-  };
-
   return (
     <div className="mx-auto">
       <main>
@@ -93,15 +85,10 @@ function App() {
             <Route path="products">
               <Route
                 index
-                element={
-                  <ProductsAdmin products={products} onRemove={removeProduct} />
-                }
+                element={<ProductsAdmin onRemove={removeProduct} />}
               />
               <Route path="add" onAdd={onAddHandler} />
-              <Route
-                path=":id/edit"
-                element={<EditProduct onEdit={onEditHandler} />}
-              />
+              <Route path=":id/edit" element={<EditProduct />} />
             </Route>
           </Route>
           <Route path="*" element={<h1>404</h1>} />

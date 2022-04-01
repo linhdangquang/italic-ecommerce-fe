@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   DataGrid,
   GridColDef,
@@ -10,14 +10,15 @@ import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import { useDispatch, useSelector } from 'react-redux';
 import { ProductType } from '../types';
+import { fetchProducts } from '../features/products/productsSlice.js';
 
 type Props = {
-  products: ProductType[];
   onRemove: (id: string) => void;
 };
 
-function ProductsAdmin({ products, onRemove }: Props) {
+function ProductsAdmin({ onRemove }: Props) {
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -74,6 +75,11 @@ function ProductsAdmin({ products, onRemove }: Props) {
       ),
     },
   ];
+  const dispatch = useDispatch();
+  const products = useSelector((state: any) => state.products.products);
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
   const rows: ProductType[] = products.map((product, idx) => ({
     ...product,
     id: idx + 1,
