@@ -59,7 +59,7 @@ function ProductsAdmin() {
     {
       field: 'name',
       headerName: 'Name',
-      width: 500,
+      width: 400,
     },
     {
       field: 'price',
@@ -73,6 +73,11 @@ function ProductsAdmin() {
       renderCell: (params: GridValueGetterParams) => (
         <img src={params.value} alt={params.value} />
       ),
+    },
+    {
+      field: 'updatedAt',
+      headerName: 'Last Updated',
+      width: 200,
     },
     {
       field: '_id',
