@@ -1,79 +1,84 @@
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getOneProduct } from '../api/products';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Alert, Collapse, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { ProductType } from '../types';
-
-type ProductEditProps = {
-  onAdd: (product: ProductType) => void;
-};
+import { addProduct } from '../features/Products/productsSlice.js';
+import { add } from '../api/products';
+import { fetchCategories } from '../features/Categories/categoriesSlice.js';
+import { ProductValidationSchema } from '../schema/product';
 
 type FormInputs = {
   name: string;
   price: number;
   description: string;
   image: string;
+  category: string;
 };
 
-function AddProduct({ onEdit }: ProductEditProps) {
+function AddProduct() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
-  } = useForm<FormInputs>();
+  } = useForm<FormInputs>({ resolver: yupResolver(ProductValidationSchema) });
   const navigate = useNavigate();
-  const { id } = useParams();
-
+  const dispatch = useDispatch();
+  const categories = useSelector((state: any) => state.categories.categories);
+  console.log(categories);
   useEffect(() => {
-    const getProduct = async () => {
-      const { data } = await getOneProduct(id);
-      reset(data);
-      console.log(data);
-    };
-    getProduct();
-  }, [id]);
-
-  const onAddProduct: SubmitHandler<FormInputs> = (product: ProductType) => {
+    dispatch(fetchCategories());
+  }, [dispatch]);
+  const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
     console.log(product);
-    onEdit(product);
+    dispatch(addProduct(product));
+    await add(product);
     navigate('/admin/products');
   };
 
   return (
-    <div>
-      <h1>Edit Product</h1>
-      <form
-        className="flex w-1/3 flex-col gap-y-2"
-        onSubmit={handleSubmit(onAddProduct)}
-      >
-        <input
-          className="border-2 border-blacklight p-2"
-          type="text"
-          {...register('name', { required: true })}
-        />
-        {errors && errors.name && (
-          <p className="text-rose-600">Name is required</p>
-        )}
-        <input
-          className="border-2 border-blacklight p-2"
-          type="number"
-          {...register('price', { required: true })}
-        />
-        <input
-          className="border-2 border-blacklight p-2"
-          type="text"
-          {...register('image', { required: true })}
-        />
-        <input
-          className="border-2 border-blacklight p-2"
-          type="text"
-          {...register('description', { required: true })}
-        />
-        <button className="btn btn-primary" type="submit">
-          Update
-        </button>
-      </form>
+    <div className="card ml-4 mt-4 w-full max-w-4xl flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
+      <div className="card-body">
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">Name</span>
+            </label>
+            <input
+              className=" input input-bordered input-primary border-2 focus:border-blueSage"
+              type="text"
+              placeholder="Email"
+              {...register('name')}
+            />
+            {errors.name?.message && (
+              <Collapse in>
+                <Alert
+                  severity="error"
+                  variant="filled"
+                  action={
+                    <IconButton size="small">
+                      <CloseIcon fontSize="inherit" />
+                    </IconButton>
+                  }
+                >
+                  {errors.name?.message}
+                </Alert>
+              </Collapse>
+            )}
+          </div>
+          <div className="form-control mt-6">
+            <button
+              type="submit"
+              className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
+            >
+              Sign in
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

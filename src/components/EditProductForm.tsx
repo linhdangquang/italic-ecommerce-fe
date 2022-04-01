@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getOneProduct, updateProduct } from '../api/products';
 import { ProductType } from '../types';
 import { editProduct } from '../features/Products/productsSlice.js';

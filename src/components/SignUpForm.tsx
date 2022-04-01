@@ -8,6 +8,8 @@ import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpUser } from '../api/user';
 import { UserType } from '../types';
+import { isAuthenticated } from '../utils/localstorage';
+import { RegisterValidationSchema } from '../schema/auth';
 
 type Props = any;
 
@@ -19,26 +21,11 @@ type FormInputs = {
 };
 
 function SignUpForm(props: Props) {
-  const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .required('Name is required')
-      .min(3, 'Name must be at least 3 characters')
-      .max(50, 'Name must be less than 50 characters'),
-    email: Yup.string().required('Email is required').email('Invalid email'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters')
-      .max(50, 'Password must be less than 50 characters'),
-    cpassword: Yup.string()
-      .required('Password is required')
-      .oneOf([Yup.ref('password'), null], 'Confirm Password does not match'),
-    acceptTerms: Yup.bool().oneOf([true], 'Accept Terms is required'),
-  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormInputs>({ resolver: yupResolver(validationSchema) });
+  } = useForm<FormInputs>({ resolver: yupResolver(RegisterValidationSchema) });
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<FormInputs> = async (user: UserType) => {
     const notify = (message: string, type: TypeOptions) =>
@@ -55,6 +42,12 @@ function SignUpForm(props: Props) {
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password, errors.name]);
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/');
+    }
+  });
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
       <div className="card-body">

@@ -11,14 +11,46 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useDispatch, useSelector } from 'react-redux';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 import { ProductType } from '../types';
-import { fetchProducts } from '../features/products/productsSlice.js';
+import {
+  fetchProducts,
+  removeProduct,
+} from '../features/products/productsSlice.js';
 
-type Props = {
-  onRemove: (id: string) => void;
-};
+import { delProduct } from '../api/products';
 
-function ProductsAdmin({ onRemove }: Props) {
+function ProductsAdmin() {
+  const dispatch = useDispatch();
+  const deleteProduct = (id: string) => {
+    const deleteSwal = withReactContent(Swal);
+    deleteSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await delProduct(id);
+            dispatch(removeProduct(id));
+            deleteSwal.fire('Deleted!', 'Product has been deleted.', 'success');
+          } catch (error) {
+            deleteSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -62,7 +94,7 @@ function ProductsAdmin({ onRemove }: Props) {
           </Link>
           <Button
             onClick={() => {
-              onRemove(params.value);
+              deleteProduct(params.value);
             }}
             variant="contained"
             color="error"
@@ -75,7 +107,6 @@ function ProductsAdmin({ onRemove }: Props) {
       ),
     },
   ];
-  const dispatch = useDispatch();
   const products = useSelector((state: any) => state.products.products);
   useEffect(() => {
     dispatch(fetchProducts());

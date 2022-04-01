@@ -8,6 +8,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
+import { isAuthenticated } from '../utils/localstorage';
+import { LoginValidationSchema } from '../schema/auth';
 
 type Props = any;
 
@@ -17,18 +19,12 @@ type FormInputs = {
 };
 
 function SignInForm(props: Props) {
-  const validationSchema = Yup.object().shape({
-    email: Yup.string().required('Email is required').email('Invalid email'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(6, 'Password must be at least 6 characters'),
-  });
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormInputs>({
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(LoginValidationSchema),
   });
   const navigate = useNavigate();
 
@@ -48,6 +44,11 @@ function SignInForm(props: Props) {
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password]);
+  useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/');
+    }
+  });
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
       <div className="card-body">
