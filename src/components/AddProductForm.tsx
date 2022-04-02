@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
+import { BeatLoader } from 'react-spinners';
 import { ProductType } from '../types';
 import { addNewProduct } from '../features/Products/productsSlice.js';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
@@ -27,6 +28,7 @@ function AddProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector((state: any) => state.categories.categories);
+  const loading = useSelector((state: any) => state.products.loading);
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
@@ -139,14 +141,21 @@ function AddProduct() {
               </Alert>
             )}
           </div>
-          <div className="form-control mt-6">
-            <button
-              type="submit"
-              className="btn  border-2 border-cyan-400  bg-sky-400 py-2 px-4 text-base font-bold text-white shadow shadow-sky-400 hover:bg-sky-500 "
-            >
-              Create
-            </button>
-          </div>
+          {!loading && (
+            <div className="form-control mt-6">
+              <button
+                type="submit"
+                className="btn  border-2 border-cyan-400  bg-sky-400 py-2 px-4 text-base font-bold text-white shadow shadow-sky-400 hover:bg-sky-500 "
+              >
+                Create
+              </button>
+            </div>
+          )}
+          {loading && (
+            <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+              <BeatLoader size={20} color="#34d399" margin={2} />
+            </div>
+          )}
         </form>
       </div>
     </div>
