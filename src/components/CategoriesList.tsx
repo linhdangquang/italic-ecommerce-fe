@@ -39,7 +39,7 @@ function CategoriesList() {
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Link to={`/admin/products/${params.value}/edit`}>
+          <Link to={`/admin/categories/${params.value}/view`}>
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}
@@ -94,7 +94,6 @@ function CategoriesList() {
       dispatch(fetchCategories());
     }
   }, [dispatch, status]);
-  console.log(categories);
   return (
     <>
       {!loading && (

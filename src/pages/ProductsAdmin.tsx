@@ -114,8 +114,6 @@ function ProductsAdmin() {
   const { products, loading, status } = useSelector(
     (state: any) => state.products
   );
-  const { categories } = useSelector((state: any) => state.categories);
-  console.log(categories);
   const rows: ProductType[] = products?.map((product, idx) => ({
     ...product,
     id: idx + 1,

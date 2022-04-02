@@ -18,6 +18,7 @@ import AddProduct from './components/AddProductForm';
 import CategoriesAdmin from './pages/CategoriesAdmin';
 import AddCategoryForm from './components/AddCategoryForm';
 import EditCategoryForm from './components/EditCategoryForm';
+import DetailCategory from './components/DetailCategory';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
               <Route index element={<CategoriesAdmin />} />
               <Route path="add" element={<AddCategoryForm />} />
               <Route path=":id/edit" element={<EditCategoryForm />} />
+              <Route path=":id/view" element={<DetailCategory />} />
             </Route>
           </Route>
           <Route path="*" element={<h1>404</h1>} />

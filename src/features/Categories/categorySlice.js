@@ -2,13 +2,13 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getDetail } from '../../api/categories';
 
 const initialStateValue = {
-  category: {},
+  category: [],
   loading: false,
   status: 'idle',
 };
 
 export const getCategoryDetails = createAsyncThunk(
-  'categories/getCategoryDetails',
+  'category/getCategoryDetails',
   async (id) => {
     const { data } = await getDetail(id);
     return data;

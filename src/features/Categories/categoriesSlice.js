@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllCategories, edit, add, getDetail } from '../../api/categories';
+import { getAllCategories, edit, add } from '../../api/categories';
 
 const initialStateValue = {
   categories: [],
@@ -28,14 +28,6 @@ export const updateCategory = createAsyncThunk(
   'categories/updateCategory',
   async (category) => {
     const { data } = await edit(category);
-    return data;
-  }
-);
-
-export const getCategoryDetails = createAsyncThunk(
-  'categories/getCategoryDetails',
-  async (id) => {
-    const { data } = await getDetail(id);
     return data;
   }
 );
