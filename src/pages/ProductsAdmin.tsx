@@ -121,7 +121,7 @@ function ProductsAdmin() {
 
   const [pageSize, setPageSize] = React.useState<number>(10);
   useEffect(() => {
-    dispatch(fetchProducts());
+    if (status === 'idle') dispatch(fetchProducts());
   }, [dispatch, status]);
 
   return (

@@ -6,6 +6,12 @@ import {
   delProduct,
 } from '../../api/products';
 
+const initialStateValue = {
+  products: [],
+  loading: false,
+  status: 'idle',
+};
+
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async () => {
@@ -40,11 +46,7 @@ export const deleteProduct = createAsyncThunk(
 
 const productsSlice = createSlice({
   name: 'products',
-  initialState: {
-    products: [],
-    loading: false,
-    status: null,
-  },
+  initialState: initialStateValue,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchProducts.pending, (state) => {
