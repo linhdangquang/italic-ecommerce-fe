@@ -1,5 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllCategories } from '../../api/categories';
+import { getAllCategories, edit, add, getDetail } from '../../api/categories';
+
+const initialStateValue = {
+  categories: [],
+  loading: false,
+  status: 'idle',
+};
 
 export const fetchCategories = createAsyncThunk(
   'categories/fetchCategories',
@@ -9,28 +15,35 @@ export const fetchCategories = createAsyncThunk(
   }
 );
 
+// export const deleteCategory = createAsyncThunk()
+export const createCategory = createAsyncThunk(
+  'categories/createCategory',
+  async (category) => {
+    const { data } = await add(category);
+    return data;
+  }
+);
+
+export const updateCategory = createAsyncThunk(
+  'categories/updateCategory',
+  async (category) => {
+    const { data } = await edit(category);
+    return data;
+  }
+);
+
+export const getCategoryDetails = createAsyncThunk(
+  'categories/getCategoryDetails',
+  async (id) => {
+    const { data } = await getDetail(id);
+    return data;
+  }
+);
+
 const categoriesSlice = createSlice({
   name: 'categories',
-  initialState: {
-    categories: [],
-    loading: false,
-    status: null,
-  },
-  reducers: {
-    addCategory: (state, action) => {
-      state.categories.push(action.payload);
-    },
-    editCategory(state, action) {
-      const { id, name } = action.payload;
-      const category = state.categories.find((category) => category.id === id);
-      category.name = name;
-    },
-    removeCategory(state, action) {
-      const { id } = action.payload;
-      const category = state.categories.find((category) => category.id === id);
-      state.categories.splice(state.categories.indexOf(category), 1);
-    },
-  },
+  initialState: initialStateValue,
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchCategories.pending, (state) => {
       state.loading = true;
@@ -44,6 +57,34 @@ const categoriesSlice = createSlice({
       state.loading = false;
       state.status = 'error';
     });
+    builder.addCase(createCategory.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(createCategory.fulfilled, (state, action) => {
+      state.categories.push(action.payload);
+      state.loading = false;
+      state.status = 'success';
+    });
+    builder.addCase(createCategory.rejected, (state) => {
+      state.loading = false;
+      state.status = 'error';
+    });
+    builder.addCase(updateCategory.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateCategory.fulfilled, (state, action) => {
+      const { _id, name } = action.payload;
+      const category = state.categories.find(
+        (category) => category._id === _id
+      );
+      category.name = name;
+      state.loading = false;
+      state.status = 'success';
+    });
+    builder.addCase(updateCategory.rejected, (state) => {
+      state.loading = false;
+      state.status = 'error';
+    });
   },
 });
 
@@ -51,5 +92,12 @@ export const { editCategory, removeCategory, addCategory } =
   categoriesSlice.actions;
 
 export const selectAllCategories = (state) => state.categories.categories;
+
+export const selectCategoryById = (state, id) => {
+  const category = state.categories.categories.find(
+    (category) => category._id === id
+  );
+  return category;
+};
 
 export default categoriesSlice.reducer;

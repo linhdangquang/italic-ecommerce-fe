@@ -15,6 +15,9 @@ import RouterAdminPrivate from './components/PrivateRouter/RouterAdminPrivate';
 import 'react-toastify/dist/ReactToastify.css';
 import SignUpPage from './pages/SignUpPage';
 import AddProduct from './components/AddProductForm';
+import CategoriesAdmin from './pages/CategoriesAdmin';
+import AddCategoryForm from './components/AddCategoryForm';
+import EditCategoryForm from './components/EditCategoryForm';
 
 function App() {
   return (
@@ -43,6 +46,11 @@ function App() {
               <Route index element={<ProductsAdmin />} />
               <Route path="add" element={<AddProduct />} />
               <Route path=":id/edit" element={<EditProduct />} />
+            </Route>
+            <Route path="categories">
+              <Route index element={<CategoriesAdmin />} />
+              <Route path="add" element={<AddCategoryForm />} />
+              <Route path=":id/edit" element={<EditCategoryForm />} />
             </Route>
           </Route>
           <Route path="*" element={<h1>404</h1>} />
