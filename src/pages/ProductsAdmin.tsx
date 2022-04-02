@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import BeatLoader from 'react-spinners/BeatLoader';
+import dayjs from 'dayjs';
 
 import {
   DataGrid,
@@ -15,6 +16,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import { useDispatch, useSelector } from 'react-redux';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { ProductType } from '../types';
 import {
   fetchProducts,
@@ -59,7 +61,7 @@ function ProductsAdmin() {
     {
       field: 'name',
       headerName: 'Name',
-      width: 400,
+      width: 250,
     },
     {
       field: 'price',
@@ -75,16 +77,44 @@ function ProductsAdmin() {
       ),
     },
     {
+      field: 'stock',
+      headerName: 'Stock',
+      width: 75,
+      cellClassName: 'text-center',
+    },
+    {
+      field: 'status',
+      headerName: 'Status',
+      width: 75,
+      valueFormatter: (params: any) => {
+        return params.value === 0 ? 'Active' : 'Inactive';
+      },
+    },
+    {
       field: 'updatedAt',
       headerName: 'Last Updated',
-      width: 200,
+      width: 135,
+      valueFormatter: (params: any) => {
+        return dayjs(params.value).format('HH:mm DD/MM/YYYY ');
+      },
     },
     {
       field: '_id',
-      width: 250,
+      width: 300,
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
+          <Link to={`/admin/categories/${params.value}/view`}>
+            <Button
+              variant="contained"
+              style={{ marginRight: '.75rem' }}
+              startIcon={<VisibilityIcon />}
+              size="small"
+              className="bg-orangeLight"
+            >
+              View
+            </Button>
+          </Link>
           <Link to={`/admin/products/${params.value}/edit`}>
             <Button
               variant="contained"

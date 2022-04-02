@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { BeatLoader } from 'react-spinners';
+import dayjs from 'dayjs';
 import {
   DataGrid,
   GridColDef,
@@ -9,8 +10,6 @@ import {
   GridToolbar,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
 import { getCategoryDetails } from '../features/Categories/categorySlice.js';
@@ -45,7 +44,10 @@ function DetailCategory() {
     {
       field: 'updatedAt',
       headerName: 'Last Updated',
-      width: 200,
+      width: 150,
+      valueFormatter: (params: any) => {
+        return dayjs(params.value).format('HH:mm DD/MM/YYYY ');
+      },
     },
     {
       field: '_id',

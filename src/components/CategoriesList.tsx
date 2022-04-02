@@ -12,6 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { BeatLoader } from 'react-spinners';
+import dayjs from 'dayjs';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
 import { CategoryType } from '../types/index';
 
@@ -31,7 +32,10 @@ function CategoriesList() {
     {
       field: 'updatedAt',
       headerName: 'Last Updated',
-      width: 200,
+      width: 150,
+      valueFormatter: (params: any) => {
+        return dayjs(params.value).format('HH:mm DD/MM/YYYY ');
+      },
     },
     {
       field: '_id',

@@ -15,4 +15,9 @@ export const ProductValidationSchema = Yup.object().shape({
     .nullable()
     .typeError('Amount must be a number')
     .required('Image is required'),
+  stock: Yup.number()
+    .typeError('Amount must be a number')
+    .required('Stock is required')
+    .min(0, 'Stock must be at least 0'),
+  status: Yup.number().required('Status is required'),
 });

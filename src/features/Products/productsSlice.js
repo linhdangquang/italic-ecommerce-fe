@@ -77,12 +77,19 @@ const productsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateProduct.fulfilled, (state, action) => {
-      const { _id, name, price, description, category } = action.payload;
-      const product = state.products.find((product) => product._id === _id);
-      product.name = name;
-      product.price = price;
-      product.description = description;
-      product.category = category;
+      const updateProduct = action.payload;
+      const product = state.products.find(
+        (product) => product._id === updateProduct._id
+      );
+      product.name = updateProduct.name;
+      product.price = updateProduct.price;
+      product.description = updateProduct.description;
+      product.image = updateProduct.image;
+      product.category = updateProduct.category;
+      product.stock = updateProduct.stock;
+      product.status = updateProduct.status;
+      product.updatedAt = updateProduct.updatedAt;
+
       state.loading = false;
       state.status = 'success';
     });
