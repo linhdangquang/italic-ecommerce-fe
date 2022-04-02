@@ -1,8 +1,6 @@
-import { Navigate } from 'react-router-dom';
 import { ProductType } from '../types';
 import instance from './instance';
 import { isAuthenticated } from '../utils/localstorage';
-import authHeader from '../utils/auth-header';
 
 if (isAuthenticated()) {
   const { token } = isAuthenticated();

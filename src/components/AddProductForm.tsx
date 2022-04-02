@@ -34,12 +34,18 @@ function AddProduct() {
   }, [dispatch]);
   const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
     try {
-      await dispatch(addNewProduct(product));
+      const data = await dispatch(addNewProduct(product));
+      if (data.type !== 'products/addNewProduct/fulfilled') {
+        toast.error(data.error.message, {
+          type: 'error',
+        });
+        navigate('/admin/products');
+        return;
+      }
       toast.success('Product added successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
-        autoClose: 3000,
-        type: 'success',
       });
+
       navigate('/admin/products');
     } catch (error) {
       toast.error(error.message, {
