@@ -38,14 +38,11 @@ function SignInForm(props: Props) {
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
-    await dispatch(signIn(userForm))
+    const data = await dispatch(signIn(userForm))
       .unwrap()
       .then(() => {
         notify('Sign in success', 'success');
         navigate('/');
-      })
-      .catch(() => {
-        console.log(error);
       });
   };
 

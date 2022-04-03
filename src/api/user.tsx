@@ -9,14 +9,13 @@ if (isAuthenticated()) {
   instance.defaults.headers.common.Authorization = '';
 }
 
-export const signInUser = (data: UserType) => {
+export const signInUser = async (data: UserType) => {
   const URL = '/api/users/signin';
-  return instance.post(URL, data).then((res) => {
-    if (res.data.token) {
-      localStorage.setItem('user', JSON.stringify(res.data));
-    }
-    return res.data;
-  });
+  const res = await instance.post(URL, data);
+  if (res.data.token) {
+    localStorage.setItem('user', JSON.stringify(res.data));
+  }
+  return res.data;
 };
 
 export const signUpUser = (data: UserType) => {

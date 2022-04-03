@@ -13,8 +13,7 @@ export const signIn = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const { data } = await signInUser(user);
-      thunkAPI.dispatch(setMessage(data.message));
-      return data;
+      return { user: data };
     } catch (error) {
       const message =
         (error.response &&
@@ -48,7 +47,8 @@ const authSlice = createSlice({
     });
     builder.addCase(signIn.fulfilled, (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload;
+      console.log(action.payload);
+      state.user = action.payload.user;
     });
     builder.addCase(signIn.rejected, (state, action) => {
       state.error = action.payload;

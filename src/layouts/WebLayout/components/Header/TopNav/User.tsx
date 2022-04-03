@@ -3,10 +3,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { logOut } from '../../../../../features/Auth/authSlice.js';
+import { isAuthenticated } from '../../../../../utils/localstorage';
 
 function User() {
-  const { user, isLoggedIn, error } = useSelector((state: any) => state.auth);
-  console.log(user);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const { user } = isAuthenticated();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogout = async () => {
@@ -16,6 +17,7 @@ function User() {
     });
     navigate('/');
   };
+
   return (
     <div>
       {isLoggedIn ? (
@@ -33,8 +35,8 @@ function User() {
             className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"
           >
             <li>
-              <p>{user?.user?.name}</p>
-              <p>{user?.user?.email}</p>
+              <p>{user.name}</p>
+              <p>{user.email}</p>
             </li>
             <li>
               <a className="justify-between">Profile</a>
