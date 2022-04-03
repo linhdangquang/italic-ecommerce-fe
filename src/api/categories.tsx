@@ -8,7 +8,6 @@ if (isAuthenticated()) {
 } else {
   instance.defaults.headers.common.Authorization = '';
 }
-const userId = isAuthenticated().user._id;
 
 export const getAllCategories = () => {
   const URL = '/api/categories';
@@ -21,16 +20,16 @@ export const getDetail = (id: string) => {
 };
 
 export const add = (category: CategoryType) => {
-  const URL = `/api/categories/${userId}`;
+  const URL = `/api/categories/${isAuthenticated().user._id}`;
   return instance.post(URL, category);
 };
 
 export const edit = (category: CategoryType) => {
-  const URL = `/api/categories/${userId}/${category._id}`;
+  const URL = `/api/categories/${isAuthenticated().user._id}/${category._id}`;
   return instance.put(URL, category);
 };
 
 export const delCategory = (id: string) => {
-  const URL = `/api/categories/${userId}/${id}`;
+  const URL = `/api/categories/${isAuthenticated().user._id}/${id}`;
   return instance.delete(URL);
 };

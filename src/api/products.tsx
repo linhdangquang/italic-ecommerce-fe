@@ -8,7 +8,6 @@ if (isAuthenticated()) {
 } else {
   instance.defaults.headers.common.Authorization = '';
 }
-const userId = isAuthenticated().user._id;
 
 export const getAllProducts = () => {
   const URL = '/api/products';
@@ -16,12 +15,12 @@ export const getAllProducts = () => {
 };
 
 export const add = (product: ProductType) => {
-  const URL = `/api/products/${userId}`;
+  const URL = `/api/products/${isAuthenticated().user._id}`;
   return instance.post(URL, product);
 };
 
 export const delProduct = (id: string) => {
-  const URL = `/api/products/${userId}/${id}`;
+  const URL = `/api/products/${isAuthenticated().user._id}/${id}`;
   return instance.delete(URL);
 };
 
@@ -31,6 +30,6 @@ export const getOneProduct = (id: string) => {
 };
 
 export const putProduct = (data: ProductType) => {
-  const URL = `/api/products/${userId}/${data._id}`;
+  const URL = `/api/products/${isAuthenticated().user._id}/${data._id}`;
   return instance.put(URL, data);
 };

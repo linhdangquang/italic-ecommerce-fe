@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { toast, TypeOptions } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../features/Auth/authSlice.js';
 import { signInUser } from '../api/user';
 import { UserType } from '../types';
 import { isAuthenticated } from '../utils/localstorage';
@@ -26,13 +28,13 @@ function SignInForm(props: Props) {
     resolver: yupResolver(LoginValidationSchema),
   });
   const navigate = useNavigate();
-
-  const onSignIn: SubmitHandler<FormInputs> = async (user: UserType) => {
+  const dispatch = useDispatch();
+  const { user, isLoggedIn } = useSelector((state: any) => state.auth);
+  const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
     try {
-      const { data } = await signInUser(user);
-      localStorage.setItem('user', JSON.stringify(data));
+      await dispatch(signIn(userForm));
       notify('Sign in success', 'success');
       navigate('/');
     } catch (error) {
@@ -40,6 +42,10 @@ function SignInForm(props: Props) {
     }
   };
   const [open, setOpen] = useState(true);
+  useEffect(() => {
+    localStorage.setItem('user', JSON.stringify(user));
+    console.log('user', user);
+  }, [user]);
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password]);
