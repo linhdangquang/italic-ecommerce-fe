@@ -1,15 +1,37 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInUser, signUpUser } from '../../api/user';
+import { signInUser, signUpUser, logOutUser } from '../../api/user';
+import { setMessage } from '../Messages/messageSlice.js';
 
-const initialStateValue = {
-  isLoggedIn: false,
-  user: null,
-  error: null,
-};
+const user = JSON.parse(localStorage.getItem('user'));
 
-export const signIn = createAsyncThunk('auth/signIn', async (user) => {
+const initialStateValue = user
+  ? { isLoggedIn: true, user }
+  : { isLoggedIn: false, user: null };
+
+export const signIn = createAsyncThunk(
+  'auth/signIn',
+  async (user, thunkAPI) => {
+    try {
+      const { data } = await signInUser(user);
+      thunkAPI.dispatch(setMessage(data.message));
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const logOut = createAsyncThunk('auth/logOut', async () => {
   try {
-    const { data } = await signInUser(user);
+    const { data } = await logOutUser();
+    localStorage.removeItem('user');
     return data;
   } catch (error) {
     return error;

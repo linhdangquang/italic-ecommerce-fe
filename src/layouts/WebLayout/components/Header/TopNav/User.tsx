@@ -1,11 +1,21 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { isAuthenticated } from '../../../../../utils/localstorage';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { logOut } from '../../../../../features/Auth/authSlice.js';
 
 function User() {
-  const { user, isLoggedIn } = useSelector((state: any) => state.auth);
-
+  const { user, isLoggedIn, error } = useSelector((state: any) => state.auth);
+  console.log(user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onLogout = async () => {
+    await dispatch(logOut());
+    toast.success('Logout success', {
+      position: toast.POSITION.BOTTOM_RIGHT,
+    });
+    navigate('/');
+  };
   return (
     <div>
       {isLoggedIn ? (
@@ -23,8 +33,8 @@ function User() {
             className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"
           >
             <li>
-              <p>{user.user.name}</p>
-              <p>{user.user.email}</p>
+              <p>{user?.user?.name}</p>
+              <p>{user?.user?.email}</p>
             </li>
             <li>
               <a className="justify-between">Profile</a>
@@ -33,7 +43,9 @@ function User() {
               <a>Settings</a>
             </li>
             <li>
-              <a>Logout</a>
+              <button type="button" className="btn" onClick={onLogout}>
+                Log Out
+              </button>
             </li>
           </ul>
         </div>

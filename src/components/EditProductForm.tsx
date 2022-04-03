@@ -50,13 +50,13 @@ function EditProduct() {
     }
   }, [id, product, reset]);
 
-  const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (category: ProductType) => {
     try {
-      await dispatch(updateProduct(product));
-      toast.success('Product updated successfully', {
+      await dispatch(updateProduct(category));
+      toast.success('Category updated successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-      navigate('/admin/products');
+      navigate('/admin/categories');
     } catch (error) {
       toast.error(error.message, {
         type: 'error',

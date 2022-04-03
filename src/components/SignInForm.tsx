@@ -7,10 +7,10 @@ import { toast, TypeOptions } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../features/Auth/authSlice.js';
-import { signInUser } from '../api/user';
 import { UserType } from '../types';
 import { isAuthenticated } from '../utils/localstorage';
 import { LoginValidationSchema } from '../schema/auth';
+import { clearMessage } from '../features/Messages/messageSlice.js';
 
 type Props = any;
 
@@ -29,23 +29,27 @@ function SignInForm(props: Props) {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isLoggedIn } = useSelector((state: any) => state.auth);
+  const { user, isLoggedIn, error } = useSelector((state: any) => state.auth);
+  const { message } = useSelector((state: any) => state.message);
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
-    try {
-      await dispatch(signIn(userForm));
-      notify('Sign in success', 'success');
-      navigate('/');
-    } catch (error) {
-      notify(`Sign in failed ${error.response.data.message}`, 'error');
-    }
+    await dispatch(signIn(userForm))
+      .unwrap()
+      .then(() => {
+        notify('Sign in success', 'success');
+        navigate('/');
+      })
+      .catch(() => {
+        console.log(error);
+      });
   };
+
   const [open, setOpen] = useState(true);
-  useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
-    console.log('user', user);
-  }, [user]);
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password]);
@@ -133,6 +137,13 @@ function SignInForm(props: Props) {
             </button>
           </div>
         </form>
+        {message && (
+          <div className="form-group">
+            <div className="alert-danger alert" role="alert">
+              {message}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
