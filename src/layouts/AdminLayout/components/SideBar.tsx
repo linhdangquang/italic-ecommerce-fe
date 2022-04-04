@@ -4,9 +4,7 @@ import { RiHome6Line } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 import CategoryIcon from '@mui/icons-material/Category';
 
-type Props = any;
-
-function SideBar(props: Props) {
+function SideBar() {
   return (
     <nav className="flex min-h-screen w-64 flex-row pr-14 ">
       <div className="fixed top-0 left-0 z-50 flex h-full min-h-screen w-56 flex-col overflow-hidden rounded-r-3xl bg-white  ">

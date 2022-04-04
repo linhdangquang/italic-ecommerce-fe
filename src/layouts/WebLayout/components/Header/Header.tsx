@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import BottomNav from './BottomNav/BottomNav';
 import TopNav from './TopNav/TopNav';
 

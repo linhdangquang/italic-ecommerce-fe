@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../features/products/productsSlice.js';
-import { ProductType } from '../types';
 import Product from '../components/Product';
 
 function ProductsPage() {

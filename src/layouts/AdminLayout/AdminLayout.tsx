@@ -3,9 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import SideBar from './components/SideBar';
 
-type Props = any;
-
-function AdminLayout(props: Props) {
+function AdminLayout() {
   return (
     <div className="container-fluid admin-container font-fira flex flex-row bg-gray-100 font-OpenSans">
       <SideBar />

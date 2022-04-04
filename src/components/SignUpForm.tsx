@@ -1,17 +1,14 @@
 import { Alert, Collapse, IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { toast, TypeOptions } from 'react-toastify';
-import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { signUpUser } from '../api/user';
 import { UserType } from '../types';
 import { isAuthenticated } from '../utils/localstorage';
 import { RegisterValidationSchema } from '../schema/auth';
-
-type Props = any;
 
 type FormInputs = {
   name: string;
@@ -20,7 +17,7 @@ type FormInputs = {
   cpassword: string;
 };
 
-function SignUpForm(props: Props) {
+function SignUpForm() {
   const {
     register,
     handleSubmit,
@@ -32,7 +29,7 @@ function SignUpForm(props: Props) {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
     try {
-      const { data } = await signUpUser(user);
+      await signUpUser(user);
       notify('Sign up success, please login', 'success');
       navigate('/');
     } catch (error) {

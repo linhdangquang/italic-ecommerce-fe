@@ -3,9 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 
-type Props = any;
-
-function WebLayout(props: Props) {
+function WebLayout() {
   return (
     <div className="mx-auto font-OpenSans">
       <Header />

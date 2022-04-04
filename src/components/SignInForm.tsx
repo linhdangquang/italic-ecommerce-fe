@@ -9,18 +9,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
 import { signIn } from '../features/Auth/authSlice.js';
 import { UserType } from '../types';
-import { isAuthenticated } from '../utils/localstorage';
 import { LoginValidationSchema } from '../schema/auth';
 import { clearMessage } from '../features/Messages/messageSlice.js';
-
-type Props = any;
 
 type FormInputs = {
   email: string;
   password: string;
 };
 
-function SignInForm(props: Props) {
+function SignInForm() {
   const {
     register,
     handleSubmit,
@@ -33,7 +30,6 @@ function SignInForm(props: Props) {
   const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
-  console.log(message);
 
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
     const notify = (message: string, type: TypeOptions) =>

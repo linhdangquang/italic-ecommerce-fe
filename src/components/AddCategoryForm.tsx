@@ -45,7 +45,6 @@ function AddCategoryForm() {
         type: 'error',
       });
     }
-    console.log(category);
   };
   return (
     <div className="card ml-4 mt-4 w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">

@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SignInForm from '../components/SignInForm';
 
-type Props = any;
-
-function SignInPage(props: Props) {
+function SignInPage() {
   return (
     <div className="hero  min-h-full bg-base-200  py-16 pb-40">
       <div className="hero-content w-full  flex-col  justify-end lg:flex-row-reverse ">

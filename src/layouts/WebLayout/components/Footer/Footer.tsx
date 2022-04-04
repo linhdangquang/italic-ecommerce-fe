@@ -2,9 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.css';
 
-type Props = any;
-
-function Footer(props: Props) {
+function Footer() {
   return (
     <div className="bg-blacklight">
       <div className=" mx-auto w-auto">

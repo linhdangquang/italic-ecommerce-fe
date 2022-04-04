@@ -25,7 +25,6 @@ function EditCategoryForm() {
   const category = useSelector((state: any) =>
     id ? selectCategoryById(state, id) : null
   );
-  console.log(category);
   const {
     register,
     handleSubmit,
@@ -54,7 +53,6 @@ function EditCategoryForm() {
         type: 'error',
       });
     }
-    console.log(category);
   };
   useEffect(() => {
     if (category) {

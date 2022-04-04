@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import AboutPage from './pages/AboutPage';
@@ -7,7 +7,6 @@ import AdminLayout from './layouts/AdminLayout/AdminLayout';
 import WebLayout from './layouts/WebLayout/WebLayout';
 import ProductDetail from './pages/ProductDetail';
 import ProductsPage from './pages/ProductsPage';
-import { ProductType } from './types';
 import ProductsAdmin from './pages/ProductsAdmin';
 import EditProduct from './components/EditProductForm';
 import SignInPage from './pages/SignInPage';
