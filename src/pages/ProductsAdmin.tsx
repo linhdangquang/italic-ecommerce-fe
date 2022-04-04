@@ -22,6 +22,7 @@ import {
   fetchProducts,
   deleteProduct,
 } from '../features/products/productsSlice.js';
+import USDFormat from '../utils/currencyFormat';
 
 function ProductsAdmin() {
   const dispatch = useDispatch();
@@ -67,6 +68,9 @@ function ProductsAdmin() {
       field: 'price',
       headerName: 'Price',
       width: 100,
+      valueFormatter: (params: any) => {
+        return USDFormat(params.value);
+      },
     },
     {
       field: 'image',

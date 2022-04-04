@@ -20,14 +20,6 @@ function Menu() {
           About
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="admin"
-          className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
-        >
-          Dashboard
-        </NavLink>
-      </li>
     </ul>
   );
 }

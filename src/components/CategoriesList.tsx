@@ -85,9 +85,9 @@ function CategoriesList() {
               style={{ marginRight: '.75rem' }}
               startIcon={<VisibilityIcon />}
               size="small"
-              className="bg-orangeLight"
+              className="bg-blueDark"
             >
-              View
+              Detail
             </Button>
           </Link>
           <Link to={`/admin/categories/${params.value}/edit`}>

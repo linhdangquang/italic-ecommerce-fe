@@ -31,7 +31,7 @@ function SignUpForm() {
     try {
       await signUpUser(user);
       notify('Sign up success, please login', 'success');
-      navigate('/');
+      navigate('/signin');
     } catch (error) {
       reset();
       notify(`Sign up failed : ${error.response.data.message}`, 'error');
