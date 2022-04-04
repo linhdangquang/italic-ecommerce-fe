@@ -6,8 +6,8 @@ import { logOut } from '../../../../../features/Auth/authSlice.js';
 import { isAuthenticated } from '../../../../../utils/localstorage';
 
 function User() {
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
-  const { user } = isAuthenticated();
+  const { isLoggedIn, user } = useSelector((state: any) => state.auth);
+  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogout = async () => {
@@ -35,8 +35,8 @@ function User() {
             className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"
           >
             <li>
-              <p>{user.name}</p>
-              <p>{user.email}</p>
+              <p>{user.user.name}</p>
+              <p>{user.user.email}</p>
             </li>
             <li>
               <a className="justify-between">Profile</a>
