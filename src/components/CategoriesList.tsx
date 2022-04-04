@@ -13,11 +13,47 @@ import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { BeatLoader } from 'react-spinners';
 import dayjs from 'dayjs';
-import { fetchCategories } from '../features/Categories/categoriesSlice.js';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import {
+  fetchCategories,
+  deleteCategory,
+} from '../features/Categories/categoriesSlice.js';
 import { CategoryType } from '../types/index';
 
 function CategoriesList() {
   const dispatch = useDispatch();
+  const delCategory = (id: string) => {
+    const deleteSwal = withReactContent(Swal);
+    deleteSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(deleteCategory(id));
+            deleteSwal.fire(
+              'Deleted!',
+              'Category has been deleted.',
+              'success'
+            );
+          } catch (error) {
+            deleteSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -66,9 +102,9 @@ function CategoriesList() {
             </Button>
           </Link>
           <Button
-            // onClick={() => {
-            //   delProduct(params.value);
-            // }}
+            onClick={() => {
+              delCategory(params.value);
+            }}
             variant="contained"
             color="error"
             size="small"

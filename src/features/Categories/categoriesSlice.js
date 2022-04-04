@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllCategories, edit, add } from '../../api/categories';
+import { getAllCategories, edit, add, delCategory } from '../../api/categories';
 
 const initialStateValue = {
   categories: [],
@@ -28,6 +28,14 @@ export const updateCategory = createAsyncThunk(
   'categories/updateCategory',
   async (category) => {
     const { data } = await edit(category);
+    return data;
+  }
+);
+
+export const deleteCategory = createAsyncThunk(
+  'categories/deleteCategory',
+  async (id) => {
+    const { data } = await delCategory(id);
     return data;
   }
 );
@@ -77,11 +85,20 @@ const categoriesSlice = createSlice({
       state.loading = false;
       state.status = 'error';
     });
+    builder.addCase(deleteCategory.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteCategory.fulfilled, (state, action) => {
+      const { _id } = action.payload;
+      const category = state.categories.find(
+        (category) => category._id === _id
+      );
+      state.categories.splice(state.categories.indexOf(category), 1);
+      state.loading = false;
+      state.status = 'success';
+    });
   },
 });
-
-export const { editCategory, removeCategory, addCategory } =
-  categoriesSlice.actions;
 
 export const selectAllCategories = (state) => state.categories.categories;
 
