@@ -53,6 +53,10 @@ const authSlice = createSlice({
     builder.addCase(signIn.rejected, (state, action) => {
       state.error = action.payload;
     });
+    builder.addCase(logOut.fulfilled, (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    });
   },
 });
 

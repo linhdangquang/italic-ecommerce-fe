@@ -6,6 +6,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { toast, TypeOptions } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { PropagateLoader } from 'react-spinners';
 import { signIn } from '../features/Auth/authSlice.js';
 import { UserType } from '../types';
 import { isAuthenticated } from '../utils/localstorage';
@@ -29,32 +30,38 @@ function SignInForm(props: Props) {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, isLoggedIn, error } = useSelector((state: any) => state.auth);
+  const [loading, setLoading] = useState(false);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
+  console.log(message);
 
-  useEffect(() => {
-    dispatch(clearMessage());
-  }, [dispatch]);
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
-    const data = await dispatch(signIn(userForm))
-      .unwrap()
-      .then(() => {
-        notify('Sign in success', 'success');
-        navigate('/');
-      });
+    setLoading(true);
+    setTimeout(async () => {
+      await dispatch(signIn(userForm))
+        .unwrap()
+        .then(() => {
+          notify('Sign in success', 'success');
+          navigate('/');
+        })
+        .catch(() => {
+          setLoading(false);
+        });
+    }, 500);
   };
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
 
   const [open, setOpen] = useState(true);
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password]);
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate('/');
-    }
-  });
+  if (isLoggedIn) {
+    navigate('/');
+  }
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
       <div className="card-body">
@@ -125,22 +132,30 @@ function SignInForm(props: Props) {
               </a>
             </label>
           </div>
-          <div className="form-control mt-6">
-            <button
-              type="submit"
-              className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
-            >
-              Sign in
-            </button>
-          </div>
-        </form>
-        {message && (
-          <div className="form-group">
-            <div className="alert-danger alert" role="alert">
-              {message}
+          {message && (
+            <div className="form-group">
+              <Alert severity="error" variant="filled">
+                {message}
+              </Alert>
             </div>
-          </div>
-        )}
+          )}
+          {loading === true ? (
+            <div className="form-control pt-1  text-center">
+              <PropagateLoader size={15} color="#34d399">
+                {' '}
+              </PropagateLoader>
+            </div>
+          ) : (
+            <div className="form-control mt-6">
+              <button
+                type="submit"
+                className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
+              >
+                Sign in
+              </button>
+            </div>
+          )}
+        </form>
       </div>
     </div>
   );

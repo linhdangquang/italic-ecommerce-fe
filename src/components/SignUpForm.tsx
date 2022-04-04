@@ -24,6 +24,7 @@ function SignUpForm(props: Props) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormInputs>({ resolver: yupResolver(RegisterValidationSchema) });
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ function SignUpForm(props: Props) {
       notify('Sign up success, please login', 'success');
       navigate('/');
     } catch (error) {
+      reset();
       notify(`Sign up failed : ${error.response.data.message}`, 'error');
     }
   };

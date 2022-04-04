@@ -1,18 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Button } from '@mui/material';
 import { logOut } from '../../../../../features/Auth/authSlice.js';
-import { isAuthenticated } from '../../../../../utils/localstorage';
 
 function User() {
   const { isLoggedIn, user } = useSelector((state: any) => state.auth);
-  console.log(user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onLogout = async () => {
     await dispatch(logOut());
-    toast.success('Logout success', {
+    toast('Logout success', {
       position: toast.POSITION.BOTTOM_RIGHT,
     });
     navigate('/');
@@ -32,23 +32,21 @@ function User() {
           </div>
           <ul
             tabIndex={0}
-            className="dropdown-content menu rounded-box menu-compact w-48 bg-base-100 p-2 shadow shadow-gray-400"
+            className="dropdown-content menu rounded-box menu-compact w-44 bg-base-100 p-2 shadow shadow-gray-400"
           >
-            <li>
-              <p>{user.user.name}</p>
-              <p>{user.user.email}</p>
-            </li>
+            <div className="px-4">
+              <p className="text-base font-medium ">{user.user.name}</p>
+              <p className="text-xs text-gray-500">{user.user.email}</p>
+            </div>
             <li>
               <a className="justify-between">Profile</a>
             </li>
             <li>
               <a>Settings</a>
             </li>
-            <li>
-              <button type="button" className="btn" onClick={onLogout}>
-                Log Out
-              </button>
-            </li>
+            <Button size="medium" onClick={onLogout} startIcon={<LogoutIcon />}>
+              Logout
+            </Button>
           </ul>
         </div>
       ) : (
