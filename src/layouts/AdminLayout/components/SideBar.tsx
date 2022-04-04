@@ -3,6 +3,7 @@ import { AiOutlineInbox } from 'react-icons/ai';
 import { RiHome6Line } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 import CategoryIcon from '@mui/icons-material/Category';
+import WebIcon from '@mui/icons-material/Web';
 
 function SideBar() {
   return (
@@ -29,7 +30,7 @@ function SideBar() {
               className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
             >
               <span className="flex items-center pl-12 text-sm font-medium">
-                <RiHome6Line size="1.25rem" />
+                <WebIcon size="1.25rem" />
                 Web
               </span>
             </NavLink>
