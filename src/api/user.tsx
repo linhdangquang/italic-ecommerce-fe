@@ -1,17 +1,10 @@
 import { UserType } from '../types';
-import { isAuthenticated } from '../utils/localstorage';
+import authHeader from '../utils/auth-header';
 import instance from './instance';
-
-if (isAuthenticated()) {
-  const { token } = isAuthenticated();
-  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-} else {
-  instance.defaults.headers.common.Authorization = '';
-}
 
 export const signInUser = async (data: UserType) => {
   const URL = '/api/users/signin';
-  const res = await instance.post(URL, data);
+  const res = await instance.post(URL, data, authHeader());
   if (res.data.token) {
     localStorage.setItem('user', JSON.stringify(res.data));
   }
@@ -20,11 +13,9 @@ export const signInUser = async (data: UserType) => {
 
 export const signUpUser = (data: UserType) => {
   const URL = '/api/users/signup';
-  return instance.post(URL, data);
+  return instance.post(URL, data, authHeader());
 };
 
 export const logOutUser = () => {
-  const URL = '/api/users/me/logout';
   localStorage.removeItem('user');
-  return instance.post(URL);
 };

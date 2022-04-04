@@ -25,6 +25,17 @@ function SideBar() {
           </li>
           <li>
             <NavLink
+              to="/"
+              className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+            >
+              <span className="flex items-center pl-12 text-sm font-medium">
+                <RiHome6Line size="1.25rem" />
+                Web
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
               to="/admin/products"
               className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
             >

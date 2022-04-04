@@ -28,7 +28,7 @@ function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const { isLoggedIn, user } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
 
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
@@ -42,6 +42,7 @@ function SignInForm() {
         .then(() => {
           notify('Sign in success', 'success');
           navigate('/');
+          console.log(user.user);
         })
         .catch(() => {
           setLoading(false);

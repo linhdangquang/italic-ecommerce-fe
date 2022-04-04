@@ -28,13 +28,7 @@ export const signIn = createAsyncThunk(
 );
 
 export const logOut = createAsyncThunk('auth/logOut', async () => {
-  try {
-    const { data } = await logOutUser();
-    localStorage.removeItem('user');
-    return data;
-  } catch (error) {
-    return error;
-  }
+  await logOutUser();
 });
 
 const authSlice = createSlice({

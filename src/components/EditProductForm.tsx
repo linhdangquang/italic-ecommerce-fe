@@ -56,7 +56,7 @@ function EditProduct() {
       toast.success('Category updated successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-      navigate('/admin/categories');
+      navigate('/admin/products');
     } catch (error) {
       toast.error(error.message, {
         type: 'error',
