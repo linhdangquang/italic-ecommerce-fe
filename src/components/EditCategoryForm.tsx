@@ -43,7 +43,7 @@ function EditCategoryForm() {
         navigate('/admin/categories');
         return;
       }
-      toast.success('Category added successfully', {
+      toast.success('Category updated successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
 

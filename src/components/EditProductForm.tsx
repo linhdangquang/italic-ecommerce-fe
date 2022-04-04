@@ -53,7 +53,7 @@ function EditProduct() {
   const onSubmit: SubmitHandler<FormInputs> = async (category: ProductType) => {
     try {
       await dispatch(updateProduct(category));
-      toast.success('Category updated successfully', {
+      toast.success('Product updated successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       navigate('/admin/products');

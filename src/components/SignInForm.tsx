@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
-import { toast, TypeOptions } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropagateLoader } from 'react-spinners';
@@ -28,7 +28,7 @@ function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { isLoggedIn, user } = useSelector((state: any) => state.auth);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
 
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
@@ -42,7 +42,6 @@ function SignInForm() {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
           navigate('/');
-          console.log(user.user);
         })
         .catch(() => {
           setLoading(false);
@@ -52,7 +51,6 @@ function SignInForm() {
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
-
   const [open, setOpen] = useState(true);
   useEffect(() => {
     setOpen(true);

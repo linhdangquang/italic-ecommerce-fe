@@ -13,7 +13,7 @@ export const signInUser = async (data: UserType) => {
 
 export const signUpUser = (data: UserType) => {
   const URL = '/api/users/signup';
-  return instance.post(URL, data, authHeader());
+  return instance.post(URL, data);
 };
 
 export const logOutUser = () => {

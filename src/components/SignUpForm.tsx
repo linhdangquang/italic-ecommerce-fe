@@ -5,10 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import { toast, TypeOptions } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { signUpUser } from '../api/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { PropagateLoader } from 'react-spinners';
 import { UserType } from '../types';
-import { isAuthenticated } from '../utils/localstorage';
 import { RegisterValidationSchema } from '../schema/auth';
+import { registerUser } from '../features/Auth/authSlice.js';
+import { clearMessage } from '../features/Messages/messageSlice.js';
 
 type FormInputs = {
   name: string;
@@ -18,35 +20,48 @@ type FormInputs = {
 };
 
 function SignUpForm() {
+  const [successful, setSuccessful] = useState(true);
+  const { message } = useSelector((state: any) => state.message);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
+    reset,
   } = useForm<FormInputs>({ resolver: yupResolver(RegisterValidationSchema) });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<FormInputs> = async (user: UserType) => {
-    const notify = (message: string, type: TypeOptions) =>
-      toast(message, { type });
-    try {
-      await signUpUser(user);
-      notify('Sign up success, please login', 'success');
-      navigate('/signin');
-    } catch (error) {
-      reset();
-      notify(`Sign up failed : ${error.response.data.message}`, 'error');
-    }
+    setSuccessful(false);
+    message && dispatch(clearMessage());
+    setTimeout(async () => {
+      await dispatch(registerUser(user))
+        .unwrap()
+        .then(() => {
+          toast.success('Sign up successfully, please sign in now', {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+          navigate('/signin');
+        })
+        .catch(() => {
+          setSuccessful(true);
+        });
+    }, 750);
   };
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [dispatch]);
+  useEffect(() => {
+    reset();
+  }, [reset, successful]);
   const [open, setOpen] = useState(true);
   useEffect(() => {
     setOpen(true);
   }, [errors.email, errors.password, errors.name]);
 
-  useEffect(() => {
-    if (isAuthenticated()) {
-      navigate('/');
-    }
-  });
+  if (isLoggedIn) {
+    navigate('/');
+  }
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
       <div className="card-body">
@@ -185,14 +200,29 @@ function SignUpForm() {
               )}
             </div>
           </div>
-          <div className="form-control mt-6">
-            <button
-              type="submit"
-              className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
-            >
-              Sign up
-            </button>
-          </div>
+          {message && (
+            <div className="form-group">
+              <Alert severity="error" variant="filled">
+                {message}
+              </Alert>
+            </div>
+          )}
+          {successful === false ? (
+            <div className="form-control pt-1  text-center">
+              <PropagateLoader size={15} color="#34d399">
+                {' '}
+              </PropagateLoader>
+            </div>
+          ) : (
+            <div className="form-control mt-6">
+              <button
+                type="submit"
+                className="btn  border-2 border-green-400  bg-blueSage py-2 px-4 text-base font-bold text-white shadow shadow-cyan-400 hover:bg-teal-400 "
+              >
+                Sign up
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>
