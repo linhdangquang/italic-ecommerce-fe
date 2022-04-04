@@ -50,7 +50,7 @@ function SignInForm(props: Props) {
         .catch(() => {
           setLoading(false);
         });
-    }, 500);
+    }, 700);
   };
   useEffect(() => {
     dispatch(clearMessage());
