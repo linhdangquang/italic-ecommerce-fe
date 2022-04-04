@@ -39,6 +39,7 @@ function SignInForm(props: Props) {
     const notify = (message: string, type: TypeOptions) =>
       toast(message, { type });
     setLoading(true);
+    message && dispatch(clearMessage());
     setTimeout(async () => {
       await dispatch(signIn(userForm))
         .unwrap()
