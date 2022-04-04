@@ -32,15 +32,15 @@ function SignInForm() {
   const { message } = useSelector((state: any) => state.message);
 
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
-    const notify = (message: string, type: TypeOptions) =>
-      toast(message, { type });
     setLoading(true);
     message && dispatch(clearMessage());
     setTimeout(async () => {
       await dispatch(signIn(userForm))
         .unwrap()
         .then(() => {
-          notify('Sign in success', 'success');
+          toast.success('Sign in successfully', {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
           navigate('/');
           console.log(user.user);
         })

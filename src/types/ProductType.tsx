@@ -5,5 +5,6 @@ interface Product {
   image: string;
   stock: number;
   status: number;
+  category: string;
 }
 export default Product;
