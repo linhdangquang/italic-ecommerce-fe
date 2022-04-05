@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PacmanLoader } from 'react-spinners';
+import HomeIcon from '@mui/icons-material/Home';
 import { getCategoryDetails } from '../features/Categories/categorySlice.js';
 import ProductCard from './ProductCard';
 import { ProductType } from '../types';
@@ -18,6 +19,24 @@ function ProductsByCategory() {
   );
   return (
     <div className="min-h-screen py-2 px-20">
+      <div className="breadcrumbs text-xs text-gray-500">
+        <ul>
+          <li>
+            <Link to="/">
+              <HomeIcon fontSize="small" />
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
+          <li>
+            <Link to={`/products/${category?.category?._id}`}>
+              {category?.category?.name}
+            </Link>
+          </li>
+        </ul>
+      </div>
       {!loading && (
         <>
           <h1 className="text-left text-[25px] font-bold italic ">

@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HomeIcon from '@mui/icons-material/Home';
 import CheckIcon from '@mui/icons-material/Check';
-import { CategoryType, ProductType } from '../types';
+import { CategoryType } from '../types';
 import { selectProductById } from '../features/Products/productsSlice.js';
 
 function ProductDetail() {
