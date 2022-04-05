@@ -11,12 +11,15 @@ function ProductsPage() {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
+  const activeProducts = products?.filter((product: ProductType) => {
+    return product.status === 0;
+  });
   return (
     <div className="min-h-screen py-2 px-20">
       <h1 className="text-left text-[25px] font-bold italic ">Products</h1>
       {!loading && (
         <div className="grid grid-cols-4 gap-x-4 py-4">
-          {products?.map((product: ProductType) => (
+          {activeProducts?.map((product: ProductType) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>

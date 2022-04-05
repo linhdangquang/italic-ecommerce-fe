@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         OpenSans: ['Open Sans', 'sans-serif'],
         DancingScript: ['Dancing Script', 'cursive'],
+        PlayfairDisplay: ['Playfair Display', 'serif'],
       },
       colors: {
         blacklight: '#171722',

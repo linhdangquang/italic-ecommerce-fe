@@ -74,7 +74,8 @@
         ],
         "no-useless-escape" : "off",
         "no-param-reassign": "off",
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "jsx-a11y/control-has-associated-label": "off"
     },
     "settings": {
         "import/resolver": {

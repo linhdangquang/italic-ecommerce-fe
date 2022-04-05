@@ -9,23 +9,23 @@ import { ProductType } from '../types';
 function ProductsByCategory() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { category, loading, status } = useSelector(
-    (state: any) => state.category
-  );
+  const { category, loading } = useSelector((state: any) => state.category);
   useEffect(() => {
     dispatch(getCategoryDetails(id));
   }, [dispatch, id]);
-  console.log(category);
+  const products = category?.category?.products?.filter(
+    (product: ProductType) => product.status === 0
+  );
   return (
     <div className="min-h-screen py-2 px-20">
       {!loading && (
         <>
           <h1 className="text-left text-[25px] font-bold italic ">
-            {category.category.name}
+            {category?.category?.name}
           </h1>
           <div className="grid grid-cols-4 gap-x-4 py-4">
-            {category.category.products?.map((product: ProductType) => (
-              <ProductCard key={product._id} product={product} />
+            {products?.map((product: ProductType) => (
+              <ProductCard key={product?._id} product={product} />
             ))}
           </div>
         </>
@@ -38,7 +38,5 @@ function ProductsByCategory() {
     </div>
   );
 }
-
-// <div className="py-2 px-20">
 
 export default ProductsByCategory;

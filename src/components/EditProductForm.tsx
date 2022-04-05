@@ -173,7 +173,7 @@ function EditProduct() {
                       {...register('status')}
                       className="radio radio-accent"
                       value={0}
-                      checked
+                      {...(product?.status === 0 && { checked: true })}
                     />
                     <label className="label">
                       <span className="label-text font-semibold text-teal-500">
@@ -187,6 +187,7 @@ function EditProduct() {
                       {...register('status')}
                       className="radio border-roseLight  checked:bg-roseLight"
                       value={1}
+                      {...(product?.status === 1 && { checked: true })}
                     />
                     <label className="label">
                       <span className="label-text font-semibold text-roseLight">

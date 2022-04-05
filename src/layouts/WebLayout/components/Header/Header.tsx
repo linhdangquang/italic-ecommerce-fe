@@ -4,7 +4,7 @@ import TopNav from './TopNav/TopNav';
 
 function Header() {
   return (
-    <div className="header">
+    <div className="header border-b border-gray-100">
       <TopNav />
       <BottomNav />
     </div>
