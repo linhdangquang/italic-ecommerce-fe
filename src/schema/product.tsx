@@ -12,6 +12,7 @@ export const ProductValidationSchema = Yup.object().shape({
     .min(1, 'Price must be at least 1'),
   description: Yup.string().required('Description is required'),
   image: Yup.mixed()
+    .required('Image is required')
     .test('fileSize', 'Image is requied', (value) => {
       console.log(value);
       if (value.length === 0) {
