@@ -6,5 +6,7 @@ interface Product {
   stock: number;
   status: number;
   category: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 export default Product;

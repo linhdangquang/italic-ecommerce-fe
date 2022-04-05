@@ -22,7 +22,7 @@ import {
   fetchProducts,
   deleteProduct,
 } from '../features/products/productsSlice.js';
-import USDFormat from '../utils/currencyFormat';
+import { USDFormat } from '../utils/currencyFormat';
 
 function ProductsAdmin() {
   const dispatch = useDispatch();
