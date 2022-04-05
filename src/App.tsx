@@ -18,6 +18,7 @@ import CategoriesAdmin from './pages/CategoriesAdmin';
 import AddCategoryForm from './components/AddCategoryForm';
 import EditCategoryForm from './components/EditCategoryForm';
 import DetailCategory from './components/DetailCategory';
+import ProductsByCategory from './components/ProductsByCategory';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="products/:id" element={<ProductDetail />} />
+            <Route path="categories/:id" element={<ProductsByCategory />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="signin" element={<SignInPage />} />
             <Route path="signup" element={<SignUpPage />} />

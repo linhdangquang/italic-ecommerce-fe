@@ -10,7 +10,6 @@ type Props = {
 
 function Product({ product }: Props) {
   const { name, price, _id, image, createdAt } = product;
-  console.log(product);
   return (
     <div className="p-2 shadow drop-shadow-md">
       <p>{name}</p>

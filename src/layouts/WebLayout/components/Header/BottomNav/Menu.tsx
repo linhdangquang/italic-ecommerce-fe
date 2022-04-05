@@ -23,7 +23,7 @@ function Menu() {
       {categories?.map((category: CategoryType, idx: number) => (
         <li key={idx + 1}>
           <NavLink
-            to={`/products/category/${category._id}`}
+            to={`/categories/${category._id}`}
             className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
           >
             {category.name}

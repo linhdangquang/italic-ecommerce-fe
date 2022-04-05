@@ -1,23 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { PacmanLoader } from 'react-spinners';
 import { fetchProducts } from '../features/products/productsSlice.js';
-import Product from '../components/Product';
+import ProductCard from '../components/ProductCard';
 import { ProductType } from '../types';
 
 function ProductsPage() {
   const dispatch = useDispatch();
-  const products = useSelector((state: any) => state.products.products);
+  const { products, loading } = useSelector((state: any) => state.products);
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
   return (
-    <div className="py-2 px-20">
+    <div className="min-h-screen py-2 px-20">
       <h1 className="text-left text-[25px] font-bold italic ">Products</h1>
-      <div className="grid grid-cols-4 gap-x-4 py-4">
-        {products?.map((product: ProductType) => (
-          <Product key={product._id} product={product} />
-        ))}
-      </div>
+      {!loading && (
+        <div className="grid grid-cols-4 gap-x-4 py-4">
+          {products?.map((product: ProductType) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      )}
+      {loading && (
+        <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+          <PacmanLoader color="#34d399" />
+        </div>
+      )}
     </div>
   );
 }
