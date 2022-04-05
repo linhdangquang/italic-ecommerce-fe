@@ -6,10 +6,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
 import { BeatLoader } from 'react-spinners';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { ProductType } from '../types';
 import { addNewProduct } from '../features/Products/productsSlice.js';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
 import { ProductValidationSchema } from '../schema/product';
+import storage from '../api/firebase';
+import check from '../check.png';
 
 type FormInputs = {
   name: string;
@@ -22,6 +25,7 @@ type FormInputs = {
 };
 
 function AddProduct() {
+  const [loading, setLoading] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -30,12 +34,22 @@ function AddProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const categories = useSelector((state: any) => state.categories.categories);
-  const loading = useSelector((state: any) => state.products.loading);
   useEffect(() => {
     dispatch(fetchCategories());
   }, [dispatch]);
+  const uploadFile = async (file: File) => {
+    if (!file) return;
+    const storageRef = ref(storage, `products/${file.name}`);
+    await uploadBytesResumable(storageRef, file);
+    const downloadURL = await getDownloadURL(storageRef);
+    return downloadURL;
+  };
   const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
     try {
+      setLoading(true);
+      const file = product.image[0];
+      const imgUrl = await uploadFile(file);
+      product.image = imgUrl;
       const data = await dispatch(addNewProduct(product));
       if (data.type !== 'products/addNewProduct/fulfilled') {
         toast.error(data.error.message, {
@@ -47,7 +61,7 @@ function AddProduct() {
       toast.success('Product added successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
-
+      setLoading(false);
       navigate('/admin/products');
     } catch (error) {
       toast.error(error.message, {
@@ -143,11 +157,11 @@ function AddProduct() {
                 </label>
                 <input
                   className=" input input-info border-2 "
-                  type="text"
+                  type="file"
                   placeholder="Image"
                   {...register('image')}
                 />
-                {errors.image?.message && (
+                {errors?.image && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"
@@ -218,7 +232,6 @@ function AddProduct() {
               )}
             </div>
           </div>
-
           {!loading && (
             <div className="form-control mt-6">
               <button

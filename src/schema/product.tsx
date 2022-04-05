@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 export const ProductValidationSchema = Yup.object().shape({
   name: Yup.string()
     .required('Name is required')
@@ -10,7 +11,7 @@ export const ProductValidationSchema = Yup.object().shape({
     .required('Price is required')
     .min(1, 'Price must be at least 1'),
   description: Yup.string().required('Description is required'),
-  image: Yup.string().required('Image is required'),
+  image: Yup.mixed().required('You need to provide a image'),
   category: Yup.string()
     .nullable()
     .typeError('Amount must be a number')
