@@ -108,7 +108,7 @@ function ProductsAdmin() {
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Link to={`/admin/categories/${params.value}/view`}>
+          <Link to="/admin">
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}

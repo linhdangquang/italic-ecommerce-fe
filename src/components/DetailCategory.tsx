@@ -7,10 +7,12 @@ import {
   DataGrid,
   GridColDef,
   GridValueGetterParams,
+  GridValueFormatterParams,
   GridToolbar,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import { USDFormat } from '../utils/currencyFormat';
 
 import { getCategoryDetails } from '../features/Categories/categorySlice.js';
 
@@ -32,6 +34,7 @@ function DetailCategory() {
       field: 'price',
       headerName: 'Price',
       width: 100,
+      valueFormatter: (params: any) => USDFormat(params.value),
     },
     {
       field: 'image',
