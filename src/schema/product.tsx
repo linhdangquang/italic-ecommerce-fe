@@ -11,7 +11,22 @@ export const ProductValidationSchema = Yup.object().shape({
     .required('Price is required')
     .min(1, 'Price must be at least 1'),
   description: Yup.string().required('Description is required'),
-  image: Yup.mixed().required('You need to provide a image'),
+  image: Yup.mixed()
+    .test('fileSize', 'Image is requied', (value) => {
+      console.log(value);
+      if (value.length === 0) {
+        return false;
+      }
+      return true;
+    })
+    .test('fileType', 'Unsupported Format', (value) => {
+      const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
+      return SUPPORTED_FORMATS.includes(value[0].type);
+    })
+    .test('fileSize', 'Image Size is too larger max is 2MB', (value) => {
+      const sizeInBytes = 2000000; // 0.5MB
+      return value.size <= sizeInBytes;
+    }),
   category: Yup.string()
     .nullable()
     .typeError('Amount must be a number')
