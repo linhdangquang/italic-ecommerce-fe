@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 
-const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 export const ProductValidationSchema = Yup.object().shape({
   name: Yup.string()
     .required('Name is required')
@@ -11,23 +10,20 @@ export const ProductValidationSchema = Yup.object().shape({
     .required('Price is required')
     .min(1, 'Price must be at least 1'),
   description: Yup.string().required('Description is required'),
-  image: Yup.mixed()
-    .required('Image is required')
-    .test('fileSize', 'Image is requied', (value) => {
-      console.log(value);
-      if (value.length === 0) {
-        return false;
-      }
-      return true;
-    })
-    .test('fileType', 'Unsupported Format', (value) => {
-      const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
-      return SUPPORTED_FORMATS.includes(value[0].type);
-    })
-    .test('fileSize', 'Image Size is too larger max is 2MB', (value) => {
-      const sizeInBytes = 2000000; // 0.5MB
-      return value.size <= sizeInBytes;
-    }),
+  // image: Yup.mixed()
+  //   .required('Image is required')
+  //   .typeError('Image is required')
+  //   .test('fileSize', 'Image is requied', (value) => {
+  //     console.log(value);
+  //     if (value.length === 0 || value[0].type === null) {
+  //       return false;
+  //     }
+  //     return true;
+  //   })
+  //   .test('fileSize', 'Image Size is too larger max is 2MB', (value) => {
+  //     const sizeInBytes = 2000000; // 0.5MB
+  //     return value[0].size <= sizeInBytes;
+  //   }),
   category: Yup.string()
     .nullable()
     .typeError('Amount must be a number')
