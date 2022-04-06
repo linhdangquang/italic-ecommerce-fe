@@ -50,10 +50,15 @@ function AddProduct() {
   const onSubmit: SubmitHandler<FormInputs> = async (product: any) => {
     try {
       setLoading(true);
-      const file = product.image[0];
-      product.imageName = file.name;
-      const imgUrl = await uploadSingleFile(file);
-      product.image = imgUrl;
+      if (product.image[0]) {
+        const file = product.image[0];
+        product.imageName = file.name;
+        const imgUrl = await uploadSingleFile(file);
+        product.image = imgUrl;
+      } else {
+        product.image =
+          'https://img.icons8.com/ios-filled/100/000000/no-image.png';
+      }
       const data = await dispatch(addNewProduct(product));
       if (data.type !== 'products/addNewProduct/fulfilled') {
         toast.error(data.error.message, {
@@ -270,7 +275,7 @@ function AddProduct() {
               </div>
             )}
             {loading && (
-              <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+              <div className="flex min-h-fit items-center justify-center">
                 <BeatLoader size={20} color="#34d399" margin={2} />
               </div>
             )}
@@ -279,12 +284,16 @@ function AddProduct() {
       </div>
       {selectedImage && (
         <div>
-          <div className="rounded px-4 py-2 ">
+          <div className="mt-4 flex h-full flex-col gap-y-2 rounded-md bg-slate-100 px-4 ">
             <h1 className="font-semibold text-gray-600">Image Preview</h1>
             <div>
               <img src={URL.createObjectURL(selectedImage)} alt="" />
             </div>
-            <button type="button" onClick={removeSelectedImage}>
+            <button
+              type="button"
+              className="btn btn-info mx-auto text-xs text-white shadow-md shadow-cyan-400"
+              onClick={removeSelectedImage}
+            >
               Remove This Image
             </button>
           </div>

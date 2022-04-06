@@ -281,7 +281,7 @@ function EditProduct() {
               </div>
             )}
             {loading && (
-              <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+              <div className="flex min-h-fit items-center justify-center">
                 <BeatLoader size={20} color="#34d399" margin={2} />
               </div>
             )}
@@ -290,26 +290,27 @@ function EditProduct() {
       </div>
       {selectedImage ? (
         <div>
-          <div className="rounded px-4 py-2 ">
+          <div className="mt-4 flex h-full flex-col gap-y-2 rounded-md bg-slate-100 px-4 ">
             <h1 className="font-semibold text-gray-600">Image Preview</h1>
             <div>
               <img src={URL.createObjectURL(selectedImage)} alt="" />
             </div>
-            <button type="button" onClick={removeSelectedImage}>
+            <button
+              type="button"
+              className="btn btn-info mx-auto text-xs text-white shadow-md shadow-cyan-400"
+              onClick={removeSelectedImage}
+            >
               Remove This Image
             </button>
           </div>
         </div>
       ) : (
         <div>
-          <div className="rounded px-4 py-2 ">
-            <h1 className="font-semibold text-gray-600">Image Preview</h1>
+          <div className="mt-4 flex h-full w-full flex-col gap-y-2 rounded-md bg-slate-100 px-4">
+            <h1 className="font-semibold text-gray-600">Present Image</h1>
             <div>
               <img src={product?.image} alt="" />
             </div>
-            <button type="button" onClick={removeSelectedImage}>
-              Remove This Image
-            </button>
           </div>
         </div>
       )}

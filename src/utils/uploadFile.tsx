@@ -15,7 +15,7 @@ export const uploadSingleFile = async (file: File) => {
 };
 
 export const deleteFile = async (fileName: string) => {
-  if (!fileName) return;
+  if (!fileName || fileName === 'no-image.png') return;
 
   const deleteRef = ref(storage, `products/${fileName}`);
   await deleteObject(deleteRef).then(() => {
