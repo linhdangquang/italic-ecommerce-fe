@@ -85,6 +85,7 @@ const productsSlice = createSlice({
       product.price = updateProduct.price;
       product.description = updateProduct.description;
       product.image = updateProduct.image;
+      product.imageName = updateProduct.imageName;
       product.category = updateProduct.category;
       product.stock = updateProduct.stock;
       product.status = updateProduct.status;

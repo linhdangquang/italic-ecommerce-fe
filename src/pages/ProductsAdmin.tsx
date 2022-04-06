@@ -7,6 +7,8 @@ import {
   GridColDef,
   GridValueGetterParams,
   GridToolbar,
+  GridColumns,
+  GridCellParams,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -58,6 +60,7 @@ function ProductsAdmin() {
       field: 'id',
       headerName: 'ID',
       width: 100,
+      cellClassName: 'font-semibold',
     },
     {
       field: 'name',

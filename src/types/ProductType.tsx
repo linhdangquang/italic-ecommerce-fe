@@ -3,6 +3,7 @@ interface Product {
   name: string;
   price: number;
   image: string | any;
+  imageName: string;
   stock: number;
   status: number;
   category: string;

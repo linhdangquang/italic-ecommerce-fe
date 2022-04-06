@@ -47,10 +47,11 @@ function AddProduct() {
     setSelectedImage(undefined);
     resetField('image');
   };
-  const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (product: any) => {
     try {
       setLoading(true);
       const file = product.image[0];
+      product.imageName = file.name;
       const imgUrl = await uploadSingleFile(file);
       product.image = imgUrl;
       const data = await dispatch(addNewProduct(product));

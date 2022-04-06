@@ -14,7 +14,7 @@ import {
   selectProductById,
 } from '../features/Products/productsSlice.js';
 import { ProductValidationSchema } from '../schema/product';
-import { uploadSingleFile } from '../utils/uploadFile';
+import { uploadSingleFile, deleteFile } from '../utils/uploadFile';
 
 type FormInputs = {
   name: string;
@@ -63,13 +63,15 @@ function EditProduct() {
     }
   }, [id, product, reset]);
 
-  const onSubmit: SubmitHandler<FormInputs> = async (product: ProductType) => {
+  const onSubmit: SubmitHandler<FormInputs> = async (product: any) => {
     try {
       setLoading(true);
       const file = product.image[0];
       if (selectedImage !== null) {
+        await deleteFile(product.imageName);
         const imgUrl = await uploadSingleFile(file);
         product.image = imgUrl;
+        product.imageName = file.name;
       }
       await dispatch(updateProduct(product));
       toast.success('Product updated successfully', {
