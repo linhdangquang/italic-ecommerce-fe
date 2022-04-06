@@ -40,7 +40,10 @@ function User() {
             </div>
             {user.user.role === 'admin' && (
               <li>
-                <Link className="justify-between" to="/admin">
+                <Link
+                  className="justify-between active:bg-teal-500"
+                  to="/admin"
+                >
                   Dashboard
                 </Link>
               </li>

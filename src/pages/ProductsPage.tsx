@@ -17,7 +17,7 @@ function ProductsPage() {
     return product.status === 0;
   });
   return (
-    <div className="min-h-screen py-2 px-20">
+    <div className="min-h-screen py-2 px-20 pb-20">
       <div className="breadcrumbs text-xs text-gray-500">
         <ul>
           <li>
@@ -33,7 +33,7 @@ function ProductsPage() {
       </div>
       <h1 className="text-left text-lg font-bold italic ">Products</h1>
       {!loading && (
-        <div className="grid grid-cols-4 gap-x-4 py-4">
+        <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
           {activeProducts?.map((product: ProductType) => (
             <ProductCard key={product._id} product={product} />
           ))}

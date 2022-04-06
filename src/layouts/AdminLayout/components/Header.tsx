@@ -3,6 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
 import SettingsIcon from '@mui/icons-material/Settings';
+import User from '../../WebLayout/components/Header/TopNav/User';
 
 type Props = any;
 
@@ -26,30 +27,7 @@ function Header(props: Props) {
               </button>
             </div>
           </form>
-          <div className="dropdown dropdown-end h-11 w-11 rounded-full">
-            <span tabIndex={0} className="cursor-pointer">
-              <img
-                src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
-                alt=""
-                className="rounded-full"
-              />
-            </span>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu mt-2 w-52 rounded-lg border bg-base-100 p-2 shadow-md drop-shadow-lg"
-            >
-              <li>
-                <a className="active:bg-teal-400">
-                  <SettingsIcon /> Settings
-                </a>
-              </li>
-              <li>
-                <Link to="/" className="active:bg-teal-400">
-                  <LogoutIcon /> Logout
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <User />
         </div>
       </nav>
     </div>

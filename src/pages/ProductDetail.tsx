@@ -40,7 +40,7 @@ function ProductDetail() {
         </ul>
       </div>
       <div className="flex justify-between gap-x-4 py-2">
-        <div className="max-w-2xl">
+        <div className="max-w-2xl md:w-1/2 ">
           <div>
             <img src={product?.image} alt="" />
           </div>
@@ -52,7 +52,7 @@ function ProductDetail() {
           </div>
         </div>
 
-        <div className="pr-20 text-left">
+        <div className="pr-20 text-left md:w-[30%]">
           <h2 className="border-b py-4 font-PlayfairDisplay text-2xl">
             {product?.name}
           </h2>
