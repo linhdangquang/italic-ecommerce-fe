@@ -39,7 +39,7 @@ function Product({ product }: Props) {
               })}
             </p>
           </div>
-          <p className="text-sm font-semibold text-gray-900">
+          <p className="text-sm font-semibold  text-gray-900">
             {USDFormat(price)}
           </p>
         </div>

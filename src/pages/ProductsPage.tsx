@@ -16,6 +16,9 @@ function ProductsPage() {
   const activeProducts = products?.filter((product: ProductType) => {
     return product.status === 0;
   });
+  useEffect(() => {
+    document.title = 'Products';
+  });
   return (
     <div className="min-h-screen py-2 px-20 pb-20">
       <div className="breadcrumbs text-xs text-gray-500">

@@ -27,6 +27,9 @@ import {
 import { USDFormat } from '../utils/currencyFormat';
 
 function ProductsAdmin() {
+  useEffect(() => {
+    document.title = 'Products';
+  });
   const dispatch = useDispatch();
   const delProduct = (id: string) => {
     const deleteSwal = withReactContent(Swal);

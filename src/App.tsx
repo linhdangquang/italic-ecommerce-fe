@@ -20,6 +20,7 @@ import EditCategoryForm from './components/EditCategoryForm';
 import DetailCategory from './components/DetailCategory';
 import ProductsByCategory from './components/ProductsByCategory';
 import { ScrollToTop } from './utils/ScrollToTop';
+import UsersAdmin from './pages/UsersAdmin';
 
 function App() {
   return (
@@ -56,6 +57,9 @@ function App() {
                 <Route path="add" element={<AddCategoryForm />} />
                 <Route path=":id/edit" element={<EditCategoryForm />} />
                 <Route path=":id/view" element={<DetailCategory />} />
+              </Route>
+              <Route path="users">
+                <Route index element={<UsersAdmin />} />
               </Route>
             </Route>
             <Route path="*" element={<h1>404</h1>} />

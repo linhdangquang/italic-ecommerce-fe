@@ -4,6 +4,7 @@ import { RiHome6Line } from 'react-icons/ri';
 import { NavLink } from 'react-router-dom';
 import CategoryIcon from '@mui/icons-material/Category';
 import WebIcon from '@mui/icons-material/Web';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 function SideBar() {
   return (
@@ -30,7 +31,7 @@ function SideBar() {
               className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
             >
               <span className="flex items-center pl-12 text-sm font-medium">
-                <WebIcon size="1.25rem" />
+                <WebIcon fontSize="small" />
                 Web
               </span>
             </NavLink>
@@ -54,6 +55,17 @@ function SideBar() {
               <span className="flex items-center pl-12 text-sm font-medium">
                 <CategoryIcon fontSize="small" />
                 Categories
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/users"
+              className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+            >
+              <span className="flex items-center pl-12 text-sm font-medium">
+                <SupervisedUserCircleIcon fontSize="small" />
+                Users
               </span>
             </NavLink>
           </li>

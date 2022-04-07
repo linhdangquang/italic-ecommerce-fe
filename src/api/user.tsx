@@ -1,6 +1,7 @@
 import { UserType } from '../types';
 import authHeader from '../utils/auth-header';
 import instance from './instance';
+import { isAuthenticated } from '../utils/localstorage';
 
 export const signInUser = async (data: UserType) => {
   const URL = '/api/users/signin';
@@ -18,4 +19,10 @@ export const signUpUser = (data: UserType) => {
 
 export const logOutUser = () => {
   localStorage.removeItem('user');
+};
+
+export const getAllUser = async () => {
+  const URL = `/api/users/${isAuthenticated().user._id}`;
+  const res = await instance.get(URL, authHeader());
+  return res.data;
 };
