@@ -37,7 +37,7 @@ function UsersList() {
     {
       field: 'email',
       headerName: 'Email',
-      width: 150,
+      width: 170,
     },
     {
       field: 'role',

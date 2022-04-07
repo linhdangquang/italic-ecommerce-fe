@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { CategoryType, ProductType } from '../types';
 import { selectAllCategories } from '../features/Categories/categoriesSlice.js';
 import { USDFormat } from '../utils/currencyFormat';
@@ -16,9 +17,9 @@ function Product({ product }: Props) {
     <div className="p-2 shadow drop-shadow-md">
       <div className="group relative">
         <div className="min-h-80 aspect-w-1 aspect-h-1 lg:aspect-none w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
-          <img
-            src={image}
+          <LazyLoadImage
             alt={imageName}
+            src={image}
             className="h-full w-full object-cover object-center lg:h-full lg:w-full"
           />
         </div>
