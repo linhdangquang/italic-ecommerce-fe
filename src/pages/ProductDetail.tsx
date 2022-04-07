@@ -8,7 +8,6 @@ import { selectProductById } from '../features/Products/productsSlice.js';
 
 function ProductDetail() {
   const { id } = useParams();
-  const dispatch = useDispatch();
   const product = useSelector((state: any) => selectProductById(state, id));
   const { categories } = useSelector((state: any) => state.categories);
   return (

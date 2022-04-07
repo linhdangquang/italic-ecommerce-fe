@@ -21,6 +21,7 @@ import DetailCategory from './components/DetailCategory';
 import ProductsByCategory from './components/ProductsByCategory';
 import { ScrollToTop } from './utils/ScrollToTop';
 import UsersAdmin from './pages/UsersAdmin';
+import Cart from './components/Cart/Cart';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               <Route path="products" element={<ProductsPage />} />
               <Route path="products/:id" element={<ProductDetail />} />
               <Route path="categories/:id" element={<ProductsByCategory />} />
+              <Route path="cart" element={<Cart />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />

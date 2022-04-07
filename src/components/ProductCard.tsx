@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Skeleton from '@mui/material/Skeleton';
 import { CategoryType, ProductType } from '../types';
 import { selectAllCategories } from '../features/Categories/categoriesSlice.js';
 import { USDFormat } from '../utils/currencyFormat';
