@@ -5,9 +5,11 @@ import HomeIcon from '@mui/icons-material/Home';
 import CheckIcon from '@mui/icons-material/Check';
 import { CategoryType } from '../types';
 import { selectProductById } from '../features/Products/productsSlice.js';
+import { addToCart } from '../features/Cart/cartSlice.js';
 
 function ProductDetail() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const product = useSelector((state: any) => selectProductById(state, id));
   const { categories } = useSelector((state: any) => state.categories);
   return (
@@ -73,6 +75,9 @@ function ProductDetail() {
                 <button
                   type="button"
                   className="flex w-full cursor-pointer items-center justify-center rounded bg-blacklight py-3 text-white hover:bg-[#2F2F3B]"
+                  onClick={() => {
+                    dispatch(addToCart(product));
+                  }}
                 >
                   Add to Cart
                 </button>

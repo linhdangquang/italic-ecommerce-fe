@@ -7,7 +7,6 @@ import {
   DataGrid,
   GridColDef,
   GridValueGetterParams,
-  GridValueFormatterParams,
   GridToolbar,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';

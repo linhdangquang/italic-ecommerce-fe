@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
+import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from './CartItem';
 
 function Cart() {
@@ -9,7 +10,7 @@ function Cart() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartTotal());
-  }, [items]);
+  }, [items, dispatch]);
 
   if (items.length === 0) {
     return (
@@ -76,8 +77,12 @@ function Cart() {
       <div id="summary" className="w-1/4 px-8 py-10">
         <h1 className="border-b pb-8 text-2xl font-semibold">Order Summary</h1>
         <div className="mt-10 mb-5 flex justify-between">
-          <span className="text-sm font-semibold uppercase">Items 3</span>
-          <span className="text-sm font-semibold">590$</span>
+          <span className="text-sm font-semibold uppercase">
+            Items: {items.length}
+          </span>
+          <span className="text-sm font-semibold">
+            {USDFormat(totalAmount)}
+          </span>
         </div>
         <div>
           <label className="mb-3 inline-block text-sm font-medium uppercase">
@@ -107,7 +112,7 @@ function Cart() {
         <div className="mt-8 border-t">
           <div className="flex justify-between py-6 text-sm font-semibold uppercase">
             <span>Total cost</span>
-            <span>{totalAmount}</span>
+            <span>{USDFormat(totalAmount + 10)}</span>
           </div>
           <button
             type="button"

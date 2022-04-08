@@ -1,20 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialStateValue = {
-  items: [
-    {
-      id: 1,
-      name: 'iPhone X',
-      price: 1000,
-      amount: 3,
-    },
-    {
-      id: 2,
-      name: 'Samsung X',
-      price: 1000,
-      amount: 2,
-    },
-  ],
+  items: [],
   totalAmount: 0,
   totalCount: 0,
 };
@@ -27,9 +14,7 @@ const cartSlice = createSlice({
       const { totalAmount, totalCount } = state.items.reduce(
         (cartTotal, cartItem) => {
           const { price, amount } = cartItem;
-          console.log(price, amount);
           const itemTotal = price * amount;
-          console.log(itemTotal);
           cartTotal.totalAmount += itemTotal;
           return cartTotal;
         },
@@ -38,12 +23,31 @@ const cartSlice = createSlice({
       state.totalAmount = parseInt(totalAmount.toFixed(2), 10);
       state.totalCount = totalCount;
     },
+    addToCart: (state, action) => {
+      const { _id, name, price, image, imageName, category } = action.payload;
+      if (state.items.find((item) => item._id === _id)) {
+        const item = state.items.find((item) => item._id === _id);
+        item.amount += 1;
+        item.total = item.price * item.amount;
+      } else {
+        state.items.push({
+          _id,
+          name,
+          price,
+          image,
+          imageName,
+          category,
+          amount: 1,
+          total: price,
+        });
+      }
+    },
     removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
+      state.items = state.items.filter((item) => item._id !== action.payload);
     },
     increaseAmount: (state, action) => {
       state.items = state.items.map((item) => {
-        if (item.id === action.payload) {
+        if (item._id === action.payload) {
           return { ...item, amount: item.amount + 1 };
         }
         return item;
@@ -52,7 +56,7 @@ const cartSlice = createSlice({
     decreaseAmount: (state, action) => {
       state.items = state.items
         .map((item) => {
-          if (item.id === action.payload) {
+          if (item._id === action.payload) {
             return { ...item, amount: item.amount - 1 };
           }
           return item;
@@ -70,6 +74,7 @@ const cartSlice = createSlice({
 
 export const {
   getCartTotal,
+  addToCart,
   increaseAmount,
   removeItem,
   decreaseAmount,
