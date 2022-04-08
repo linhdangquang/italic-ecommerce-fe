@@ -11,7 +11,7 @@
 
 ## Badges
 
-[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript/badge/react-ts)](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript/overview/react-ts)
+[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript/badge)](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript)
 
 
 
