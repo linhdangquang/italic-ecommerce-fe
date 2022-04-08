@@ -23,7 +23,7 @@
 
 ## 🛠 Technology
 ### Frontend :
-React, Tailwind CSS, MUI
+React Typescript, Tailwind CSS, MUI
 ### Backend :
 Node JS, Express JS, JWT, Mongoose
 ### Database :
