@@ -11,3 +11,24 @@
 .AdminLayout__link.active span {
   @apply text-sky-500 font-bold disabled cursor-not-allowed
 }
+
+html::-webkit-scrollbar-track
+{
+  @apply rounded-lg
+}
+
+html::-webkit-scrollbar
+{
+  @apply w-3
+}
+
+html::-webkit-scrollbar-thumb
+{
+  @apply bg-gray-600
+}
+
+html::-webkit-scrollbar-thumb:hover
+{
+  @apply bg-gray-700
+}
+
