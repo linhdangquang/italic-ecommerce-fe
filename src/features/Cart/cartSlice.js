@@ -30,7 +30,7 @@ const cartSlice = createSlice({
         const item = state.items.find((item) => item._id === _id);
         item.amount += 1;
         item.total = item.price * item.amount;
-        toast('✌ Add to Cart Success!', {
+        toast(`💚 Increase Success!, Total ${item.amount}`, {
           position: 'bottom-right',
           autoClose: 2000,
           hideProgressBar: false,
@@ -50,7 +50,7 @@ const cartSlice = createSlice({
           amount: 1,
           total: price,
         });
-        toast('✌ Add to Cart Success!', {
+        toast('✌ Add to Cart Success! ', {
           position: 'bottom-right',
           autoClose: 2000,
           hideProgressBar: false,

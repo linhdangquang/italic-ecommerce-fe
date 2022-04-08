@@ -57,8 +57,8 @@ function Cart() {
             Total
           </h3>
         </div>
-        {items.map((item) => (
-          <CartItem key={item.id} item={item} />
+        {items.map((item, idx) => (
+          <CartItem key={idx + 1} item={item} />
         ))}
 
         <Link

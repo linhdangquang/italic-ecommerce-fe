@@ -47,6 +47,7 @@ function CartItem({ item }) {
         <input
           className="mx-2 w-8 border text-center"
           type="text"
+          readOnly
           value={amount}
         />
         <button type="button" onClick={() => dispatch(increaseAmount(_id))}>

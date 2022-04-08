@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import { Button } from '@mui/material';
@@ -8,10 +8,17 @@ import { USDFormat } from '../../../../../utils/currencyFormat';
 
 function Cart() {
   const { totalAmount, items } = useSelector((state: any) => state.cart);
+  const [open, setOpen] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items]);
+  useEffect(() => {
+    if (open === false) {
+      document.querySelector('.dropdown-content').classList.add('hidden');
+    }
+    // document.querySelector('.dropdown-content').classList.add('hidden');
+  }, [setOpen, open]);
   return (
     <div className="dropdown-end dropdown">
       <div tabIndex={0} className="btn btn-ghost btn-circle">
@@ -48,6 +55,7 @@ function Cart() {
                 variant="contained"
                 startIcon={<ShoppingBasketIcon />}
                 className="btn w-full bg-orangeLight text-white"
+                onClick={() => setOpen(false)}
               >
                 View Cart
               </Button>

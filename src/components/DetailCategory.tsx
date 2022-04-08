@@ -57,7 +57,7 @@ function DetailCategory() {
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Link to={`/admin/categories/${params.value}/view`}>
+          <Link to={`/products/${params.value}`}>
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}
