@@ -1,22 +1,29 @@
 import { ProductType } from '../types';
 import instance from './instance';
+import { isAuthenticated } from '../utils/localstorage';
+import authHeader from '../utils/auth-header';
 
 export const getAllProducts = () => {
   const URL = '/api/products';
   return instance.get(URL);
 };
 
+export const add = (product: ProductType) => {
+  const URL = `/api/products/${isAuthenticated().user._id}`;
+  return instance.post(URL, product, authHeader());
+};
+
 export const delProduct = (id: string) => {
-  const URL = `/api/products/${id}`;
-  return instance.delete(URL);
+  const URL = `/api/products/${isAuthenticated().user._id}/${id}`;
+  return instance.delete(URL, authHeader());
 };
 
 export const getOneProduct = (id: string) => {
   const URL = `/api/products/${id}`;
-  return instance.get(URL);
+  return instance.get(URL, authHeader());
 };
 
-export const updateProduct = (data: ProductType) => {
-  const URL = `/api/products/${data._id}`;
-  return instance.put(URL, data);
+export const putProduct = (data: ProductType) => {
+  const URL = `/api/products/${isAuthenticated().user._id}/${data._id}`;
+  return instance.put(URL, data, authHeader());
 };

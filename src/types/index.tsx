@@ -1,4 +1,5 @@
 import ProductType from './ProductType';
-import PersonType from './PersonType';
+import UserType from './UserType';
+import CategoryType from './CategoryType';
 
-export type { ProductType, PersonType };
+export type { ProductType, UserType, CategoryType };

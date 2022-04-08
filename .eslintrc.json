@@ -65,7 +65,18 @@
         ],
         "react/no-unescaped-entities": [
             "off"
-        ]
+        ],
+        "jsx-a11y/label-has-associated-control": [
+            "off"
+        ],
+        "react/require-default-props": [
+            "off"
+        ],
+        "no-useless-escape" : "off",
+        "no-param-reassign": "off",
+        "no-unused-expressions": "off",
+        "jsx-a11y/control-has-associated-label": "off",
+        "consistent-return": "off"
     },
     "settings": {
         "import/resolver": {
