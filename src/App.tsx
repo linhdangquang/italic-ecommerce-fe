@@ -24,6 +24,7 @@ import UsersAdmin from './pages/UsersAdmin';
 import Cart from './components/Cart/Cart';
 import BannerAdmin from './pages/BannerAdmin';
 import AddBannerForm from './components/Banner/AddBannerForm';
+import UpdateBannerForm from './components/Banner/UpdateBannerForm';
 
 function App() {
   return (
@@ -65,6 +66,7 @@ function App() {
               <Route path="banners">
                 <Route index element={<BannerAdmin />} />
                 <Route path="add" element={<AddBannerForm />} />
+                <Route path=":id/edit" element={<UpdateBannerForm />} />
               </Route>
               <Route path="users">
                 <Route index element={<UsersAdmin />} />

@@ -1,6 +1,6 @@
 import React from 'react';
-import HeroBanner from '../components/Hero/HeroBanner';
 import SmallInfo from '../components/SmallInfo';
+import BannerSlider from '../components/Hero/BannerSlider';
 
 function HomePage() {
   React.useEffect(() => {
@@ -8,7 +8,7 @@ function HomePage() {
   });
   return (
     <div className="pb-6">
-      <HeroBanner />
+      <BannerSlider />
       <SmallInfo />
     </div>
   );

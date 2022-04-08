@@ -75,10 +75,16 @@ const bannersSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(updateBanner.fulfilled, (state, action) => {
-      const index = state.banner.findIndex(
-        (item) => item.id === action.payload.id
+      const updatedBanner = action.payload;
+      const banner = state.banner.find(
+        (banner) => banner._id === updatedBanner._id
       );
-      state.banner[index] = action.payload;
+      banner.title = updatedBanner.title;
+      banner.subtitle = updatedBanner.subtitle;
+      banner.buttonText = updatedBanner.buttonText;
+      banner.buttonLink = updatedBanner.buttonLink;
+      banner.imageUrl = updatedBanner.imageUrl;
+      banner.imageName = updatedBanner.imageName;
       state.loading = false;
       state.status = 'success';
     });

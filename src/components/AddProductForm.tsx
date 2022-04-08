@@ -22,7 +22,7 @@ type FormInputs = {
 };
 
 function AddProduct() {
-  const [selectedImage, setSelectedImage] = React.useState();
+  const [selectedImage, setSelectedImage] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const {
     register,
@@ -43,13 +43,13 @@ function AddProduct() {
   };
 
   const removeSelectedImage = () => {
-    setSelectedImage(undefined);
+    setSelectedImage(null);
     resetField('image');
   };
   const onSubmit: SubmitHandler<FormInputs> = async (product: any) => {
     try {
       setLoading(true);
-      if (product.image[0]) {
+      if (selectedImage !== null) {
         const file = product.image[0];
         product.imageName = file.name;
         const imgUrl = await uploadSingleFile(file);

@@ -16,19 +16,18 @@ type FormInputs = {
   buttonText: string;
   buttonLink: string;
   status: number;
-  image: string;
+  imageUrl: string;
 };
 
 function AddBannerForm() {
-  const [selectedImage, setSelectedImage] = React.useState();
+  const [selectedImage, setSelectedImage] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
     resetField,
-  } = useForm<FormInputs>();
-  // { resolver: yupResolver(BannerSchema) }
+  } = useForm<FormInputs>({ resolver: yupResolver(BannerSchema) });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const imageChange = (e) => {
@@ -38,35 +37,34 @@ function AddBannerForm() {
   };
 
   const removeSelectedImage = () => {
-    setSelectedImage(undefined);
-    resetField('image');
+    setSelectedImage(null);
+    resetField('imageUrl');
   };
   const onSubmit: SubmitHandler<FormInputs> = async (banner: any) => {
     try {
       setLoading(true);
-      if (banner.image[0]) {
-        const file = banner.image[0];
+      if (selectedImage !== null) {
+        const file = banner.imageUrl[0];
         banner.imageName = file.name;
         const imgUrl = await uploadSingleFile(file);
-        banner.image = imgUrl;
+        banner.imageUrl = imgUrl;
       } else {
-        banner.image =
+        banner.imageUrl =
           'https://img.icons8.com/ios-filled/100/000000/no-image.png';
       }
       const data = await dispatch(createBanner(banner));
-      console.log(data);
       if (data.type !== 'banner/createBanner/fulfilled') {
         toast.error(data.error.message, {
           type: 'error',
         });
-        // navigate('/admin/products');
+        navigate('/admin/banners');
         return;
       }
-      toast.success('Product added successfully', {
+      toast.success('Banner added successfully', {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       setLoading(false);
-      // navigate('/admin/products');
+      navigate('/admin/banners');
     } catch (error) {
       toast.error(error.message, {
         type: 'error',
@@ -177,16 +175,16 @@ function AddBannerForm() {
                     type="file"
                     accept="image/*"
                     placeholder="Image"
-                    {...register('image')}
+                    {...register('imageUrl')}
                     onChange={imageChange}
                   />
-                  {errors?.image && (
+                  {errors?.imageUrl && (
                     <Alert
                       severity="error"
                       className="my-1 mb-2"
                       variant="filled"
                     >
-                      {errors.image?.message}
+                      {errors.imageUrl?.message}
                     </Alert>
                   )}
                 </div>

@@ -10,9 +10,7 @@ import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { BeatLoader } from 'react-spinners';
-import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { BannerType } from '../../types/index';
@@ -23,42 +21,39 @@ import {
 
 function BannerList() {
   const dispatch = useDispatch();
-  // const delCategory = (id: string) => {
-  //   const deleteSwal = withReactContent(Swal);
-  //   deleteSwal
-  //     .fire({
-  //       title: 'Are you sure?',
-  //       text: "You won't be able to revert this!",
-  //       icon: 'warning',
-  //       showCancelButton: true,
-  //       confirmButtonColor: '#3085d6',
-  //       cancelButtonColor: '#d33',
-  //       confirmButtonText: 'Yes, delete it!',
-  //     })
-  //     .then(async (result) => {
-  //       if (result.isConfirmed) {
-  //         try {
-  //           dispatch(deleteCategory(id));
-  //           deleteSwal.fire(
-  //             'Deleted!',
-  //             'Category has been deleted.',
-  //             'success'
-  //           );
-  //         } catch (error) {
-  //           deleteSwal.fire(
-  //             'Error!',
-  //             'Something went wrong, please try again.',
-  //             'error'
-  //           );
-  //         }
-  //       }
-  //     });
-  // };
+  const delBanner = (id: string) => {
+    const deleteSwal = withReactContent(Swal);
+    deleteSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(removeBanner(id));
+            deleteSwal.fire('Deleted!', 'Banner has been deleted.', 'success');
+          } catch (error) {
+            deleteSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
   const columns: GridColDef[] = [
     {
       field: 'id',
       headerName: 'ID',
-      width: 100,
+      width: 50,
+      cellClassName: 'font-semibold',
     },
     {
       field: 'title',
@@ -76,28 +71,28 @@ function BannerList() {
       width: 150,
     },
     {
-      field: 'buttonLink',
-      headerName: 'Button Link',
+      field: 'status',
+      headerName: 'Status',
+      width: 75,
+      valueFormatter: (params: any) => {
+        return params.value === 0 ? 'Active' : 'Inactive';
+      },
+    },
+    {
+      field: 'imageUrl',
+      headerName: 'Image',
       width: 150,
+      renderCell: (params: GridValueGetterParams) => (
+        <img src={params.value} alt={params.value} />
+      ),
     },
     {
       field: '_id',
-      width: 350,
+      width: 250,
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Link to={`/admin/categories/${params.value}/view`}>
-            <Button
-              variant="contained"
-              style={{ marginRight: '.75rem' }}
-              startIcon={<VisibilityIcon />}
-              size="small"
-              className="bg-blueDark"
-            >
-              Detail
-            </Button>
-          </Link>
-          <Link to={`/admin/categories/${params.value}/edit`}>
+          <Link to={`/admin/banners/${params.value}/edit`}>
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}
@@ -109,9 +104,9 @@ function BannerList() {
             </Button>
           </Link>
           <Button
-            // onClick={() => {
-            //   delCategory(params.value);
-            // }}
+            onClick={() => {
+              delBanner(params.value);
+            }}
             variant="contained"
             color="error"
             size="small"
