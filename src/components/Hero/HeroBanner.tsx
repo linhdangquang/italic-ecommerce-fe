@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function HeroBanner() {
+  // const { title, subtitle, buttonText, buttonLink, imageUrl } = data;
   return (
     <div className="hero   bg-base-200">
       <div className="hero-content grid  w-full max-w-full grid-cols-2 bg-blacklight p-0">
