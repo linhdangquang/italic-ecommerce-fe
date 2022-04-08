@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import CategoryIcon from '@mui/icons-material/Category';
 import WebIcon from '@mui/icons-material/Web';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import BurstModeIcon from '@mui/icons-material/BurstMode';
 
 function SideBar() {
   return (
@@ -66,6 +67,17 @@ function SideBar() {
               <span className="flex items-center pl-12 text-sm font-medium">
                 <SupervisedUserCircleIcon fontSize="small" />
                 Users
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/banners"
+              className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+            >
+              <span className="flex items-center pl-12 text-sm font-medium">
+                <BurstModeIcon fontSize="small" />
+                Banners
               </span>
             </NavLink>
           </li>

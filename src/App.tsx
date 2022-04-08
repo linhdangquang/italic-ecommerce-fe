@@ -22,6 +22,8 @@ import ProductsByCategory from './components/ProductsByCategory';
 import { ScrollToTop } from './utils/ScrollToTop';
 import UsersAdmin from './pages/UsersAdmin';
 import Cart from './components/Cart/Cart';
+import BannerAdmin from './pages/BannerAdmin';
+import AddBannerForm from './components/Banner/AddBannerForm';
 
 function App() {
   return (
@@ -59,6 +61,10 @@ function App() {
                 <Route path="add" element={<AddCategoryForm />} />
                 <Route path=":id/edit" element={<EditCategoryForm />} />
                 <Route path=":id/view" element={<DetailCategory />} />
+              </Route>
+              <Route path="banners">
+                <Route index element={<BannerAdmin />} />
+                <Route path="add" element={<AddBannerForm />} />
               </Route>
               <Route path="users">
                 <Route index element={<UsersAdmin />} />

@@ -9,6 +9,7 @@ import authReducer from '../features/Auth/authSlice.js';
 import messageReducer from '../features/Messages/messageSlice.js';
 import usersReducer from '../features/Users/usersSlice.js';
 import cartReducer from '../features/Cart/cartSlice.js';
+import bannerReducer from '../features/HeroBanner/bannerSlice.js';
 
 const persistConfig = {
   key: 'root',
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   message: messageReducer,
   users: usersReducer,
   cart: cartReducer,
+  banner: bannerReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
