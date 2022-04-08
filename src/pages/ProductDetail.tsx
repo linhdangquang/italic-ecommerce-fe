@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HomeIcon from '@mui/icons-material/Home';
 import CheckIcon from '@mui/icons-material/Check';
+import { toast } from 'react-toastify';
 import { CategoryType } from '../types';
 import { selectProductById } from '../features/Products/productsSlice.js';
 import { addToCart } from '../features/Cart/cartSlice.js';
@@ -77,6 +78,15 @@ function ProductDetail() {
                   className="flex w-full cursor-pointer items-center justify-center rounded bg-blacklight py-3 text-white hover:bg-[#2F2F3B]"
                   onClick={() => {
                     dispatch(addToCart(product));
+                    // toast('🦄 Add to Cart Success!', {
+                    //   position: 'bottom-right',
+                    //   autoClose: 2000,
+                    //   hideProgressBar: false,
+                    //   closeOnClick: true,
+                    //   pauseOnHover: true,
+                    //   draggable: true,
+                    //   progress: undefined,
+                    // });
                   }}
                 >
                   Add to Cart

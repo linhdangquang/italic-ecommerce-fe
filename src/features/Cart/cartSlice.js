@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const initialStateValue = {
   items: [],
@@ -29,6 +30,15 @@ const cartSlice = createSlice({
         const item = state.items.find((item) => item._id === _id);
         item.amount += 1;
         item.total = item.price * item.amount;
+        toast('✌ Add to Cart Success!', {
+          position: 'bottom-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       } else {
         state.items.push({
           _id,
@@ -40,10 +50,28 @@ const cartSlice = createSlice({
           amount: 1,
           total: price,
         });
+        toast('✌ Add to Cart Success!', {
+          position: 'bottom-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     },
     removeItem: (state, action) => {
       state.items = state.items.filter((item) => item._id !== action.payload);
+      toast('😢 Remove from Cart!', {
+        position: 'bottom-left',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     increaseAmount: (state, action) => {
       state.items = state.items.map((item) => {
@@ -65,6 +93,15 @@ const cartSlice = createSlice({
     },
     clearCart: (state, action) => {
       state.items = [];
+      toast('✔ Clear cart successfully', {
+        position: 'bottom-left',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     },
     // getCartItems: (state, action) => {
     //   state.items = state.items;

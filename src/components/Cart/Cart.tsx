@@ -89,7 +89,7 @@ function Cart() {
             Shipping
           </label>
           <select className="block w-full p-2 text-sm text-gray-600">
-            <option>Standard shipping - $10.00</option>
+            <option>Free shipping</option>
           </select>
         </div>
         <div className="py-10">
@@ -112,7 +112,7 @@ function Cart() {
         <div className="mt-8 border-t">
           <div className="flex justify-between py-6 text-sm font-semibold uppercase">
             <span>Total cost</span>
-            <span>{USDFormat(totalAmount + 10)}</span>
+            <span>{USDFormat(totalAmount)}</span>
           </div>
           <button
             type="button"
