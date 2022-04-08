@@ -29,6 +29,6 @@ Node JS, Express JS, JWT, Mongoose
 ### Database :
 MongoDB
 ### State Management:
-Redux, React Redux, Redux Toolkit
+Redux Persist, React Redux, Redux Toolkit
 
 
