@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { USDFormat } from '../../utils/currencyFormat';
 import {
   increaseAmount,
@@ -33,7 +34,7 @@ function CartItem({ item }) {
             className="max-w-fit text-xs font-semibold text-gray-500 hover:text-red-500"
             onClick={() => dispatch(removeItem(_id))}
           >
-            Remove
+            <RemoveShoppingCartIcon className="align-middle text-xs" /> Remove
           </button>
         </div>
       </div>

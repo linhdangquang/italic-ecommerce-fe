@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from './CartItem';
@@ -13,9 +14,11 @@ function Cart() {
   }, [items, dispatch]);
   if (items.length === 0) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">Your cart is empty</h1>
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="-translate-y-1/2 text-center">
+          <h1 className="text-3xl font-bold">
+            <RemoveShoppingCartIcon fontSize="large" /> Your cart is empty
+          </h1>
           <Link
             to="/products"
             className="text-lg font-semibold hover:text-blueDark"
