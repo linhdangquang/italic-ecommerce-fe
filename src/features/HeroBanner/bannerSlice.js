@@ -85,6 +85,7 @@ const bannersSlice = createSlice({
       banner.buttonLink = updatedBanner.buttonLink;
       banner.imageUrl = updatedBanner.imageUrl;
       banner.imageName = updatedBanner.imageName;
+      banner.status = updatedBanner.status;
       state.loading = false;
       state.status = 'success';
     });

@@ -202,7 +202,7 @@ function UpdateBannerForm() {
                       {...register('status')}
                       className="radio radio-accent"
                       value={0}
-                      checked
+                      {...(banner?.status === 0 && { checked: true })}
                     />
                     <label className="label">
                       <span className="label-text font-semibold text-teal-500">
@@ -216,6 +216,7 @@ function UpdateBannerForm() {
                       {...register('status')}
                       className="radio border-roseLight  checked:bg-roseLight"
                       value={1}
+                      {...(banner?.status === 1 && { checked: true })}
                     />
                     <label className="label">
                       <span className="label-text font-semibold text-roseLight">

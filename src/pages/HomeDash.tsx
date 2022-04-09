@@ -5,18 +5,51 @@ import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../features/Products/productsSlice.js';
 import { fetchUsers } from '../features/Users/usersSlice.js';
+import { fetchCategories } from '../features/Categories/categoriesSlice.js';
+import CategoryPieChart from '../components/Chart/CategoryPieChart';
 
 function HomeDash() {
   const dispatch = useDispatch();
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
+  const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchUsers());
+    dispatch(fetchCategories());
   }, [dispatch]);
   useEffect(() => {
     document.title = 'Dashboard';
   });
+  const categoryLabels = categories.map((category: any) => category.name);
+  const productsByCategory = categories.map((category: any) => {
+    return products.filter((product: any) => product.category === category._id);
+  });
+  const quantityByCategory = productsByCategory.map((category: any) => {
+    return category.length;
+  });
+  const data = {
+    labels: categoryLabels,
+    datasets: [
+      {
+        label: '# of Votes',
+        data: quantityByCategory,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.8)',
+          'rgba(54, 162, 235, 0.8)',
+          'rgba(255, 206, 86, 0.8)',
+          'rgba(75, 192, 192, 0.8)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
   return (
     <div className="px-4">
       <div className="stats w-full bg-orangeLight shadow-lg shadow-orangeLight drop-shadow-lg">
@@ -46,6 +79,9 @@ function HomeDash() {
           <div className="stat-value text-white">1,200</div>
           <div className="stat-desc text-white">↘︎ 90 (14%)</div>
         </div>
+      </div>
+      <div className="chart py-8">
+        <CategoryPieChart data={data} />
       </div>
     </div>
   );

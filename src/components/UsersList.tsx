@@ -91,9 +91,7 @@ function UsersList() {
   }));
   const [pageSize, setPageSize] = React.useState<number>(10);
   useEffect(() => {
-    if (status === 'idle') {
-      dispatch(fetchUsers());
-    }
+    dispatch(fetchUsers());
   }, [dispatch, status]);
   return (
     <>
