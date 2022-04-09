@@ -1,13 +1,13 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import LogoutIcon from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
-import SettingsIcon from '@mui/icons-material/Settings';
+import { useSelector } from 'react-redux';
+import dayjs from 'dayjs';
 import User from '../../WebLayout/components/Header/TopNav/User';
 
-type Props = any;
-
-function Header(props: Props) {
+function Header() {
+  const { user } = useSelector((state: any) => state.auth);
+  const now = dayjs();
+  console.log(now);
   return (
     <div className=" mx-auto w-full rounded-l-2xl  md:px-4">
       <nav className="flex items-center justify-between py-8">
@@ -30,6 +30,12 @@ function Header(props: Props) {
           <User />
         </div>
       </nav>
+      <div>
+        <h2 className="flex gap-x-2 font-mono text-3xl font-semibold">
+          Good {now.hour() < 12 ? 'Morning ' : 'Afternoon '}
+          <p className="text-black underline"> {user?.user?.name}</p>
+        </h2>
+      </div>
     </div>
   );
 }
