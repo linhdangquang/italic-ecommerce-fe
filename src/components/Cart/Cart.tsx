@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-  getCartTotal,
-  clearCart,
-  getCartItems,
-} from '../../features/Cart/cartSlice.js';
+import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from './CartItem';
 
@@ -15,7 +11,6 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items, dispatch]);
-  console.log(items);
   if (items.length === 0) {
     return (
       <div className="flex h-screen items-center justify-center">

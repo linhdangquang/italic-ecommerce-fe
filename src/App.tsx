@@ -25,6 +25,7 @@ import Cart from './components/Cart/Cart';
 import BannerAdmin from './pages/BannerAdmin';
 import AddBannerForm from './components/Banner/AddBannerForm';
 import UpdateBannerForm from './components/Banner/UpdateBannerForm';
+import HomeDash from './pages/HomeDash';
 
 function App() {
   return (
@@ -51,7 +52,7 @@ function App() {
               }
             >
               <Route index element={<Navigate to="dashboard" />} />
-              <Route path="dashboard" element={<h1>DASHBOARD</h1>} />
+              <Route path="dashboard" element={<HomeDash />} />
               <Route path="products">
                 <Route index element={<ProductsAdmin />} />
                 <Route path="add" element={<AddProduct />} />
