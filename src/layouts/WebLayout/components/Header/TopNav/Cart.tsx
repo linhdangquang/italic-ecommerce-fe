@@ -8,20 +8,13 @@ import { USDFormat } from '../../../../../utils/currencyFormat';
 
 function Cart() {
   const { totalAmount, items } = useSelector((state: any) => state.cart);
-  const [open, setOpen] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items]);
-  useEffect(() => {
-    if (open === false) {
-      document.querySelector('.dropdown-content').classList.add('hidden');
-    }
-    // document.querySelector('.dropdown-content').classList.add('hidden');
-  }, [setOpen, open]);
   return (
     <div className="dropdown-end dropdown">
-      <div tabIndex={0} className="btn btn-ghost btn-circle">
+      <div tabIndex={0} className="btn btn-ghost btn-circle ">
         <div className="indicator">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +48,6 @@ function Cart() {
                 variant="contained"
                 startIcon={<ShoppingBasketIcon />}
                 className="btn w-full bg-orangeLight text-white"
-                onClick={() => setOpen(false)}
               >
                 View Cart
               </Button>

@@ -30,7 +30,9 @@ function ProductsPage() {
             </Link>
           </li>
           <li>
-            <Link to="/products">Products</Link>
+            <Link className="font-semibold" to="/products">
+              Products
+            </Link>
           </li>
         </ul>
       </div>

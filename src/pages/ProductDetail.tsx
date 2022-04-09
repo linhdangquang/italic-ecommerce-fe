@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import HomeIcon from '@mui/icons-material/Home';
 import CheckIcon from '@mui/icons-material/Check';
@@ -18,26 +18,28 @@ function ProductDetail() {
       <div className="breadcrumbs text-xs text-gray-500">
         <ul>
           <li>
-            <Link to="/">
+            <NavLink to="/">
               <HomeIcon fontSize="small" />
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/products">Products</Link>
+            <NavLink to="/products">Products</NavLink>
           </li>
           <li>
-            <Link to={`/categories/${product?.category}`}>
+            <NavLink to={`/categories/${product?.category}`}>
               {categories?.map((category: CategoryType) => {
                 if (category._id === product?.category) {
                   return category?.name;
                 }
                 return false;
               })}
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <a>{product?.name}</a>
+            <NavLink className="font-semibold" to={`/products/${product?._id}`}>
+              {product?.name}
+            </NavLink>
           </li>
         </ul>
       </div>

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
+import {
+  getCartTotal,
+  clearCart,
+  getCartItems,
+} from '../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from './CartItem';
 
@@ -11,7 +15,7 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items, dispatch]);
-
+  console.log(items);
   if (items.length === 0) {
     return (
       <div className="flex h-screen items-center justify-center">
@@ -57,7 +61,7 @@ function Cart() {
             Total
           </h3>
         </div>
-        {items.map((item, idx) => (
+        {items?.map((item, idx) => (
           <CartItem key={idx + 1} item={item} />
         ))}
 
@@ -78,7 +82,7 @@ function Cart() {
         <h1 className="border-b pb-8 text-2xl font-semibold">Order Summary</h1>
         <div className="mt-10 mb-5 flex justify-between">
           <span className="text-sm font-semibold uppercase">
-            Items: {items.length}
+            Items: {items?.length}
           </span>
           <span className="text-sm font-semibold">
             {USDFormat(totalAmount)}

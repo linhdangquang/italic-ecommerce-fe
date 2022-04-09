@@ -103,9 +103,6 @@ const cartSlice = createSlice({
         progress: undefined,
       });
     },
-    // getCartItems: (state, action) => {
-    //   state.items = state.items;
-    // },
   },
 });
 

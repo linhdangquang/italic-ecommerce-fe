@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { PacmanLoader } from 'react-spinners';
 import HomeIcon from '@mui/icons-material/Home';
@@ -22,18 +22,21 @@ function ProductsByCategory() {
       <div className="breadcrumbs text-xs text-gray-500">
         <ul>
           <li>
-            <Link to="/">
+            <NavLink to="/">
               <HomeIcon fontSize="small" />
               Home
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/products">Products</Link>
+            <NavLink to="/products">Products</NavLink>
           </li>
           <li>
-            <Link to={`/products/${category?.category?._id}`}>
+            <NavLink
+              className="font-semibold"
+              to={`/products/${category?.category?._id}`}
+            >
               {category?.category?.name}
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </div>
