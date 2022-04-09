@@ -99,6 +99,9 @@ function ProductsAdmin() {
       valueFormatter: (params: any) => {
         return params.value === 0 ? 'Active' : 'Inactive';
       },
+      cellClassName: (params: any) => {
+        return params.value === 0 ? 'text-green-500 ' : 'text-red-500';
+      },
     },
     {
       field: 'updatedAt',

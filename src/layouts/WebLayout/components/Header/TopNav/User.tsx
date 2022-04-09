@@ -17,17 +17,13 @@ function User() {
     });
     navigate('/');
   };
-
   return (
     <div>
       {isLoggedIn ? (
         <div className="dropdown-end dropdown">
           <div tabIndex={0} className="avatar btn btn-ghost btn-circle">
             <div className="w-10 rounded-full">
-              <img
-                src="https://api.lorem.space/image/face?hash=33791"
-                alt="img"
-              />
+              <img src={user?.user?.avatarUrl} alt={user?.user?.avatarName} />
             </div>
           </div>
           <ul
@@ -35,8 +31,8 @@ function User() {
             className="dropdown-content menu rounded-box menu-compact w-44 bg-base-100 p-2 shadow shadow-gray-400"
           >
             <div className="px-4">
-              <p className="text-base font-medium ">{user.user.name}</p>
-              <p className="text-xs text-gray-500">{user.user.email}</p>
+              <p className="text-base font-medium ">{user.user?.name}</p>
+              <p className="text-xs text-gray-500">{user.user?.email}</p>
             </div>
             {user.user.role === 'admin' && (
               <li>
@@ -49,7 +45,12 @@ function User() {
               </li>
             )}
             <li>
-              <a>Profile</a>
+              <Link
+                className="justify-between active:bg-teal-500"
+                to="/profile"
+              >
+                Profile
+              </Link>
             </li>
             <li>
               <a>Settings</a>

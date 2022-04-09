@@ -4,5 +4,7 @@ type User = {
   password: string;
   role?: string;
   token?: string;
+  avatarUrl?: string;
+  avatarName?: string;
 };
 export default User;

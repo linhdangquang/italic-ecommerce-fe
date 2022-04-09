@@ -26,3 +26,9 @@ export const getAllUser = async () => {
   const res = await instance.get(URL, authHeader());
   return res.data;
 };
+
+export const updateUser = async (data: UserType) => {
+  const URL = `/api/users/${isAuthenticated().user._id}`;
+  const res = await instance.put(URL, data, authHeader());
+  return res.data;
+};

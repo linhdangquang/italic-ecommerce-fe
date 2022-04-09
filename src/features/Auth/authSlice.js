@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInUser, signUpUser, logOutUser } from '../../api/user';
+import { signInUser, signUpUser, logOutUser, updateUser } from '../../api/user';
 import { setMessage } from '../Messages/messageSlice.js';
 
 const user = JSON.parse(localStorage.getItem('user'));
@@ -45,6 +45,25 @@ export const logOut = createAsyncThunk('auth/logOut', async () => {
   await logOutUser();
 });
 
+export const changeInfo = createAsyncThunk(
+  'auth/changeInfo',
+  async (user, thunkAPI) => {
+    try {
+      const data = await updateUser(user);
+      return data;
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      thunkAPI.dispatch(setMessage(message));
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialStateValue,
@@ -70,6 +89,10 @@ const authSlice = createSlice({
     builder.addCase(logOut.fulfilled, (state) => {
       state.isLoggedIn = false;
       state.user = null;
+    });
+    builder.addCase(changeInfo.fulfilled, (state, action) => {
+      const { user } = action.payload;
+      state.user.user = user;
     });
   },
 });

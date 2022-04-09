@@ -7,7 +7,6 @@ import User from '../../WebLayout/components/Header/TopNav/User';
 function Header() {
   const { user } = useSelector((state: any) => state.auth);
   const now = dayjs();
-  console.log(now);
   return (
     <div className=" mx-auto w-full rounded-l-2xl  md:px-4">
       <nav className="flex items-center justify-between py-8">
