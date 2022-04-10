@@ -55,6 +55,11 @@ function User() {
               </Link>
             </li>
             <li>
+              <Link className="justify-between active:bg-teal-500" to="/orders">
+                Orders
+              </Link>
+            </li>
+            <li>
               <a>Settings</a>
             </li>
             <Button size="medium" onClick={onLogout} startIcon={<LogoutIcon />}>

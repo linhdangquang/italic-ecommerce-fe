@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { toast } from 'react-toastify';
 import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
@@ -11,6 +11,7 @@ function Cart() {
   const { items, totalAmount } = useSelector((state: any) => state.cart);
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items, dispatch]);
@@ -116,6 +117,7 @@ function Cart() {
                 toast.warning('Please sign in before checkout', {
                   position: 'bottom-right',
                 });
+                navigate('/signin');
               }
             }}
           >
