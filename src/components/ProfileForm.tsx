@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { Alert } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -131,6 +131,14 @@ export default function ProfileForm() {
                       {errors.avatarUrl?.message}
                     </Alert>
                   )}
+                </div>
+                <div className="form-control my-2">
+                  <Link
+                    to="/"
+                    className="w-fit rounded-full bg-emerald-400 p-2 text-xs text-white"
+                  >
+                    Change password{' '}
+                  </Link>
                 </div>
               </div>
               {message && (

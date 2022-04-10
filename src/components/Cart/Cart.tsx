@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { toast } from 'react-toastify';
 import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from './CartItem';
 
 function Cart() {
   const { items, totalAmount } = useSelector((state: any) => state.cart);
+  const { isLoggedIn } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCartTotal());
@@ -39,7 +41,12 @@ function Cart() {
             <button
               type="button"
               className="text-xs text-gray-500 hover:text-gray-700 hover:underline"
-              onClick={() => dispatch(clearCart())}
+              onClick={() => {
+                dispatch(clearCart());
+                toast.info('Cart cleared successfully', {
+                  position: 'bottom-right',
+                });
+              }}
             >
               Clear cart
             </button>{' '}
@@ -94,33 +101,30 @@ function Cart() {
             <option>Free shipping</option>
           </select>
         </div>
-        <div className="py-10">
-          <label className="mb-3 inline-block text-sm font-semibold uppercase">
-            Promo Code
-          </label>
-          <input
-            type="text"
-            id="promo"
-            placeholder="Enter your code"
-            className="w-full p-2 text-sm"
-          />
-        </div>
-        <button
-          type="button"
-          className="bg-red-500 px-5 py-2 text-sm uppercase text-white hover:bg-red-600"
-        >
-          Apply
-        </button>
+
         <div className="mt-8 border-t">
           <div className="flex justify-between py-6 text-sm font-semibold uppercase">
             <span>Total cost</span>
             <span>{USDFormat(totalAmount)}</span>
           </div>
+
           <button
             type="button"
-            className="btn w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
+            className="btn relative w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
+            onClick={() => {
+              if (!isLoggedIn) {
+                toast.warning('Please sign in before checkout', {
+                  position: 'bottom-right',
+                });
+              }
+            }}
           >
-            Checkout
+            <Link
+              to="checkout"
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              Checkout
+            </Link>
           </button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { Button } from '@mui/material';
 import { logOut } from '../../../../../features/Auth/authSlice.js';
+import { clearCart } from '../../../../../features/Cart/cartSlice.js';
 
 function User() {
   const { isLoggedIn, user } = useSelector((state: any) => state.auth);
@@ -12,6 +13,7 @@ function User() {
   const navigate = useNavigate();
   const onLogout = async () => {
     await dispatch(logOut());
+    await dispatch(clearCart());
     toast('Logout success', {
       position: toast.POSITION.BOTTOM_RIGHT,
     });

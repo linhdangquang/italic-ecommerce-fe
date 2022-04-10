@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import Skeleton from '@mui/material/Skeleton';
 import { CategoryType, ProductType } from '../types';
 import { selectAllCategories } from '../features/Categories/categoriesSlice.js';
 import { USDFormat } from '../utils/currencyFormat';
@@ -17,11 +17,15 @@ function Product({ product }: Props) {
     <div className="p-2 shadow drop-shadow-md">
       <div className="group relative">
         <div className="min-h-80 aspect-w-1 aspect-h-1 lg:aspect-none w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
-          <LazyLoadImage
-            alt={imageName}
-            src={image}
-            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
-          />
+          {product ? (
+            <img
+              alt={imageName}
+              src={image}
+              className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+            />
+          ) : (
+            <Skeleton variant="rectangular" animation="wave" width="full" />
+          )}
         </div>
         <div className="mt-4 flex justify-between">
           <div>
