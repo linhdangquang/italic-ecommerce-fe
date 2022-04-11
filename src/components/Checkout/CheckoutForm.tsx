@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 import CartItem from '../Cart/CartItem';
+import { add } from '../../api/order';
 
 function CheckoutForm() {
   const { items, totalAmount } = useSelector((state: any) => state.cart);
@@ -14,11 +15,29 @@ function CheckoutForm() {
   const navigate = useNavigate();
   const productsBuy = items.map((item: any) => {
     return {
-      product: item,
+      productId: item._id,
       quantity: item.amount,
     };
   });
   console.log(productsBuy);
+  const orderBill = {
+    user: user.user._id,
+    address: 'da',
+    city: 'das',
+    phone: '0928939889',
+    products: productsBuy,
+    total: totalAmount,
+  };
+  const onOrder = async () => {
+    try {
+      await add(orderBill);
+      await dispatch(clearCart());
+      toast.success('Order Successfully');
+      // navigate('/');
+    } catch (error) {
+      toast.error('Order Failed');
+    }
+  };
   useEffect(() => {
     if (user && user.user.role === 'admin') {
       toast.info('Admin cannot checkout', {
@@ -164,6 +183,7 @@ function CheckoutForm() {
           <button
             type="button"
             className="btn w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
+            onClick={onOrder}
           >
             Confirm Order
           </button>

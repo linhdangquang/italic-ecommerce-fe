@@ -6,6 +6,7 @@ import CategoryIcon from '@mui/icons-material/Category';
 import WebIcon from '@mui/icons-material/Web';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import BurstModeIcon from '@mui/icons-material/BurstMode';
+import ReceiptIcon from '@mui/icons-material/Receipt';
 
 function SideBar() {
   return (
@@ -56,6 +57,17 @@ function SideBar() {
               <span className="flex items-center pl-12 text-sm font-medium">
                 <CategoryIcon fontSize="small" />
                 Categories
+              </span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/orders"
+              className="AdminLayout__link block h-12 transform items-center text-gray-500 transition-transform duration-200 ease-in hover:translate-x-2 hover:text-gray-800"
+            >
+              <span className="flex items-center pl-12 text-sm font-medium">
+                <ReceiptIcon fontSize="small" />
+                Orders
               </span>
             </NavLink>
           </li>

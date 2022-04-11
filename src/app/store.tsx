@@ -10,6 +10,7 @@ import messageReducer from '../features/Messages/messageSlice.js';
 import usersReducer from '../features/Users/usersSlice.js';
 import cartReducer from '../features/Cart/cartSlice.js';
 import bannerReducer from '../features/HeroBanner/bannerSlice.js';
+import orderReducer from '../features/Order/orderSlice.js';
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const reducer = combineReducers({
   message: messageReducer,
   users: usersReducer,
   cart: cartReducer,
+  order: orderReducer,
   banner: bannerReducer,
 });
 

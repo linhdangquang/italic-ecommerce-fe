@@ -28,6 +28,7 @@ import UpdateBannerForm from './components/Banner/UpdateBannerForm';
 import HomeDash from './pages/HomeDash';
 import ProfilePage from './pages/ProfilePage';
 import CheckoutForm from './components/Checkout/CheckoutForm';
+import OrderList from './components/Order/OrderList';
 
 function App() {
   return (
@@ -75,6 +76,9 @@ function App() {
               </Route>
               <Route path="users">
                 <Route index element={<UsersAdmin />} />
+              </Route>
+              <Route path="orders">
+                <Route index element={<OrderList />} />
               </Route>
             </Route>
             <Route path="*" element={<h1>404</h1>} />
