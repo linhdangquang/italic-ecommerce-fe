@@ -18,17 +18,18 @@
 ## Features
 
 - Sign in/ Sign up/ Logout
+- Cart
 - Admin Dashboard
 
 
 ## 🛠 Technology
 ### Frontend :
-React Typescript, Tailwind CSS, MUI
+React Typescript, Tailwind CSS, MUI, Some libararies.
 ### Backend :
-Node JS, Express JS, JWT, Mongoose
+Node JS, Express JS, JWT, Mongoose.
 ### Database :
 MongoDB
 ### State Management:
-Redux Persist, React Redux, Redux Toolkit
+Redux Persist, React Redux, Redux Toolkit.
 
 
