@@ -3,6 +3,7 @@ import AccessibilityNewIcon from '@mui/icons-material/AccessibilityNew';
 import ArchiveIcon from '@mui/icons-material/Archive';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useSelector, useDispatch } from 'react-redux';
+import dayjs from 'dayjs';
 import { fetchProducts } from '../features/Products/productsSlice.js';
 import { fetchUsers } from '../features/Users/usersSlice.js';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
@@ -10,8 +11,10 @@ import CategoryPieChart from '../components/Chart/CategoryPieChart';
 
 function HomeDash() {
   const dispatch = useDispatch();
+  const now = dayjs();
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
+  const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {
     dispatch(fetchProducts());
@@ -52,6 +55,12 @@ function HomeDash() {
   };
   return (
     <div className="px-4">
+      <div className="pb-4">
+        <h2 className="flex gap-x-2 font-mono text-3xl font-semibold">
+          Good {now.hour() < 12 ? 'Morning ' : 'Afternoon '}
+          <p className="text-black underline"> {user?.user?.name}</p>
+        </h2>
+      </div>
       <div className="stats w-full bg-orangeLight shadow-lg shadow-orangeLight drop-shadow-lg">
         <div className="stat">
           <div className="stat-figure text-yellowLight">

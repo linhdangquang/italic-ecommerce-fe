@@ -22,9 +22,9 @@ function CheckoutForm() {
   console.log(productsBuy);
   const orderBill = {
     user: user.user._id,
-    address: 'da',
-    city: 'das',
-    phone: '0928939889',
+    address: 'District 1 St 2121',
+    city: 'Ho Chi Minh',
+    phone: '0123456789',
     products: productsBuy,
     total: totalAmount,
   };

@@ -1,12 +1,8 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import { useSelector } from 'react-redux';
-import dayjs from 'dayjs';
 import User from '../../WebLayout/components/Header/TopNav/User';
 
 function Header() {
-  const { user } = useSelector((state: any) => state.auth);
-  const now = dayjs();
   return (
     <div className=" mx-auto w-full rounded-l-2xl  md:px-4">
       <nav className="flex items-center justify-between py-8">
@@ -29,12 +25,6 @@ function Header() {
           <User />
         </div>
       </nav>
-      <div>
-        <h2 className="flex gap-x-2 font-mono text-3xl font-semibold">
-          Good {now.hour() < 12 ? 'Morning ' : 'Afternoon '}
-          <p className="text-black underline"> {user?.user?.name}</p>
-        </h2>
-      </div>
     </div>
   );
 }
