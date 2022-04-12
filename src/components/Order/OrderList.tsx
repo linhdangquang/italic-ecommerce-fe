@@ -140,6 +140,7 @@ function OrderList() {
   ];
   const { orders, loading } = useSelector((state: any) => state.order);
   const rows = orders.map((order, idx) => {
+    console.log(order);
     return {
       ...order,
       productsQuantity: order.products

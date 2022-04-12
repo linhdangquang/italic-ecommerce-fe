@@ -12,6 +12,7 @@ function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const product = useSelector((state: any) => selectProductById(state, id));
+  console.log(product);
   const { categories } = useSelector((state: any) => state.categories);
   return (
     <div className="min-h-screen py-2 px-20">

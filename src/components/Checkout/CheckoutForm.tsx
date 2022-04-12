@@ -5,13 +5,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
-import { BeatLoader } from 'react-spinners';
-import { uploadSingleFile } from '../../utils/uploadFile';
-import { BannerSchema } from '../../schema/banner';
-import { createBanner } from '../../features/HeroBanner/bannerSlice.js';
+import { MoonLoader } from 'react-spinners';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 import { USDFormat } from '../../utils/currencyFormat';
 import { checkoutFormValidationSchema } from '../../schema/checkout';
 import CartItem from '../Cart/CartItem';
+import { addOrder } from '../../features/Order/orderSlice.js';
+import { clearCart } from '../../features/Cart/cartSlice.js';
 
 type FormInputs = {
   name: string;
@@ -22,7 +23,6 @@ type FormInputs = {
 };
 
 function CheckOutForm() {
-  const [loading, setLoading] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -33,11 +33,57 @@ function CheckOutForm() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { loading, error } = useSelector((state: any) => state.order);
   const { items, totalAmount } = useSelector((state: any) => state.cart);
   const { user } = useSelector((state: any) => state.auth);
+
   const onSubmit: SubmitHandler<FormInputs> = async (data: any) => {
-    console.log(data);
-    console.log(errors);
+    const productsBuy = items.map((item: any) => {
+      return {
+        productId: item._id,
+        quantity: item.amount,
+      };
+    });
+    const confirmSwal = withReactContent(Swal);
+    confirmSwal
+      .fire({
+        title: 'Are you sure?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#38bdf8',
+        cancelButtonColor: '#ef4444',
+        confirmButtonText: 'Yes, checkout!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            await dispatch(
+              addOrder({
+                user: user.user._id,
+                name: data.name,
+                email: data.email,
+                address: data.address,
+                city: data.city,
+                phone: data.phone,
+                products: productsBuy,
+                total: totalAmount,
+              })
+            );
+            await dispatch(clearCart());
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Your order has been successfully placed!',
+              showConfirmButton: true,
+            });
+            navigate('/cart');
+          } catch (error) {
+            toast('❤ Something went wrong', {
+              position: 'bottom-right',
+            });
+          }
+        }
+      });
   };
   useEffect(() => {
     reset({
@@ -45,6 +91,7 @@ function CheckOutForm() {
       email: user.user.email,
     });
   }, [reset, user]);
+
   return (
     <div className="my-10 mx-20 flex min-h-screen shadow-md">
       <div className="w-3/4 bg-white px-10 py-10">
@@ -57,39 +104,8 @@ function CheckOutForm() {
         <div className="mt-10 mb-5 flex w-full">
           <div className="w-full">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <input
-                type="text"
-                placeholder="Name"
-                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
-                {...register('name')}
-              />
-              <input
-                type="text"
-                placeholder="Email"
-                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
-                {...register('email')}
-              />
-              <textarea
-                cols={5}
-                rows={10}
-                className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
-                {...register('address')}
-              />
-              <input
-                type="text"
-                placeholder="City"
-                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
-                {...register('city')}
-              />
-              <input
-                type="number"
-                placeholder="Phone Number"
-                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
-                {...register('phone')}
-              />
-              {/* <div className="grid md:grid-cols-2 md:gap-x-2">
+              <div className="grid md:grid-cols-2 md:gap-x-2">
                 <div className="form-control">
-                  <label className="pb-1 text-sm text-gray-600">Name</label>
                   <input
                     type="text"
                     placeholder="Name"
@@ -99,17 +115,14 @@ function CheckOutForm() {
                   {errors.name && (
                     <Alert
                       severity="error"
-                      className="my-1 mb-2"
                       variant="filled"
+                      className="my-1 mb-2"
                     >
-                      {errors.name}
+                      {errors.name.message}
                     </Alert>
                   )}
                 </div>
                 <div className="form-control">
-                  <label className="pb-1 text-sm text-gray-600">
-                    Email address
-                  </label>
                   <input
                     type="text"
                     placeholder="Email"
@@ -119,16 +132,15 @@ function CheckOutForm() {
                   {errors.email && (
                     <Alert
                       severity="error"
-                      className="my-1 mb-2"
                       variant="filled"
+                      className="my-1 mb-2"
                     >
-                      {errors.email}
+                      {errors.email.message}
                     </Alert>
                   )}
                 </div>
               </div>
-              <div className="form-control py-2">
-                <label className="pb-1 text-sm text-gray-600">Address</label>
+              <div className="form-control my-2">
                 <textarea
                   cols={5}
                   rows={10}
@@ -138,16 +150,32 @@ function CheckOutForm() {
                 {errors.address && (
                   <Alert
                     severity="error"
-                    className="my-1 mb-2"
                     variant="filled"
+                    className="my-1 mb-2"
                   >
-                    {errors.address}
+                    {errors.address.message}
                   </Alert>
                 )}
               </div>
               <div className="grid md:grid-cols-2 md:gap-x-2">
                 <div className="form-control">
-                  <label className="pb-1 text-sm text-gray-600">City</label>
+                  <input
+                    type="string"
+                    placeholder="Phone Number"
+                    className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                    {...register('phone')}
+                  />
+                  {errors.phone && (
+                    <Alert
+                      severity="error"
+                      variant="filled"
+                      className="my-1 mb-2"
+                    >
+                      {errors.phone.message}
+                    </Alert>
+                  )}
+                </div>
+                <div className="form-control">
                   <input
                     type="text"
                     placeholder="City"
@@ -157,41 +185,33 @@ function CheckOutForm() {
                   {errors.city && (
                     <Alert
                       severity="error"
-                      className="my-1 mb-2"
                       variant="filled"
+                      className="my-1 mb-2"
                     >
-                      {errors.city}
+                      {errors.city.message}
                     </Alert>
                   )}
                 </div>
-                <div className="form-control">
-                  <label className="pb-1 text-sm text-gray-600">
-                    Phone Number
-                  </label>
-                  <input
-                    type="number"
-                    placeholder="Phone Number"
-                    className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
-                    {...register('phone')}
-                  />
-                  {errors.phone && (
-                    <Alert
-                      severity="error"
-                      className="my-1 mb-2"
-                      variant="filled"
-                    >
-                      {errors.phone}
-                    </Alert>
-                  )}
-                </div>
-              </div> */}
-              <div className="form-control my-4 flex items-center justify-center">
+              </div>
+
+              <div className="form-control relative my-4 flex items-center justify-center">
                 <button
                   type="submit"
-                  className="btn w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
+                  className=" btn  w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
                 >
                   Confirm Order
                 </button>
+                {loading && (
+                  <MoonLoader
+                    size={25}
+                    color="#ffffff"
+                    css={{
+                      position: 'absolute',
+                      left: '35%',
+                      zIndex: 1,
+                    }}
+                  />
+                )}
               </div>
             </form>
           </div>

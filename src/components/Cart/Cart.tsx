@@ -9,7 +9,7 @@ import CartItem from './CartItem';
 
 function Cart() {
   const { items, totalAmount } = useSelector((state: any) => state.cart);
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const { isLoggedIn, user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -118,6 +118,12 @@ function Cart() {
                   position: 'bottom-right',
                 });
                 navigate('/signin');
+              }
+              if (user.user.role === 'admin') {
+                toast.warning('Admin cannot checkout', {
+                  position: 'bottom-right',
+                });
+                navigate('/cart');
               }
             }}
           >
