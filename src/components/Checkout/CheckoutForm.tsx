@@ -204,12 +204,12 @@ function CheckOutForm() {
                 {loading && (
                   <MoonLoader
                     size={25}
-                    color="#ffffff"
-                    css={{
-                      position: 'absolute',
-                      left: '35%',
-                      zIndex: 1,
-                    }}
+                    color="#171722"
+                    // css={{
+                    //   zIndex: 1,
+                    //   left: '35%',
+                    //   position: 'absolute',
+                    // }}
                   />
                 )}
               </div>

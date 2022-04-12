@@ -16,3 +16,8 @@ export const update = (order: any) => {
   const URL = `/api/orders/${isAuthenticated().user._id}/${order._id}`;
   return instance.put(URL, order, authHeader());
 };
+
+export const getOrderDetails = (orderId: string) => {
+  const URL = `/api/orders/details/${isAuthenticated().user._id}/${orderId}`;
+  return instance.get(URL, authHeader());
+};

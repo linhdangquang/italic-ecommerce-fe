@@ -14,7 +14,7 @@ function HomeDash() {
   const now = dayjs();
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
-  const { orders } = useSelector((state: any) => state.order);
+  const { orders } = useSelector((state: any) => state.orders);
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {

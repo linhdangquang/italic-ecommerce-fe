@@ -31,6 +31,25 @@ html::-webkit-scrollbar-thumb:hover
 {
   @apply bg-gray-700
 }
+.cartItem::-webkit-scrollbar-track
+{
+  @apply rounded-lg
+}
+
+.cartItem::-webkit-scrollbar
+{
+  @apply w-3
+}
+
+.cartItem::-webkit-scrollbar-thumb
+{
+  @apply bg-cyan-600
+}
+
+.cartItem::-webkit-scrollbar-thumb:hover
+{
+  @apply bg-cyan-700
+}
 /* STYLE ORDER STATUS */
 #root .pending {
   @apply text-orangeLight font-semibold !important;
@@ -55,4 +74,14 @@ html::-webkit-scrollbar-thumb:hover
 }
 #root .inactive-product {
   @apply text-red-600 z-10 font-semibold relative before:bg-rose-400 before:absolute before:w-[95%] before:h-5 before:-z-10 before:rounded-full before:right-1 !important;
+}
+
+/* ORDER INFO */
+
+.orderInfo__item {
+  @apply flex items-center  justify-between w-full h-full;
+}
+
+.orderInfo__item-value {
+  @apply  font-semibold ;
 }

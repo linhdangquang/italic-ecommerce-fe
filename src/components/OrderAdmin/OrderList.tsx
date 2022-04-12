@@ -80,6 +80,7 @@ function OrderList() {
         if (params.value === 'cancelled') {
           return 'cancelled';
         }
+        return '';
       },
     },
     {
@@ -104,7 +105,7 @@ function OrderList() {
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Link to={`/admin/categories/${params.value}/view`}>
+          <Link to={`/admin/orders/${params.value}/view`}>
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}

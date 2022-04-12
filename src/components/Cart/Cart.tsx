@@ -35,7 +35,7 @@ function Cart() {
   return (
     <div className="my-10 mx-20 flex min-h-screen shadow-md">
       <div className="w-3/4 bg-white px-10 py-10">
-        <div className="flex justify-between border-b pb-8">
+        <div className="flex  justify-between border-b pb-8">
           <h1 className="text-2xl font-semibold">Shopping Cart</h1>
           <h2 className="flex flex-col text-2xl font-semibold">
             {items.length} Items
@@ -53,7 +53,7 @@ function Cart() {
             </button>{' '}
           </h2>
         </div>
-        <div className="mt-10 mb-5 flex">
+        <div className="mt-10 mb-5 flex ">
           <h3 className="w-2/5 text-xs font-semibold uppercase text-gray-600">
             Product Details
           </h3>
@@ -67,9 +67,11 @@ function Cart() {
             Total
           </h3>
         </div>
-        {items?.map((item, idx) => (
-          <CartItem key={idx + 1} item={item} />
-        ))}
+        <div className="cartItem overflow-auto overflow-x-hidden md:max-h-[500px]">
+          {items?.map((item, idx) => (
+            <CartItem key={idx + 1} item={item} />
+          ))}
+        </div>
 
         <Link
           to="/products"

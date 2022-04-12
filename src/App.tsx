@@ -27,10 +27,11 @@ import AddBannerForm from './components/Banner/AddBannerForm';
 import UpdateBannerForm from './components/Banner/UpdateBannerForm';
 import HomeDash from './pages/HomeDash';
 import ProfilePage from './pages/ProfilePage';
-import OrderList from './components/Order/OrderList';
+import OrderList from './components/OrderAdmin/OrderList';
 import CheckOutForm from './components/Checkout/CheckoutForm';
 import UserOrderList from './components/UserOrders/UserOrderList';
 import EditOrderForm from './components/OrderAdmin/EditOrderForm';
+import OrderDetails from './components/OrderAdmin/OrderDetails';
 
 function App() {
   return (
@@ -45,7 +46,7 @@ function App() {
               <Route path="categories/:id" element={<ProductsByCategory />} />
               <Route path="cart" element={<Cart />} />
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="orders/:id" element={<UserOrderList />} />
+              <Route path="orders/:userId" element={<UserOrderList />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />
@@ -84,6 +85,7 @@ function App() {
               <Route path="orders">
                 <Route index element={<OrderList />} />
                 <Route path=":orderId/edit" element={<EditOrderForm />} />
+                <Route path=":orderId/view" element={<OrderDetails />} />
               </Route>
             </Route>
             <Route path="*" element={<h1>404</h1>} />

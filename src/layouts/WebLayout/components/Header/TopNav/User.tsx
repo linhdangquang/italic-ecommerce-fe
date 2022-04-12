@@ -55,7 +55,10 @@ function User() {
               </Link>
             </li>
             <li>
-              <Link className="justify-between active:bg-teal-500" to="/orders">
+              <Link
+                className="justify-between active:bg-teal-500"
+                to={`/orders/${user.user?._id}`}
+              >
                 Orders
               </Link>
             </li>
