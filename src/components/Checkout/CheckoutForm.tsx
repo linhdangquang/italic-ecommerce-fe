@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import { USDFormat } from '../../utils/currencyFormat';
 import { checkoutFormValidationSchema } from '../../schema/checkout';
 import CartItem from '../Cart/CartItem';
-import { addOrder } from '../../features/Order/orderSlice.js';
+import { addOrder } from '../../features/Order/ordersSlice.js';
 import { clearCart } from '../../features/Cart/cartSlice.js';
 
 type FormInputs = {
@@ -33,7 +33,7 @@ function CheckOutForm() {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: any) => state.order);
+  const { loading, error } = useSelector((state: any) => state.orders);
   const { items, totalAmount } = useSelector((state: any) => state.cart);
   const { user } = useSelector((state: any) => state.auth);
 

@@ -11,3 +11,8 @@ export const add = (order: any) => {
   const URL = `/api/orders/${isAuthenticated().user._id}`;
   return instance.post(URL, order, authHeader());
 };
+
+export const update = (order: any) => {
+  const URL = `/api/orders/${isAuthenticated().user._id}/${order._id}`;
+  return instance.put(URL, order, authHeader());
+};

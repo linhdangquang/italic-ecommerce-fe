@@ -17,7 +17,7 @@ import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { USDFormat } from '../../utils/currencyFormat';
-import { fetchOrders } from '../../features/Order/orderSlice.js';
+import { fetchOrders } from '../../features/Order/ordersSlice.js';
 
 function OrderList() {
   useEffect(() => {
@@ -31,11 +31,11 @@ function OrderList() {
       width: 50,
     },
     {
-      field: 'address, city',
+      field: 'address, city, name',
       headerName: 'Informations',
       width: 200,
       valueGetter: (params: GridValueGetterParams) => {
-        return `${params.row.address}, ${params.row.city}, ${params.row.phone}`;
+        return `${params.row.name} ${params.row.address}, ${params.row.city}, ${params.row.phone}`;
       },
     },
     {
@@ -115,7 +115,7 @@ function OrderList() {
               Detail
             </Button>
           </Link>
-          <Link to={`/admin/categories/${params.value}/edit`}>
+          <Link to={`/admin/orders/${params.value}/edit`}>
             <Button
               variant="contained"
               style={{ marginRight: '.75rem' }}
@@ -138,9 +138,8 @@ function OrderList() {
       ),
     },
   ];
-  const { orders, loading } = useSelector((state: any) => state.order);
+  const { orders, loading } = useSelector((state: any) => state.orders);
   const rows = orders.map((order, idx) => {
-    console.log(order);
     return {
       ...order,
       productsQuantity: order.products

@@ -29,6 +29,8 @@ import HomeDash from './pages/HomeDash';
 import ProfilePage from './pages/ProfilePage';
 import OrderList from './components/Order/OrderList';
 import CheckOutForm from './components/Checkout/CheckoutForm';
+import UserOrderList from './components/UserOrders/UserOrderList';
+import EditOrderForm from './components/OrderAdmin/EditOrderForm';
 
 function App() {
   return (
@@ -43,6 +45,7 @@ function App() {
               <Route path="categories/:id" element={<ProductsByCategory />} />
               <Route path="cart" element={<Cart />} />
               <Route path="profile" element={<ProfilePage />} />
+              <Route path="orders/:id" element={<UserOrderList />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />
@@ -80,6 +83,7 @@ function App() {
               </Route>
               <Route path="orders">
                 <Route index element={<OrderList />} />
+                <Route path=":orderId/edit" element={<EditOrderForm />} />
               </Route>
             </Route>
             <Route path="*" element={<h1>404</h1>} />
