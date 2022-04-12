@@ -14,6 +14,7 @@ function HomeDash() {
   const now = dayjs();
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
+  const { orders } = useSelector((state: any) => state.order);
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {
@@ -85,7 +86,7 @@ function HomeDash() {
             <LocalShippingIcon fontSize="large" />
           </div>
           <div className="stat-title text-white">Orders</div>
-          <div className="stat-value text-white">1,200</div>
+          <div className="stat-value text-white">{orders?.length}</div>
           <div className="stat-desc text-white">↘︎ 90 (14%)</div>
         </div>
       </div>
