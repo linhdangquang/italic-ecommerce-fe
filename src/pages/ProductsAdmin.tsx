@@ -100,7 +100,7 @@ function ProductsAdmin() {
         return params.value === 0 ? 'Active' : 'Inactive';
       },
       cellClassName: (params: any) => {
-        return params.value === 0 ? 'text-green-500 ' : 'text-red-500';
+        return params.value === 0 ? 'active-product' : 'inactive-product';
       },
     },
     {

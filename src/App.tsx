@@ -27,8 +27,8 @@ import AddBannerForm from './components/Banner/AddBannerForm';
 import UpdateBannerForm from './components/Banner/UpdateBannerForm';
 import HomeDash from './pages/HomeDash';
 import ProfilePage from './pages/ProfilePage';
-import CheckoutForm from './components/Checkout/CheckoutForm';
 import OrderList from './components/Order/OrderList';
+import CheckOutForm from './components/Checkout/CheckoutForm';
 
 function App() {
   return (
@@ -42,11 +42,11 @@ function App() {
               <Route path="products/:id" element={<ProductDetail />} />
               <Route path="categories/:id" element={<ProductsByCategory />} />
               <Route path="cart" element={<Cart />} />
-              <Route path="cart/checkout" element={<CheckoutForm />} />
               <Route path="profile" element={<ProfilePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />
+              <Route path="cart/checkout" element={<CheckOutForm />} />
             </Route>
             <Route
               path="admin"
@@ -57,6 +57,7 @@ function App() {
               }
             >
               <Route index element={<Navigate to="dashboard" />} />
+
               <Route path="dashboard" element={<HomeDash />} />
               <Route path="products">
                 <Route index element={<ProductsAdmin />} />

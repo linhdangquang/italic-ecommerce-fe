@@ -1,71 +1,50 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
-import { getCartTotal, clearCart } from '../../features/Cart/cartSlice.js';
+import { BeatLoader } from 'react-spinners';
+import { uploadSingleFile } from '../../utils/uploadFile';
+import { BannerSchema } from '../../schema/banner';
+import { createBanner } from '../../features/HeroBanner/bannerSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
+import { checkoutFormValidationSchema } from '../../schema/checkout';
 import CartItem from '../Cart/CartItem';
-import { add } from '../../api/order';
 
-function CheckoutForm() {
+type FormInputs = {
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  phone: string;
+};
+
+function CheckOutForm() {
+  const [loading, setLoading] = React.useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormInputs>({
+    resolver: yupResolver(checkoutFormValidationSchema),
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { items, totalAmount } = useSelector((state: any) => state.cart);
   const { user } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const productsBuy = items.map((item: any) => {
-    return {
-      productId: item._id,
-      quantity: item.amount,
-    };
-  });
-  console.log(productsBuy);
-  const orderBill = {
-    user: user.user._id,
-    address: 'District 1 St 2121',
-    city: 'Ho Chi Minh',
-    phone: '0123456789',
-    products: productsBuy,
-    total: totalAmount,
-  };
-  const onOrder = async () => {
-    try {
-      await add(orderBill);
-      await dispatch(clearCart());
-      toast.success('Order Successfully');
-      // navigate('/');
-    } catch (error) {
-      toast.error('Order Failed');
-    }
+  const onSubmit: SubmitHandler<FormInputs> = async (data: any) => {
+    console.log(data);
+    console.log(errors);
   };
   useEffect(() => {
-    if (user && user.user.role === 'admin') {
-      toast.info('Admin cannot checkout', {
-        position: 'bottom-right',
-      });
-      navigate('/cart');
-    }
-  }, []);
-  useEffect(() => {
-    dispatch(getCartTotal());
-  }, [items, dispatch]);
-  if (items.length === 0) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="-translate-y-1/2 text-center">
-          <h1 className="text-3xl font-bold">
-            <RemoveShoppingCartIcon fontSize="large" /> Your cart is empty
-          </h1>
-          <Link
-            to="/products"
-            className="text-lg font-semibold hover:text-blueDark"
-          >
-            Go to products
-          </Link>
-        </div>
-      </div>
-    );
-  }
+    reset({
+      name: user.user.name,
+      email: user.user.email,
+    });
+  }, [reset, user]);
   return (
     <div className="my-10 mx-20 flex min-h-screen shadow-md">
       <div className="w-3/4 bg-white px-10 py-10">
@@ -77,71 +56,146 @@ function CheckoutForm() {
         </div>
         <div className="mt-10 mb-5 flex w-full">
           <div className="w-full">
-            <form>
-              <div className="grid md:grid-cols-2 md:gap-x-2">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                type="text"
+                placeholder="Name"
+                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                {...register('name')}
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                {...register('email')}
+              />
+              <textarea
+                cols={5}
+                rows={10}
+                className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
+                {...register('address')}
+              />
+              <input
+                type="text"
+                placeholder="City"
+                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                {...register('city')}
+              />
+              <input
+                type="number"
+                placeholder="Phone Number"
+                className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                {...register('phone')}
+              />
+              {/* <div className="grid md:grid-cols-2 md:gap-x-2">
                 <div className="form-control">
-                  <label htmlFor="name" className="pb-1 text-sm text-gray-600">
-                    Name
-                  </label>
+                  <label className="pb-1 text-sm text-gray-600">Name</label>
                   <input
                     type="text"
                     placeholder="Name"
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                    {...register('name')}
                   />
+                  {errors.name && (
+                    <Alert
+                      severity="error"
+                      className="my-1 mb-2"
+                      variant="filled"
+                    >
+                      {errors.name}
+                    </Alert>
+                  )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="email" className="pb-1 text-sm text-gray-600">
+                  <label className="pb-1 text-sm text-gray-600">
                     Email address
                   </label>
                   <input
                     type="text"
                     placeholder="Email"
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                    {...register('email')}
                   />
+                  {errors.email && (
+                    <Alert
+                      severity="error"
+                      className="my-1 mb-2"
+                      variant="filled"
+                    >
+                      {errors.email}
+                    </Alert>
+                  )}
                 </div>
               </div>
               <div className="form-control py-2">
-                <label
-                  htmlFor="textarea"
-                  className="pb-1 text-sm text-gray-600"
-                >
-                  Address
-                </label>
+                <label className="pb-1 text-sm text-gray-600">Address</label>
                 <textarea
                   cols={5}
                   rows={10}
                   className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
+                  {...register('address')}
                 />
+                {errors.address && (
+                  <Alert
+                    severity="error"
+                    className="my-1 mb-2"
+                    variant="filled"
+                  >
+                    {errors.address}
+                  </Alert>
+                )}
               </div>
               <div className="grid md:grid-cols-2 md:gap-x-2">
                 <div className="form-control">
-                  <label htmlFor="City" className="pb-1 text-sm text-gray-600">
-                    City
-                  </label>
+                  <label className="pb-1 text-sm text-gray-600">City</label>
                   <input
                     type="text"
                     placeholder="City"
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                    {...register('city')}
                   />
+                  {errors.city && (
+                    <Alert
+                      severity="error"
+                      className="my-1 mb-2"
+                      variant="filled"
+                    >
+                      {errors.city}
+                    </Alert>
+                  )}
                 </div>
                 <div className="form-control">
-                  <label htmlFor="email" className="pb-1 text-sm text-gray-600">
+                  <label className="pb-1 text-sm text-gray-600">
                     Phone Number
                   </label>
                   <input
                     type="number"
                     placeholder="Phone Number"
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                    {...register('phone')}
                   />
+                  {errors.phone && (
+                    <Alert
+                      severity="error"
+                      className="my-1 mb-2"
+                      variant="filled"
+                    >
+                      {errors.phone}
+                    </Alert>
+                  )}
                 </div>
+              </div> */}
+              <div className="form-control my-4 flex items-center justify-center">
+                <button
+                  type="submit"
+                  className="btn w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
+                >
+                  Confirm Order
+                </button>
               </div>
             </form>
           </div>
         </div>
-        {/* {items?.map((item, idx) => (
-          <CartItem key={idx + 1} item={item} />
-        ))} */}
-
         <Link
           to="/products"
           className="mt-10 flex text-sm font-semibold text-indigo-600"
@@ -180,17 +234,10 @@ function CheckoutForm() {
             <span>Total cost</span>
             <span className="font-bold">{USDFormat(totalAmount)}</span>
           </div>
-          <button
-            type="button"
-            className="btn w-full rounded-sm border-0 bg-indigo-500 py-3 text-sm font-semibold uppercase text-white hover:bg-indigo-600"
-            onClick={onOrder}
-          >
-            Confirm Order
-          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default CheckoutForm;
+export default CheckOutForm;

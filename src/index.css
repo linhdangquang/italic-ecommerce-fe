@@ -31,19 +31,28 @@ html::-webkit-scrollbar-thumb:hover
 {
   @apply bg-gray-700
 }
-
+/* STYLE ORDER STATUS */
 #root .pending {
   @apply text-orangeLight font-semibold !important;
 }
-
 #root .delivery {
-  @apply text-cyan-700 font-semibold !important;
+  @apply text-cyan-500 font-semibold !important;
 }
-
 #root .completed {
   @apply text-green-700 font-semibold !important;
 }
-
 #root .cancelled {
   @apply text-red-700 font-semibold !important;
+}
+
+#root .status-header {
+  @apply text-gray-700 font-semibold  !important;
+}
+
+/* STYLE PRODUCT STATUS */
+#root .active-product {
+  @apply text-green-600 z-10 font-semibold relative before:bg-teal-400 before:absolute before:w-[70%] before:h-5 before:-z-10 before:rounded-full before:left-1 !important;
+}
+#root .inactive-product {
+  @apply text-red-600 z-10 font-semibold relative before:bg-rose-400 before:absolute before:w-[95%] before:h-5 before:-z-10 before:rounded-full before:right-1 !important;
 }

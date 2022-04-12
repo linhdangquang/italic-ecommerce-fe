@@ -35,13 +35,12 @@ function OrderList() {
       headerName: 'Informations',
       width: 200,
       valueGetter: (params: GridValueGetterParams) => {
-        console.log(params.row);
         return `${params.row.address}, ${params.row.city}, ${params.row.phone}`;
       },
     },
     {
-      field: 'products',
-      headerName: 'Products Bought',
+      field: 'productsQuantity',
+      headerName: 'Quantity',
       width: 75,
     },
     {
@@ -52,6 +51,7 @@ function OrderList() {
     {
       field: 'status',
       headerName: 'Status',
+      headerClassName: 'status-header',
       width: 100,
       valueFormatter: (params: any) => {
         if (params.value === 'pending') {
@@ -100,7 +100,7 @@ function OrderList() {
     },
     {
       field: '_id',
-      width: 350,
+      width: 340,
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
@@ -142,7 +142,9 @@ function OrderList() {
   const rows = orders.map((order, idx) => {
     return {
       ...order,
-      products: order.products.length,
+      productsQuantity: order.products
+        .map((product) => product.quantity)
+        .reduce((a, b) => a + b),
       total: USDFormat(order.total),
       id: idx + 1,
     };
@@ -161,7 +163,7 @@ function OrderList() {
         <div style={{ flexGrow: 1 }}>
           <div className="flex justify-between">
             <h1 className="p-2 text-center text-3xl font-bold text-gray-800 antialiased">
-              Products
+              Orders
             </h1>
             <Link to="/admin/products/add">
               <Button

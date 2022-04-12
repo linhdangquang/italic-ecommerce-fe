@@ -73,9 +73,12 @@ function BannerList() {
     {
       field: 'status',
       headerName: 'Status',
-      width: 75,
+      width: 76,
       valueFormatter: (params: any) => {
         return params.value === 0 ? 'Active' : 'Inactive';
+      },
+      cellClassName: (params: any) => {
+        return params.value === 0 ? 'active-product' : 'inactive-product';
       },
     },
     {
