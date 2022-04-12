@@ -9,7 +9,7 @@
 }
 
 .AdminLayout__link.active span {
-  @apply text-sky-500 font-bold disabled cursor-not-allowed
+  @apply text-sky-500 font-bold disabled
 }
 
 html::-webkit-scrollbar-track

@@ -28,7 +28,7 @@ function SignInForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const { isLoggedIn } = useSelector((state: any) => state.auth);
+  const { isLoggedIn, user } = useSelector((state: any) => state.auth);
   const { message } = useSelector((state: any) => state.message);
 
   const onSignIn: SubmitHandler<FormInputs> = async (userForm: UserType) => {
@@ -41,7 +41,6 @@ function SignInForm() {
           toast.success('Sign in successfully', {
             position: toast.POSITION.BOTTOM_RIGHT,
           });
-          navigate('/');
         })
         .catch(() => {
           setLoading(false);
@@ -56,7 +55,12 @@ function SignInForm() {
     setOpen(true);
   }, [errors.email, errors.password]);
   if (isLoggedIn) {
-    navigate('/');
+    if (user.user.role === 'admin') {
+      navigate('/admin');
+    }
+    if (user.user.role === 'user') {
+      navigate('/');
+    }
   }
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
