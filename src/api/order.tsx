@@ -26,3 +26,11 @@ export const del = (orderId: string) => {
   const URL = `/api/orders/${isAuthenticated().user._id}/${orderId}`;
   return instance.delete(URL, authHeader());
 };
+
+export const getOrderByUserId = (userId: string) => {
+  if (!userId) {
+    return;
+  }
+  const URL = `/api/orders/user/${userId}`;
+  return instance.get(URL, authHeader());
+};

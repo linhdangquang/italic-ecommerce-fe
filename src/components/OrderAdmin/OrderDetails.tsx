@@ -22,7 +22,6 @@ function OrderDetails() {
       );
     });
   }, [orderId]);
-  console.log(orderInfo, userInfo, productsInfo);
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold text-gray-600">Order Details</h1>
@@ -121,7 +120,7 @@ function OrderDetails() {
               Products:{' '}
             </span>
             <div className="orderInfo__item overflow-x-auto">
-              <table className="table-zebra table w-full text-gray-800 ">
+              <table className="table-zebra  w-full text-gray-800  ">
                 <thead>
                   <tr>
                     <th />

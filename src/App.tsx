@@ -46,7 +46,7 @@ function App() {
               <Route path="categories/:id" element={<ProductsByCategory />} />
               <Route path="cart" element={<Cart />} />
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="orders/:userId" element={<UserOrderList />} />
+              <Route path="orders" element={<UserOrderList />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />

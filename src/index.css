@@ -85,3 +85,7 @@ html::-webkit-scrollbar-thumb:hover
 .orderInfo__item-value {
   @apply  font-semibold ;
 }
+
+#root .order-id {
+  @apply text-gray-600 font-semibold ;
+}

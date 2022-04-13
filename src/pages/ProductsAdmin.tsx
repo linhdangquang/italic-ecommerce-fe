@@ -7,8 +7,6 @@ import {
   GridColDef,
   GridValueGetterParams,
   GridToolbar,
-  GridColumns,
-  GridCellParams,
 } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
