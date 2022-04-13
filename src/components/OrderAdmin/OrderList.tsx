@@ -17,13 +17,40 @@ import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { USDFormat } from '../../utils/currencyFormat';
-import { fetchOrders } from '../../features/Order/ordersSlice.js';
+import { fetchOrders, deleteOrder } from '../../features/Order/ordersSlice.js';
 
 function OrderList() {
   useEffect(() => {
     document.title = 'Orders';
   });
   const dispatch = useDispatch();
+  const putOrder = (orderId) => {
+    const deleteSwal = withReactContent(Swal);
+    deleteSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(deleteOrder(orderId));
+            deleteSwal.fire('Deleted!', 'Order has been deleted.', 'success');
+          } catch (error) {
+            deleteSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
   const columns: GridColDef[] = [
     {
       field: 'id',
@@ -132,6 +159,7 @@ function OrderList() {
             color="error"
             size="small"
             startIcon={<DeleteIcon />}
+            onClick={() => putOrder(params.value)}
           >
             Delete
           </Button>

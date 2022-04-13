@@ -35,7 +35,7 @@ function CheckOutForm() {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state: any) => state.orders);
   const { items, totalAmount } = useSelector((state: any) => state.cart);
-  const { user } = useSelector((state: any) => state.auth);
+  const { user, isLoggedIn } = useSelector((state: any) => state.auth);
 
   const onSubmit: SubmitHandler<FormInputs> = async (data: any) => {
     const productsBuy = items.map((item: any) => {
@@ -86,12 +86,13 @@ function CheckOutForm() {
       });
   };
   useEffect(() => {
-    reset({
-      name: user.user.name,
-      email: user.user.email,
-    });
+    if (isLoggedIn) {
+      reset({
+        name: user.user.name,
+        email: user.user.email,
+      });
+    }
   }, [reset, user]);
-
   return (
     <div className="my-10 mx-20 flex min-h-screen shadow-md">
       <div className="w-3/4 bg-white px-10 py-10">

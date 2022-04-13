@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getAllOrders, add, update } from '../../api/order';
+import { getAllOrders, add, update, del } from '../../api/order';
 
 const initialStateValue = {
   orders: [],
@@ -22,11 +22,22 @@ export const updateOrder = createAsyncThunk(
   'orders/updateOrder',
   async (order) => {
     try {
-      console.log('updateOrder', order);
       const { data } = await update(order);
       return data;
     } catch (error) {
-      console.log(error);
+      return error;
+    }
+  }
+);
+
+export const deleteOrder = createAsyncThunk(
+  'orders/deleteOrder',
+  async (orderId) => {
+    try {
+      const { data } = await del(orderId);
+      return data;
+    } catch (error) {
+      return error;
     }
   }
 );
@@ -71,6 +82,21 @@ const ordersSlice = createSlice({
         (order) => order._id === updateOrder._id
       );
       state.orders[index] = updateOrder;
+      state.loading = false;
+      state.status = 'success';
+    });
+    builder.addCase(updateOrder.rejected, (state, action) => {
+      state.error = action.error;
+      state.loading = false;
+      state.status = 'error';
+    });
+    builder.addCase(deleteOrder.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(deleteOrder.fulfilled, (state, action) => {
+      const { _id } = action.payload.order;
+      const index = state.orders.findIndex((order) => order._id === _id);
+      state.orders.splice(index, 1);
       state.loading = false;
       state.status = 'success';
     });

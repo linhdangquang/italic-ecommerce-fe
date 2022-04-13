@@ -21,3 +21,8 @@ export const getOrderDetails = (orderId: string) => {
   const URL = `/api/orders/details/${isAuthenticated().user._id}/${orderId}`;
   return instance.get(URL, authHeader());
 };
+
+export const del = (orderId: string) => {
+  const URL = `/api/orders/${isAuthenticated().user._id}/${orderId}`;
+  return instance.delete(URL, authHeader());
+};
