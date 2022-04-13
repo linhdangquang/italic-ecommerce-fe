@@ -89,3 +89,7 @@ html::-webkit-scrollbar-thumb:hover
 #root .order-id {
   @apply text-gray-600 font-semibold ;
 }
+
+.swiper-pagination-bullet {
+  @apply bg-white;
+}

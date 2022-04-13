@@ -33,7 +33,7 @@ function UserOrderList() {
   const columns: GridColDef[] = [
     {
       field: '_id',
-      headerName: 'ID ORDER',
+      headerName: 'ID',
       width: 220,
       cellClassName: 'order-id',
       valueFormatter: (params: any) => {

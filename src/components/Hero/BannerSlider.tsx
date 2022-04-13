@@ -21,9 +21,6 @@ function BannerSlider() {
   });
   return (
     <Swiper
-      style={{
-        '--swiper-pagination-color': '#fff',
-      }}
       effect="fade"
       pagination
       loop
