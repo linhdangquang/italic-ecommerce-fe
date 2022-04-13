@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
+import { Button } from '@mui/material';
+import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import dayjs from 'dayjs';
 import { getOrderDetails } from '../../api/order';
 import { USDFormat } from '../../utils/currencyFormat';
 
-function OrderDetails() {
+function UserDetailOrder() {
   const [orderInfo, setOrderInfo] = useState<any>({});
   const [userInfo, setUserInfo] = useState<any>({});
   const [productsInfo, setProductsInfo] = useState<any>([]);
@@ -23,43 +24,46 @@ function OrderDetails() {
       );
     });
   }, [orderId]);
+  console.log(orderInfo);
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold text-gray-600">Order Details</h1>
-      <div className="flex flex-wrap gap-2 py-4">
-        <div className="orderInfo w-fit rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-br from-teal-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+    <div className="min-h-screen px-20 py-4">
+      <h1 className="text-2xl font-bold text-gray-600">
+        Order Details: #{orderInfo?._id}
+      </h1>
+      <div className="flex flex-wrap gap-2 gap-x-4 py-4">
+        <div className="orderInfo w-1/3 rounded border-2 pb-0 border-gray-400 bg-slate-100 bg-gradient-to-br from-slate-500 to-cyan-600  p-0 text-neutral-content shadow-lg drop-shadow-md relative">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Order Information's
           </h3>
-          <div className="flex flex-col">
+          <div className="flex flex-col relative px-2">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order ID: </span>
-              <span className="orderInfo__item-value">{orderInfo._id}</span>
+              <span className="orderInfo__item-value">{orderInfo?._id}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order Date: </span>
               <span className="orderInfo__item-value">
-                {dayjs(orderInfo.createdAt).format('DD/MM/YYYY')}
+                {dayjs(orderInfo?.createdAt).format('DD/MM/YYYY')}
               </span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order Status: </span>
-              {orderInfo.status === 'pending' && (
+              {orderInfo?.status === 'pending' && (
                 <span className="orderInfo__item-value text-orange-500">
                   Pending
                 </span>
               )}
-              {orderInfo.status === 'delivery' && (
+              {orderInfo?.status === 'delivery' && (
                 <span className="orderInfo__item-value text-blue-500">
                   Delivery
                 </span>
               )}
-              {orderInfo.status === 'completed' && (
+              {orderInfo?.status === 'completed' && (
                 <span className="orderInfo__item-value text-green-500">
                   Completed
                 </span>
               )}
-              {orderInfo.status === 'cancelled' && (
+              {orderInfo?.status === 'cancelled' && (
                 <span className="orderInfo__item-value text-rose-500">
                   Cancelled
                 </span>
@@ -72,17 +76,24 @@ function OrderDetails() {
               </span>
             </div>
           </div>
+          {orderInfo?.status === 'pending' && (
+            <div className="w-full mb-auto mt-2 ">
+              <Button variant="outlined" color="error" className="w-full bg-rose-600 text-white hover:bg-rose-700">
+                Cancel Order
+              </Button>
+            </div>
+          )}
         </div>
-        <div className="orderInfo w-fit flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-bl from-orangeLight to-slate-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
-          <h3 className="mb-2 flex items-center justify-between rounded-sm border-2 py-1 text-center font-semibold ">
+        <div className="orderInfo w-fit flex-1   rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-bl from-orangeLight  to-slate-600 text-neutral-content shadow-lg drop-shadow-md">
+          <h3 className="mb-2 flex items-center justify-between rounded-sm border-2 py-1 text-center font-semibold px-2 ">
             User Information's{' '}
             <img
-              src={userInfo.avatarUrl}
-              alt={userInfo.avatarName}
+              src={userInfo?.avatarUrl}
+              alt={userInfo?.avatarName}
               className="avatar cursor-pointer rounded-full transition-all md:h-6 md:w-6 md:hover:scale-[200%]"
             />
           </h3>
-          <div className="flex flex-col">
+          <div className="flex flex-col px-2">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User ID: </span>
               <span className="orderInfo__item-value">{userInfo._id}</span>
@@ -107,11 +118,11 @@ function OrderDetails() {
             </div>
           </div>
         </div>
-        <div className="orderInfo w-fit flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+        <div className="orderInfo w-full  flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600  text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Products Ordered Information's
           </h3>
-          <div className="flex flex-col">
+          <div className="flex flex-col px-2">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">
                 Total quantity: {productsQuantity}{' '}
@@ -158,4 +169,4 @@ function OrderDetails() {
   );
 }
 
-export default OrderDetails;
+export default UserDetailOrder;

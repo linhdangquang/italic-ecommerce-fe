@@ -107,11 +107,18 @@ function UserOrderList() {
       headerName: 'Actions',
       renderCell: (params: GridValueGetterParams) => (
         <div>
-          <Button size="small" variant="text" startIcon={<VisibilityIcon />}>
-            <Link to={`/orders/${params.value}`}>View</Link>
-          </Button>
+          <Link to={`${params.value}`}>
+            <Button size="small" variant="text" startIcon={<VisibilityIcon />}>
+              View
+            </Button>
+          </Link>
           {params.row.status === 'pending' && (
-            <Button size="small" variant="text" startIcon={<CancelIcon />}>
+            <Button
+              size="small"
+              variant="text"
+              color="error"
+              startIcon={<CancelIcon />}
+            >
               <p>Cancel</p>
             </Button>
           )}

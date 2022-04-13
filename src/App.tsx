@@ -32,6 +32,7 @@ import CheckOutForm from './components/Checkout/CheckoutForm';
 import UserOrderList from './components/UserOrders/UserOrderList';
 import EditOrderForm from './components/OrderAdmin/EditOrderForm';
 import OrderDetails from './components/OrderAdmin/OrderDetails';
+import UserDetailOrder from './components/UserOrders/UserDetailOrder';
 
 function App() {
   return (
@@ -46,7 +47,10 @@ function App() {
               <Route path="categories/:id" element={<ProductsByCategory />} />
               <Route path="cart" element={<Cart />} />
               <Route path="profile" element={<ProfilePage />} />
-              <Route path="orders" element={<UserOrderList />} />
+              <Route path="orders">
+                <Route index element={<UserOrderList />} />
+                <Route path=":orderId" element={<UserDetailOrder />} />
+              </Route>
               <Route path="about" element={<AboutPage />} />
               <Route path="signin" element={<SignInPage />} />
               <Route path="signup" element={<SignUpPage />} />
