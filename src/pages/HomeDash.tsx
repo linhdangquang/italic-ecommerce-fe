@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { fetchProducts } from '../features/Products/productsSlice.js';
 import { fetchUsers } from '../features/Users/usersSlice.js';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
+import { fetchOrders } from '../features/Order/ordersSlice.js';
 import CategoryPieChart from '../components/Chart/CategoryPieChart';
 
 function HomeDash() {
@@ -21,6 +22,7 @@ function HomeDash() {
     dispatch(fetchProducts());
     dispatch(fetchUsers());
     dispatch(fetchCategories());
+    dispatch(fetchOrders());
   }, [dispatch]);
   useEffect(() => {
     document.title = 'Dashboard';

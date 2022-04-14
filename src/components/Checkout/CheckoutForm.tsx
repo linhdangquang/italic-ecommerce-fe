@@ -70,12 +70,6 @@ function CheckOutForm() {
               })
             );
             await dispatch(clearCart());
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Your order has been successfully placed!',
-              showConfirmButton: true,
-            });
             navigate('/cart');
           } catch (error) {
             toast('❤ Something went wrong', {

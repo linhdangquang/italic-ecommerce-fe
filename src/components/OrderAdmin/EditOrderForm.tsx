@@ -33,7 +33,6 @@ function EditOrderForm() {
   const onSubmit: SubmitHandler<FormInputs> = async (orderFormData: any) => {
     try {
       await dispatch(updateOrder(orderFormData));
-      toast.success('Order updated successfully');
       navigate('/admin/orders');
     } catch (error) {
       toast.error(error.message);
@@ -44,6 +43,9 @@ function EditOrderForm() {
       reset(order);
     }
   }, [orderId]);
+  useEffect(() => {
+    document.title = 'Edit Order';
+  }, []);
   return (
     <div className="flex">
       <div className="card ml-4 mt-4 w-full max-w-4xl flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">

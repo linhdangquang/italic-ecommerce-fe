@@ -2,11 +2,17 @@
 import { Button } from '@mui/material';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import withReactContent from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 import { getOrderDetails } from '../../api/order';
+import {updateOrder} from '../../features/Order/ordersSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
 
 function UserDetailOrder() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [orderInfo, setOrderInfo] = useState<any>({});
   const [userInfo, setUserInfo] = useState<any>({});
   const [productsInfo, setProductsInfo] = useState<any>([]);
@@ -24,7 +30,68 @@ function UserDetailOrder() {
       );
     });
   }, [orderId]);
-  console.log(orderInfo);
+  const cancelOrder = async () => {
+    const cancelSwal = withReactContent(Swal);
+    cancelSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, i want to revert this!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(updateOrder({
+              _id: orderInfo._id,
+              status: 'cancelled',
+            }));
+            navigate('/orders');
+            cancelSwal.fire('Cancelled', 'Order has been  cancelled', 'success');
+          } catch (error) {
+            cancelSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  }
+  const confirmReceived = async () => {
+    const confirmSwal = withReactContent(Swal);
+    confirmSwal
+      .fire({
+        title: 'Confirm received?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, I has been received',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(updateOrder({
+              _id: orderInfo._id,
+              status: 'completed',
+            }));
+            navigate('/orders');
+            confirmSwal.fire('Confirmed', 'Order has been confirmed', 'success');
+          } catch (error) {
+            confirmSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  }
   return (
     <div className="min-h-screen px-20 py-4">
       <h1 className="text-2xl font-bold text-gray-600">
@@ -78,8 +145,17 @@ function UserDetailOrder() {
           </div>
           {orderInfo?.status === 'pending' && (
             <div className="w-full mb-auto mt-2 ">
-              <Button variant="outlined" color="error" className="w-full bg-rose-600 text-white hover:bg-rose-700">
+              <Button variant="outlined" color="error"  className="w-full bg-rose-600 text-white hover:bg-rose-700"
+                onClick={cancelOrder}>
                 Cancel Order
+              </Button>
+            </div>
+          )}
+          {orderInfo?.status === 'delivery' && (
+            <div className="w-full mb-auto mt-2 ">
+              <Button variant="outlined" color="info"  className="w-full bg-sky-600 text-white hover:bg-sky-700"
+                onClick={confirmReceived}>
+                Confirm Received
               </Button>
             </div>
           )}

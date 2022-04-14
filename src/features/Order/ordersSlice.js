@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 import { getAllOrders, add, update, del } from '../../api/order';
 
 const initialStateValue = {
@@ -15,6 +17,12 @@ export const fetchOrders = createAsyncThunk('orders/fetchOrders', async () => {
 
 export const addOrder = createAsyncThunk('orders/addOrder', async (order) => {
   const { data } = await add(order);
+  Swal.fire({
+    position: 'center',
+    icon: 'success',
+    title: 'Your order has been successfully placed!',
+    showConfirmButton: true,
+  });
   return data;
 });
 
@@ -84,6 +92,7 @@ const ordersSlice = createSlice({
       state.orders[index] = updateOrder;
       state.loading = false;
       state.status = 'success';
+      toast.success('Order updated successfully');
     });
     builder.addCase(updateOrder.rejected, (state, action) => {
       state.error = action.error;

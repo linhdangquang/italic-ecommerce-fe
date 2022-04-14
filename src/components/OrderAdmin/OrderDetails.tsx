@@ -6,6 +6,7 @@ import { getOrderDetails } from '../../api/order';
 import { USDFormat } from '../../utils/currencyFormat';
 
 function OrderDetails() {
+ 
   const [orderInfo, setOrderInfo] = useState<any>({});
   const [userInfo, setUserInfo] = useState<any>({});
   const [productsInfo, setProductsInfo] = useState<any>([]);
@@ -23,6 +24,9 @@ function OrderDetails() {
       );
     });
   }, [orderId]);
+  useEffect(() => {
+    document.title = `Order Details #${orderInfo._id}`;
+  }, [orderInfo._id])
   return (
     <div className="p-4">
       <h1 className="text-2xl font-bold text-gray-600">Order Details</h1>

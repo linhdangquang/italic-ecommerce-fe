@@ -1,35 +1,99 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CancelIcon from '@mui/icons-material/Cancel';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CheckIcon from '@mui/icons-material/Check';
 import dayjs from 'dayjs';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import EditIcon from '@mui/icons-material/Edit';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { getOrderByUserId } from '../../api/order';
 import { USDFormat } from '../../utils/currencyFormat';
+import { updateOrder } from '../../features/Order/ordersSlice.js';
 
 function UserOrderList() {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isLoggedIn, user } = useSelector((state: any) => state.auth);
   const userId = user?.user?._id;
   const [userOrders, setUserOrders] = useState<any>([{}]);
+  const cancelOrder = async (orderId) => {
+    const cancelSwal = withReactContent(Swal);
+    cancelSwal
+      .fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, i want to revert this!',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(
+              updateOrder({
+                _id: orderId,
+                status: 'cancelled',
+              })
+            );
+            navigate(`/orders/${orderId}`);
+            cancelSwal.fire(
+              'Cancelled',
+              'Order has been  cancelled',
+              'success'
+            );
+          } catch (error) {
+            cancelSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
+  const confirmReceived = async (orderId) => {
+    const confirmSwal = withReactContent(Swal);
+    confirmSwal
+      .fire({
+        title: 'Confirm received?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, I has been received',
+      })
+      .then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            dispatch(
+              updateOrder({
+                _id: orderId,
+                status: 'completed',
+              })
+            );
+            navigate('/orders');
+            confirmSwal.fire(
+              'Confirmed',
+              'Order has been confirmed',
+              'success'
+            );
+          } catch (error) {
+            confirmSwal.fire(
+              'Error!',
+              'Something went wrong, please try again.',
+              'error'
+            );
+          }
+        }
+      });
+  };
   const columns: GridColDef[] = [
     {
       field: '_id',
@@ -108,7 +172,12 @@ function UserOrderList() {
       renderCell: (params: GridValueGetterParams) => (
         <div>
           <Link to={`${params.value}`}>
-            <Button size="small" variant="text" startIcon={<VisibilityIcon />}>
+            <Button
+              size="small"
+              variant="text"
+              className="font-bold"
+              startIcon={<VisibilityIcon />}
+            >
               View
             </Button>
           </Link>
@@ -117,9 +186,23 @@ function UserOrderList() {
               size="small"
               variant="text"
               color="error"
+              className="font-bold"
+              onClick={() => cancelOrder(params.value)}
               startIcon={<CancelIcon />}
             >
               <p>Cancel</p>
+            </Button>
+          )}
+          {params.row.status === 'delivery' && (
+            <Button
+              size="small"
+              variant="text"
+              className="font-bold text-emerald-600 hover:bg-emerald-100"
+              color="info"
+              onClick={() => confirmReceived(params.value)}
+              startIcon={<CheckIcon />}
+            >
+              <p>Received</p>
             </Button>
           )}
         </div>
@@ -137,13 +220,14 @@ function UserOrderList() {
       id: idx + 1,
     };
   });
+
   useEffect(() => {
     const fetchOrdersUser = async (id) => {
       const { data } = (await getOrderByUserId(id)) || {};
       setUserOrders(data?.userOrders);
     };
     fetchOrdersUser(userId);
-  }, [userId]);
+  }, [userId, dispatch]);
   useEffect(() => {
     if (!user) {
       navigate('/');

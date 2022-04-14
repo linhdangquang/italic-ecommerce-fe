@@ -194,16 +194,6 @@ function OrderList() {
             <h1 className="p-2 text-center text-3xl font-bold text-gray-800 antialiased">
               Orders
             </h1>
-            <Link to="/admin/products/add">
-              <Button
-                variant="contained"
-                color="success"
-                style={{ marginRight: '.75rem' }}
-                startIcon={<AddBoxIcon />}
-              >
-                Add
-              </Button>
-            </Link>
           </div>
           {!loading && (
             <DataGrid
