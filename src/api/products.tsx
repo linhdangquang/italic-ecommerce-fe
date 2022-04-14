@@ -27,3 +27,11 @@ export const putProduct = (data: ProductType) => {
   const URL = `/api/products/${isAuthenticated().user._id}/${data._id}`;
   return instance.put(URL, data, authHeader());
 };
+
+export const searchProducts = (textSearch: string) => {
+  if (!textSearch || textSearch === '') {
+    return;
+  }
+  const URL = `/api/products/?q=${textSearch}`;
+  return instance.get(URL);
+};

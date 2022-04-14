@@ -4,11 +4,14 @@ import ArchiveIcon from '@mui/icons-material/Archive';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { useSelector, useDispatch } from 'react-redux';
 import dayjs from 'dayjs';
+import sortBy from 'lodash/sortBy';
+import PaidIcon from '@mui/icons-material/Paid';
 import { fetchProducts } from '../features/Products/productsSlice.js';
 import { fetchUsers } from '../features/Users/usersSlice.js';
 import { fetchCategories } from '../features/Categories/categoriesSlice.js';
 import { fetchOrders } from '../features/Order/ordersSlice.js';
 import CategoryPieChart from '../components/Chart/CategoryPieChart';
+import { USDFormat } from '../utils/currencyFormat';
 
 function HomeDash() {
   const dispatch = useDispatch();
@@ -16,6 +19,7 @@ function HomeDash() {
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
   const { orders } = useSelector((state: any) => state.orders);
+  const totalEarn = orders.map((order) => order.total).reduce((a, b) => a + b);
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {
@@ -34,6 +38,8 @@ function HomeDash() {
   const quantityByCategory = productsByCategory.map((category: any) => {
     return category.length;
   });
+  sortBy(orders, ['createdAt']);
+  const recentOrder = orders[orders.length - 1];
   const data = {
     labels: categoryLabels,
     datasets: [
@@ -67,10 +73,10 @@ function HomeDash() {
       <div className="stats w-full bg-orangeLight shadow-lg shadow-orangeLight drop-shadow-lg">
         <div className="stat">
           <div className="stat-figure text-yellowLight">
-            <ArchiveIcon fontSize="large" />
+            <PaidIcon fontSize="large" />
           </div>
-          <div className="stat-title text-white">Products</div>
-          <div className="stat-value text-white">{products?.length}</div>
+          <div className="stat-title text-white">Earn</div>
+          <div className="stat-value text-white">{USDFormat(totalEarn)}</div>
           <div className="stat-desc text-white">Jan 1st - Feb 1st</div>
         </div>
 
@@ -92,8 +98,16 @@ function HomeDash() {
           <div className="stat-desc text-white">↘︎ 90 (14%)</div>
         </div>
       </div>
-      <div className="chart py-8">
+      <div className="chart flex gap-x-4 py-8">
         <CategoryPieChart data={data} />
+        <div>
+          <h2 className="text-lg font-semibold">
+            Recent Order #{recentOrder._id}
+          </h2>
+          <div className="flex flex-col">
+            <p>{dayjs(recentOrder?.createdAt).format('HH:mm DD/MM/YYYY ')}</p>
+          </div>
+        </div>
       </div>
     </div>
   );

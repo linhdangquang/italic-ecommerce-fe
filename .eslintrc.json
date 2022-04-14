@@ -76,7 +76,9 @@
         "no-param-reassign": "off",
         "no-unused-expressions": "off",
         "jsx-a11y/control-has-associated-label": "off",
-        "consistent-return": "off"
+        "consistent-return": "off",
+        "import/no-extraneous-dependencies": "off",
+        "@typescript-eslint/no-this-alias": "off"
     },
     "settings": {
         "import/resolver": {
