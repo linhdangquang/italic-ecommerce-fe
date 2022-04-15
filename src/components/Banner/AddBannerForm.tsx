@@ -222,7 +222,7 @@ function AddBannerForm() {
                     </label>
                   </div>
                 </div>
-                {errors.status?.message && (
+                {errors?.status?.message && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"

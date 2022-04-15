@@ -7,6 +7,7 @@ import { Button } from '@mui/material';
 import CancelIcon from '@mui/icons-material/Cancel';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CheckIcon from '@mui/icons-material/Check';
+import BeatLoader from 'react-spinners/BeatLoader';
 import dayjs from 'dayjs';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -20,6 +21,7 @@ function UserOrderList() {
   const { isLoggedIn, user } = useSelector((state: any) => state.auth);
   const userId = user?.user?._id;
   const [userOrders, setUserOrders] = useState<any>([{}]);
+  const [isLoading, setIsLoading] = useState(true);
   const cancelOrder = async (orderId) => {
     const cancelSwal = withReactContent(Swal);
     cancelSwal
@@ -224,6 +226,7 @@ function UserOrderList() {
   useEffect(() => {
     const fetchOrdersUser = async (id) => {
       const { data } = (await getOrderByUserId(id)) || {};
+      setIsLoading(false);
       setUserOrders(data?.userOrders);
     };
     fetchOrdersUser(userId);
@@ -243,7 +246,7 @@ function UserOrderList() {
     <div className="px-20 py-4">
       <h1 className="text-2xl font-bold">Your orders</h1>
       <div className="flex flex-col  justify-center">
-        {userOrders.length === 0 ? (
+        {userOrders?.length === 0 ? (
           <div className="flex min-h-screen items-center justify-center">
             <div className="-translate-y-1/2 text-center">
               <h1 className="text-3xl font-bold">You don't have any orders</h1>
@@ -258,34 +261,40 @@ function UserOrderList() {
         ) : (
           <div className="min-h-screen py-4">
             <div style={{ height: 500, width: '100%', minWidth: 650 }}>
-              <DataGrid
-                className="mx-2 rounded-lg shadow-md drop-shadow-lg"
-                rows={rows}
-                columns={columns}
-                classes={{
-                  root: 'bg-white',
-                  row: 'hover:bg-gray-100 bg-white border border-gray-100',
-                  sortIcon: 'text-gray-500',
-                  overlay: 'bg-gray-100',
-                  columnHeaders: 'border-gray-100',
-                  columnHeaderTitle: 'font-bold text-gray-700',
-                  menuIconButton: 'text-gray-600',
-                  columnSeparator: 'hidden',
-                  cell: 'text-gray-700',
-                  footerContainer: 'border-t-0 text-gray-500',
-                  toolbarContainer: 'gap-1',
-                }}
-                rowsPerPageOptions={[10, 20, 50, 100]}
-                componentsProps={{
-                  toolbar: {
-                    sx: {
-                      '& .MuiButton-root': {
-                        fontWeight: 600,
+              {isLoading === false ? (
+                <DataGrid
+                  className="mx-2 rounded-lg shadow-md drop-shadow-lg"
+                  rows={rows}
+                  columns={columns}
+                  classes={{
+                    root: 'bg-white',
+                    row: 'hover:bg-gray-100 bg-white border border-gray-100',
+                    sortIcon: 'text-gray-500',
+                    overlay: 'bg-gray-100',
+                    columnHeaders: 'border-gray-100',
+                    columnHeaderTitle: 'font-bold text-gray-700',
+                    menuIconButton: 'text-gray-600',
+                    columnSeparator: 'hidden',
+                    cell: 'text-gray-700',
+                    footerContainer: 'border-t-0 text-gray-500',
+                    toolbarContainer: 'gap-1',
+                  }}
+                  rowsPerPageOptions={[10, 20, 50, 100]}
+                  componentsProps={{
+                    toolbar: {
+                      sx: {
+                        '& .MuiButton-root': {
+                          fontWeight: 600,
+                        },
                       },
                     },
-                  },
-                }}
-              />
+                  }}
+                />
+              ) : (
+                <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+                  <BeatLoader size={20} color="#34d399" margin={2} />
+                </div>
+              )}
             </div>
           </div>
         )}

@@ -95,9 +95,9 @@ function DetailCategory() {
         <div style={{ flexGrow: 1 }}>
           <div className="flex justify-between">
             <h1 className="p-2 text-center text-3xl font-bold text-gray-800 antialiased">
-              {category.category?.name} :{' '}
+              {category?.category?.name} :{' '}
               <small className="font-base text-gray-600">
-                {category.category?.products.length} products total
+                {category?.category?.products.length} products total
               </small>
             </h1>
           </div>

@@ -129,8 +129,8 @@ function CheckOutForm() {
   useEffect(() => {
     if (isLoggedIn) {
       reset({
-        name: user.user.name,
-        email: user.user.email,
+        name: user?.user.name,
+        email: user?.user.email,
       });
     }
   }, [reset, user]);
@@ -154,13 +154,13 @@ function CheckOutForm() {
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
                     {...register('name')}
                   />
-                  {errors.name && (
+                  {errors?.name && (
                     <Alert
                       severity="error"
                       variant="filled"
                       className="my-1 mb-2"
                     >
-                      {errors.name.message}
+                      {errors?.name.message}
                     </Alert>
                   )}
                 </div>
@@ -171,13 +171,13 @@ function CheckOutForm() {
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
                     {...register('email')}
                   />
-                  {errors.email && (
+                  {errors?.email && (
                     <Alert
                       severity="error"
                       variant="filled"
                       className="my-1 mb-2"
                     >
-                      {errors.email.message}
+                      {errors?.email.message}
                     </Alert>
                   )}
                 </div>
@@ -202,7 +202,7 @@ function CheckOutForm() {
                   className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
                   {...register('address')}
                 /> */}
-                {errors.address && (
+                {errors?.address && (
                   <Alert
                     severity="error"
                     variant="filled"
@@ -220,13 +220,13 @@ function CheckOutForm() {
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
                     {...register('phone')}
                   />
-                  {errors.phone && (
+                  {errors?.phone && (
                     <Alert
                       severity="error"
                       variant="filled"
                       className="my-1 mb-2"
                     >
-                      {errors.phone.message}
+                      {errors?.phone.message}
                     </Alert>
                   )}
                 </div>
@@ -237,13 +237,13 @@ function CheckOutForm() {
                     className="input input-info border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
                     {...register('city')}
                   />
-                  {errors.city && (
+                  {errors?.city && (
                     <Alert
                       severity="error"
                       variant="filled"
                       className="my-1 mb-2"
                     >
-                      {errors.city.message}
+                      {errors?.city.message}
                     </Alert>
                   )}
                 </div>
@@ -295,7 +295,7 @@ function CheckOutForm() {
         <div className="mt-8 p-2 ">
           <div className="text-md flex  gap-x-2 py-2 font-bold uppercase">
             <span>Items</span>
-            <span>{items.length}</span>
+            <span>{items?.length}</span>
           </div>
           <div className="flex justify-between py-2 text-sm font-semibold uppercase">
             <span>Subtotal</span>

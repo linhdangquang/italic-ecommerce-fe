@@ -38,32 +38,32 @@ function OrderDetails() {
           <div className="flex flex-col">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order ID: </span>
-              <span className="orderInfo__item-value">{orderInfo._id}</span>
+              <span className="orderInfo__item-value">{orderInfo?._id}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order Date: </span>
               <span className="orderInfo__item-value">
-                {dayjs(orderInfo.createdAt).format('DD/MM/YYYY')}
+                {dayjs(orderInfo?.createdAt).format('DD/MM/YYYY')}
               </span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Order Status: </span>
-              {orderInfo.status === 'pending' && (
+              {orderInfo?.status === 'pending' && (
                 <span className="orderInfo__item-value text-orange-500">
                   Pending
                 </span>
               )}
-              {orderInfo.status === 'delivery' && (
+              {orderInfo?.status === 'delivery' && (
                 <span className="orderInfo__item-value text-blue-500">
                   Delivery
                 </span>
               )}
-              {orderInfo.status === 'completed' && (
+              {orderInfo?.status === 'completed' && (
                 <span className="orderInfo__item-value text-green-500">
                   Completed
                 </span>
               )}
-              {orderInfo.status === 'cancelled' && (
+              {orderInfo?.status === 'cancelled' && (
                 <span className="orderInfo__item-value text-rose-500">
                   Cancelled
                 </span>
@@ -72,7 +72,7 @@ function OrderDetails() {
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Total Price: </span>
               <span className="orderInfo__item-value">
-                {USDFormat(orderInfo.total)}
+                {USDFormat(orderInfo?.total)}
               </span>
             </div>
           </div>
@@ -81,37 +81,37 @@ function OrderDetails() {
           <h3 className="mb-2 flex items-center justify-between rounded-sm border-2 py-1 text-center font-semibold ">
             User Information's{' '}
             <img
-              src={userInfo.avatarUrl}
-              alt={userInfo.avatarName}
+              src={userInfo?.avatarUrl}
+              alt={userInfo?.avatarName}
               className="avatar cursor-pointer rounded-full transition-all md:h-6 md:w-6 md:hover:scale-[200%]"
             />
           </h3>
           <div className="flex flex-col">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User ID: </span>
-              <span className="orderInfo__item-value">{userInfo._id}</span>
+              <span className="orderInfo__item-value">{userInfo?._id}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User Name: </span>
-              <span className="orderInfo__item-value">{orderInfo.name}</span>
+              <span className="orderInfo__item-value">{orderInfo?.name}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User Email: </span>
-              <span className="orderInfo__item-value">{orderInfo.email}</span>
+              <span className="orderInfo__item-value">{orderInfo?.email}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Phone Number: </span>
-              <span className="orderInfo__item-value">{orderInfo.phone}</span>
+              <span className="orderInfo__item-value">{orderInfo?.phone}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Address: </span>
               <span className="orderInfo__item-value">
-                <address>{`${orderInfo.address}, ${orderInfo.city}`}</address>
+                <address>{`${orderInfo?.address}, ${orderInfo?.city}`}</address>
               </span>
             </div>
           </div>
         </div>
-        <div className="orderInfo w-full rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+        <div className="orderInfo w-full? rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Products Ordered Information's
           </h3>
@@ -136,7 +136,7 @@ function OrderDetails() {
                   </tr>
                 </thead>
                 <tbody>
-                  {productsInfo.map((product, idx) => (
+                  {productsInfo?.map((product, idx) => (
                     <tr key={idx} className="hover">
                       <th>{idx + 1}</th>
                       <td>{product.productItem.name}</td>
@@ -153,7 +153,7 @@ function OrderDetails() {
               </table>
             </div>
             <div className="text-right font-extrabold text-white">
-              <span>Sum: {USDFormat(orderInfo.total)}</span>
+              <span>Sum: {USDFormat(orderInfo?.total)}</span>
             </div>
           </div>
         </div>

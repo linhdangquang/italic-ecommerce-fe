@@ -106,7 +106,7 @@ function HomeDash() {
         <CategoryPieChart data={data} />
         <div>
           <h2 className="text-lg font-semibold">
-            Recent Order #{recentOrder._id}
+            Recent Order #{recentOrder?._id}
           </h2>
           <div className="flex flex-col">
             <p>{dayjs(recentOrder?.createdAt).format('HH:mm DD/MM/YYYY ')}</p>

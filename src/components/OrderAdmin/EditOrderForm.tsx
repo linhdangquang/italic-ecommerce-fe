@@ -104,13 +104,13 @@ function EditOrderForm() {
                   className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
                   {...register('address')}
                 />
-                {errors.address && (
+                {errors?.address && (
                   <Alert
                     severity="error"
                     variant="filled"
                     className="my-1 mb-2"
                   >
-                    {errors.address.message}
+                    {errors?.address.message}
                   </Alert>
                 )}
               </div>

@@ -89,7 +89,7 @@ function UpdateBannerForm() {
                   placeholder="Title"
                   {...register('title')}
                 />
-                {errors.title?.message && (
+                {errors?.title?.message && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"
@@ -109,13 +109,13 @@ function UpdateBannerForm() {
                   placeholder="Subtitle"
                   {...register('subtitle')}
                 />
-                {errors.subtitle?.message && (
+                {errors?.subtitle?.message && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"
                     variant="filled"
                   >
-                    {errors.subtitle?.message}
+                    {errors?.subtitle?.message}
                   </Alert>
                 )}
               </div>
@@ -131,13 +131,13 @@ function UpdateBannerForm() {
                   placeholder="Button Text"
                   {...register('buttonText')}
                 />
-                {errors.buttonText?.message && (
+                {errors?.buttonText?.message && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"
                     variant="filled"
                   >
-                    {errors.buttonText?.message}
+                    {errors?.buttonText?.message}
                   </Alert>
                 )}
               </div>
@@ -151,13 +151,13 @@ function UpdateBannerForm() {
                   placeholder="Button URL"
                   {...register('buttonLink')}
                 />
-                {errors.buttonLink?.message && (
+                {errors?.buttonLink?.message && (
                   <Alert
                     severity="error"
                     className="my-1 mb-2"
                     variant="filled"
                   >
-                    {errors.buttonLink?.message}
+                    {errors?.buttonLink?.message}
                   </Alert>
                 )}
               </div>
@@ -186,7 +186,7 @@ function UpdateBannerForm() {
                       className="my-1 mb-2"
                       variant="filled"
                     >
-                      {errors.imageUrl?.message}
+                      {errors?.imageUrl?.message}
                     </Alert>
                   )}
                 </div>
@@ -231,7 +231,7 @@ function UpdateBannerForm() {
                     className="my-1 mb-2"
                     variant="filled"
                   >
-                    {errors.status?.message}
+                    {errors?.status?.message}
                   </Alert>
                 )}
               </div>

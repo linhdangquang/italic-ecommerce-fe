@@ -6,9 +6,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
+import BeatLoader from 'react-spinners/BeatLoader';
 import { getOrderDetails } from '../../api/order';
 import {updateOrder} from '../../features/Order/ordersSlice.js';
 import { USDFormat } from '../../utils/currencyFormat';
+
 
 function UserDetailOrder() {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ function UserDetailOrder() {
   const [userInfo, setUserInfo] = useState<any>({});
   const [productsInfo, setProductsInfo] = useState<any>([]);
   const [productsQuantity, setProductsQuantity] = useState<any>(0);
+  const [isLoading, setIsLoading] = useState(true);
   const { orderId } = useParams();
   useEffect(() => {
     getOrderDetails(orderId as string).then((res) => {
@@ -28,6 +31,7 @@ function UserDetailOrder() {
           .map((product) => product.quantity)
           .reduce((a, b) => a + b)
       );
+      setIsLoading(false);
     });
   }, [orderId]);
   const cancelOrder = async () => {
@@ -46,7 +50,7 @@ function UserDetailOrder() {
         if (result.isConfirmed) {
           try {
             dispatch(updateOrder({
-              _id: orderInfo._id,
+              _id: orderInfo?._id,
               status: 'cancelled',
             }));
             navigate('/orders');
@@ -97,7 +101,8 @@ function UserDetailOrder() {
       <h1 className="text-2xl font-bold text-gray-600">
         Order Details: #{orderInfo?._id}
       </h1>
-      <div className="flex flex-wrap  gap-2 gap-x-4 py-4">
+      {isLoading === false ? (
+        <div className="flex flex-wrap  gap-2 gap-x-4 py-4">
         <div className="orderInfo rounded border-2 pb-0 border-gray-400 bg-slate-100 bg-gradient-to-br from-slate-500 to-cyan-600  p-0 text-neutral-content shadow-lg drop-shadow-md relative flex flex-col justify-between">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Order Information's
@@ -139,7 +144,7 @@ function UserDetailOrder() {
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Total Price: </span>
               <span className="orderInfo__item-value">
-                {USDFormat(orderInfo.total)}
+                {USDFormat(orderInfo?.total)}
               </span>
             </div>
           </div>
@@ -172,24 +177,24 @@ function UserDetailOrder() {
           <div className="flex flex-col px-2">
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User ID: </span>
-              <span className="orderInfo__item-value">{userInfo._id}</span>
+              <span className="orderInfo__item-value">{userInfo?._id}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User Name: </span>
-              <span className="orderInfo__item-value">{orderInfo.name}</span>
+              <span className="orderInfo__item-value">{orderInfo?.name}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">User Email: </span>
-              <span className="orderInfo__item-value">{orderInfo.email}</span>
+              <span className="orderInfo__item-value">{orderInfo?.email}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Phone Number: </span>
-              <span className="orderInfo__item-value">{orderInfo.phone}</span>
+              <span className="orderInfo__item-value">{orderInfo?.phone}</span>
             </div>
             <div className="orderInfo__item">
               <span className="orderInfo__item-label">Address: </span>
               <span className="orderInfo__item-value">
-                <address>{`${orderInfo.address}, ${orderInfo.city}`}</address>
+                <address>{`${orderInfo?.address}, ${orderInfo?.city}`}</address>
               </span>
             </div>
           </div>
@@ -219,7 +224,7 @@ function UserDetailOrder() {
                   </tr>
                 </thead>
                 <tbody>
-                  {productsInfo.map((product, idx) => (
+                  {productsInfo?.map((product, idx) => (
                     <tr key={idx} className="hover">
                       <th>{idx + 1}</th>
                       <td>{product.productItem.name}</td>
@@ -236,11 +241,17 @@ function UserDetailOrder() {
               </table>
             </div>
             <div className="text-right font-extrabold text-white">
-              <span>Sum: {USDFormat(orderInfo.total)}</span>
+              <span>Sum: {USDFormat(orderInfo?.total)}</span>
             </div>
           </div>
         </div>
       </div>
+      ) : (
+        <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+          <BeatLoader size={20} color="#34d399" margin={2} />
+        </div>
+      )}
+      
     </div>
   );
 }

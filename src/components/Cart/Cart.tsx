@@ -38,7 +38,7 @@ function Cart() {
         <div className="flex  justify-between border-b pb-8">
           <h1 className="text-2xl font-semibold">Shopping Cart</h1>
           <h2 className="flex flex-col text-2xl font-semibold">
-            {items.length} Items
+            {items?.length} Items
             <button
               type="button"
               className="text-xs text-gray-500 hover:text-gray-700 hover:underline"
@@ -121,7 +121,7 @@ function Cart() {
                 });
                 navigate('/signin');
               }
-              if (user.user.role === 'admin') {
+              if (user?.user.role === 'admin') {
                 toast.warning('Admin cannot checkout', {
                   position: 'bottom-right',
                 });
