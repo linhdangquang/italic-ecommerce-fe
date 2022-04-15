@@ -19,7 +19,9 @@ function HomeDash() {
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
   const { orders } = useSelector((state: any) => state.orders);
-  const totalEarn = orders.map((order) => order.total).reduce((a, b) => a + b);
+  const totalEarn = orders
+    ?.map((order) => order.total)
+    ?.reduce((a, b) => a + b);
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
   useEffect(() => {
@@ -31,11 +33,13 @@ function HomeDash() {
   useEffect(() => {
     document.title = 'Dashboard';
   });
-  const categoryLabels = categories.map((category: any) => category.name);
-  const productsByCategory = categories.map((category: any) => {
-    return products.filter((product: any) => product.category === category._id);
+  const categoryLabels = categories?.map((category: any) => category.name);
+  const productsByCategory = categories?.map((category: any) => {
+    return products?.filter(
+      (product: any) => product.category === category._id
+    );
   });
-  const quantityByCategory = productsByCategory.map((category: any) => {
+  const quantityByCategory = productsByCategory?.map((category: any) => {
     return category.length;
   });
   sortBy(orders, ['createdAt']);
