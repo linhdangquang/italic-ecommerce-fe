@@ -74,7 +74,11 @@ function CheckOutForm() {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <li
+          key={place_id}
+          className="cursor-pointer px-4 hover:bg-slate-100"
+          onClick={handleSelect(suggestion)}
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
@@ -187,7 +191,11 @@ function CheckOutForm() {
                   {...register('address')} // <-- register the input
                   onChange={handleInput}
                 />
-                {status === 'OK' && <ul>{renderSuggestions()}</ul>}
+                {status === 'OK' && (
+                  <ul className="mb-2 rounded-b bg-slate-200">
+                    {renderSuggestions()}
+                  </ul>
+                )}
                 {/* <textarea
                   cols={5}
                   rows={10}
