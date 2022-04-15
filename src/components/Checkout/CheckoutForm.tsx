@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable camelcase */
 import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,6 +8,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
+import usePlacesAutocomplete from 'use-places-autocomplete';
+import useOnclickOutside from 'react-cool-onclickoutside';
 import { MoonLoader } from 'react-spinners';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
@@ -13,6 +18,7 @@ import { checkoutFormValidationSchema } from '../../schema/checkout';
 import CartItem from '../Cart/CartItem';
 import { addOrder } from '../../features/Order/ordersSlice.js';
 import { clearCart } from '../../features/Cart/cartSlice.js';
+import GooglePlaces from '../GooglePlaces';
 
 type FormInputs = {
   name: string;
@@ -36,8 +42,46 @@ function CheckOutForm() {
   const { loading, error } = useSelector((state: any) => state.orders);
   const { items, totalAmount } = useSelector((state: any) => state.cart);
   const { user, isLoggedIn } = useSelector((state: any) => state.auth);
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      /* Define search scope here */
+    },
+    debounce: 300,
+  });
+  const ref = useOnclickOutside(() => {
+    clearSuggestions();
+  });
+  const handleInput = (e) => {
+    setValue(e.target.value);
+  };
 
+  const handleSelect =
+    ({ description }) =>
+    () => {
+      setValue(description, false);
+      clearSuggestions();
+    };
+  const renderSuggestions = () =>
+    data.map((suggestion) => {
+      const {
+        place_id,
+        structured_formatting: { main_text, secondary_text },
+      } = suggestion;
+
+      return (
+        <li key={place_id} onClick={handleSelect(suggestion)}>
+          <strong>{main_text}</strong> <small>{secondary_text}</small>
+        </li>
+      );
+    });
   const onSubmit: SubmitHandler<FormInputs> = async (data: any) => {
+    data.address = value;
     const productsBuy = items.map((item: any) => {
       return {
         productId: item._id,
@@ -136,12 +180,21 @@ function CheckOutForm() {
                 </div>
               </div>
               <div className="form-control my-2">
-                <textarea
+                <input
+                  value={value}
+                  disabled={!ready}
+                  placeholder="Your address"
+                  className="textarea textarea-info w-full resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0"
+                  {...register('address')} // <-- register the input
+                  onChange={handleInput}
+                />
+                {status === 'OK' && <ul>{renderSuggestions()}</ul>}
+                {/* <textarea
                   cols={5}
                   rows={10}
                   className="textarea textarea-info resize-none border-2 shadow shadow-cyan-300 drop-shadow-sm focus:shadow-md focus:shadow-cyan-300 focus:outline-0 md:h-24"
                   {...register('address')}
-                />
+                /> */}
                 {errors.address && (
                   <Alert
                     severity="error"

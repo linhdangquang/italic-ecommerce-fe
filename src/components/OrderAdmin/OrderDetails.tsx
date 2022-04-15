@@ -31,7 +31,7 @@ function OrderDetails() {
     <div className="p-4">
       <h1 className="text-2xl font-bold text-gray-600">Order Details</h1>
       <div className="flex flex-wrap gap-2 py-4">
-        <div className="orderInfo w-fit rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-br from-teal-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+        <div className="orderInfo  rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-br from-teal-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Order Information's
           </h3>
@@ -77,7 +77,7 @@ function OrderDetails() {
             </div>
           </div>
         </div>
-        <div className="orderInfo w-fit flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-bl from-orangeLight to-slate-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+        <div className="orderInfo grow  flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-bl from-orangeLight to-slate-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 flex items-center justify-between rounded-sm border-2 py-1 text-center font-semibold ">
             User Information's{' '}
             <img
@@ -111,7 +111,7 @@ function OrderDetails() {
             </div>
           </div>
         </div>
-        <div className="orderInfo w-fit flex-1 rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
+        <div className="orderInfo w-full rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-tr from-pink-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
             Products Ordered Information's
           </h3>

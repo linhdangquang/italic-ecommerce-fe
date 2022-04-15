@@ -97,7 +97,7 @@ function SearchForm() {
                 ))}
                 <div className="text-sm text-gray-900">
                   <Link to="/" className="font-semibold hover:text-sky-600">
-                    All results ({search?.length})
+                    Show all results ({search?.length})
                     <span className="text-sm italic text-gray-900">
                       {searchValue}
                     </span>
