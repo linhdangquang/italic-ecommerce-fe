@@ -33,5 +33,5 @@ export const searchProducts = (textSearch: string) => {
     return;
   }
   const URL = `/api/products/?q=${textSearch}`;
-  return instance.get(URL);
+  return instance.get<any>(URL);
 };

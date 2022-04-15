@@ -21,15 +21,11 @@ function SearchForm() {
     };
   };
 
-  const handleClickOutside = useCallback(() => {
-    setSearch([]);
-  }, []);
-
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setIsSearching(true);
     if (value.length > 2 && !isSearching) {
-      const { data } = await searchProducts(value);
+      const { data } = (await searchProducts(value)) as any;
       setSearch(data);
       document.addEventListener('click', () => {
         e.target.value = '';

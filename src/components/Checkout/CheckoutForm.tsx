@@ -18,7 +18,6 @@ import { checkoutFormValidationSchema } from '../../schema/checkout';
 import CartItem from '../Cart/CartItem';
 import { addOrder } from '../../features/Order/ordersSlice.js';
 import { clearCart } from '../../features/Cart/cartSlice.js';
-import GooglePlaces from '../GooglePlaces';
 
 type FormInputs = {
   name: string;
