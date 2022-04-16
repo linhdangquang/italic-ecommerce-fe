@@ -18,7 +18,7 @@
 ## Features
 
 - Sign in/ Sign up/ Logout
-- Cart
+- Cart, Checkout
 - Admin Dashboard
 
 
