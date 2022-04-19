@@ -11,7 +11,7 @@
 
 ## Badges
 
-[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript/badge)](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript)
+[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe/badge)](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe)
 
 
 
