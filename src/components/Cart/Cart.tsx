@@ -15,6 +15,9 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items, dispatch]);
+  useEffect(() => {
+    document.title = 'Cart';
+  }, []);
   if (items.length === 0) {
     return (
       <div className="flex min-h-screen items-center justify-center">

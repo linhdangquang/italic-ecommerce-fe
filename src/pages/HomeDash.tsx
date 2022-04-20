@@ -16,23 +16,13 @@ import { USDFormat } from '../utils/currencyFormat';
 function HomeDash() {
   const dispatch = useDispatch();
   const now = dayjs();
+  const [totalEarn, setTotalEarn] = React.useState(0);
   const { products } = useSelector((state: any) => state.products);
   const { users } = useSelector((state: any) => state.users);
   const { orders } = useSelector((state: any) => state.orders);
-  const totalEarn = orders
-    ?.map((order) => order.total)
-    ?.reduce((a, b) => a + b);
   const { user } = useSelector((state: any) => state.auth);
   const { categories } = useSelector((state: any) => state.categories);
-  useEffect(() => {
-    dispatch(fetchProducts());
-    dispatch(fetchUsers());
-    dispatch(fetchCategories());
-    dispatch(fetchOrders());
-  }, [dispatch]);
-  useEffect(() => {
-    document.title = 'Dashboard';
-  });
+
   const categoryLabels = categories?.map((category: any) => category.name);
   const productsByCategory = categories?.map((category: any) => {
     return products?.filter(
@@ -66,6 +56,23 @@ function HomeDash() {
       },
     ],
   };
+  useEffect(() => {
+    dispatch(fetchProducts());
+    dispatch(fetchUsers());
+    dispatch(fetchCategories());
+    dispatch(fetchOrders());
+  }, [dispatch]);
+  useEffect(() => {
+    document.title = 'Dashboard';
+  });
+  useEffect(() => {
+    const total = orders
+      ?.map((order) => order?.total)
+      ?.reduce((a, b) => {
+        return a + b;
+      }, 0);
+    setTotalEarn(total);
+  }, [orders]);
   return (
     <div className="px-4">
       <div className="pb-4">

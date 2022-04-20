@@ -75,7 +75,9 @@ export default function ProfileForm() {
   useEffect(() => {
     reset(user?.user);
   }, [user, reset, dispatch]);
-
+  useEffect(() => {
+    document.title = 'Profile';
+  }, []);
   return (
     <div className="min-h-screen px-20 py-4">
       <div className="flex">

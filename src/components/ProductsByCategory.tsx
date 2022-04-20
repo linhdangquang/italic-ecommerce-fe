@@ -17,6 +17,9 @@ function ProductsByCategory() {
   const products = category?.category?.products?.filter(
     (product: ProductType) => product.status === 0
   );
+  useEffect(() => {
+    document.title = 'Products';
+  }, []);
   return (
     <div className="min-h-screen py-2 px-20">
       <div className="breadcrumbs text-xs text-gray-500">

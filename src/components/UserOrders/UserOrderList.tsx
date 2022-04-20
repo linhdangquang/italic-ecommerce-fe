@@ -242,6 +242,9 @@ function UserOrderList() {
       navigate('/');
     }
   }, [navigate]);
+  useEffect(() => {
+    document.title = 'Orders';
+  }, []);
   return (
     <div className="px-20 py-4">
       <h1 className="text-2xl font-bold">Your orders</h1>

@@ -2,11 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import BeatLoader from 'react-spinners/BeatLoader';
 import { getOrderDetails } from '../../api/order';
 import { USDFormat } from '../../utils/currencyFormat';
 
+
 function OrderDetails() {
- 
+  const [loading, setLoading] = useState(true);
   const [orderInfo, setOrderInfo] = useState<any>({});
   const [userInfo, setUserInfo] = useState<any>({});
   const [productsInfo, setProductsInfo] = useState<any>([]);
@@ -22,6 +24,7 @@ function OrderDetails() {
           .map((product) => product.quantity)
           .reduce((a, b) => a + b)
       );
+      setLoading(false);
     });
   }, [orderId]);
   useEffect(() => {
@@ -29,7 +32,9 @@ function OrderDetails() {
   }, [orderInfo._id])
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold text-gray-600">Order Details</h1>
+      <h1 className="text-2xl font-bold text-gray-600">Order Details #{orderInfo?._id}</h1>
+      {loading === false ? (
+
       <div className="flex flex-wrap gap-2 py-4">
         <div className="orderInfo  rounded border-2 border-gray-400 bg-slate-100 bg-gradient-to-br from-teal-500 to-gray-600 p-2 text-neutral-content shadow-lg drop-shadow-md">
           <h3 className="mb-2 rounded-sm border-2 py-1 text-center font-semibold ">
@@ -158,6 +163,11 @@ function OrderDetails() {
           </div>
         </div>
       </div>
+      ) : (
+        <div className=" absolute top-1/2 right-1/2 flex min-h-fit items-center justify-center">
+          <BeatLoader size={20} color="#34d399" margin={2} />
+        </div>
+      )}
     </div>
   );
 }

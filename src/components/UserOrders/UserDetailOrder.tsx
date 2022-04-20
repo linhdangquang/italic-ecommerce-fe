@@ -96,6 +96,9 @@ function UserDetailOrder() {
         }
       });
   }
+  useEffect(() => {
+    document.title = 'Order Details';
+  }, []);
   return (
     <div className="min-h-screen px-20 py-4">
       <h1 className="text-2xl font-bold text-gray-600">

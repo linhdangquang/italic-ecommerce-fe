@@ -62,6 +62,9 @@ function SignInForm() {
       navigate('/');
     }
   }
+  React.useEffect(() => {
+    document.title = 'Sign in';
+  }, []);
   return (
     <div className="card w-full max-w-md flex-shrink-0 bg-base-100 shadow-lg shadow-slate-400 drop-shadow-2xl">
       <div className="card-body">

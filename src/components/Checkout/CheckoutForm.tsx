@@ -134,6 +134,9 @@ function CheckOutForm() {
       });
     }
   }, [reset, user]);
+  useEffect(() => {
+    document.title = 'Checkout';
+  }, []);
   return (
     <div className="my-10 mx-20 flex min-h-screen shadow-md">
       <div className="w-3/4 bg-white px-10 py-10">
