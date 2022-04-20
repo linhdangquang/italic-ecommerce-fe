@@ -2,7 +2,8 @@
 # Ecommerce shop clothes
 
 
-
+## Backend API
+https://github.com/linhdangquang/italic-ecommerce-api
 
 ## Authors
 
@@ -11,14 +12,14 @@
 
 ## Badges
 
-[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript/badge)](https://www.codefactor.io/repository/github/linhdangquang/web502_typescript)
+[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe/badge)](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe)
 
 
 
 ## Features
 
 - Sign in/ Sign up/ Logout
-- Cart
+- Cart, Checkout
 - Admin Dashboard
 
 
