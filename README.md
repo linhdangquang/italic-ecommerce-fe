@@ -10,10 +10,6 @@ https://github.com/linhdangquang/italic-ecommerce-api
 - [@linhdangquang](https://www.github.com/linhdangquang)
 
 
-## Badges
-
-[![CodeFactor](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe/badge)](https://www.codefactor.io/repository/github/linhdangquang/italic-ecommerce-fe)
-
 
 
 ## Features
