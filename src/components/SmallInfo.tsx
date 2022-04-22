@@ -2,9 +2,9 @@ import React from 'react';
 
 function SmallInfo() {
   return (
-    <div className="bg-sky-100 px-20">
-      <div className="mx-auto flex justify-center">
-        <div className="relative flex items-start justify-center px-[25px] py-8 before:absolute before:top-1/2 before:right-0 before:h-[80px] before:w-0 before:-translate-y-1/2 before:border-r">
+    <div className="bg-sky-100 px-4 md:px-20">
+      <div className="mx-auto flex flex-col justify-center md:flex-row">
+        <div className="relative flex items-start justify-center  px-4 py-2 before:absolute before:top-1/2 before:right-0 before:h-[80px] before:w-0 before:-translate-y-1/2 before:border-r md:py-8 md:px-[25px]">
           <img
             src="https://italic.com/static/images/orange.png"
             alt="img"
@@ -18,7 +18,7 @@ function SmallInfo() {
             </p>
           </div>
         </div>
-        <div className="relative flex items-start justify-center px-[25px] py-8 before:absolute before:top-1/2 before:right-0 before:h-[80px] before:w-0 before:-translate-y-1/2 before:border-r">
+        <div className="relative flex items-start justify-center  px-4 py-2 before:absolute before:top-1/2 before:right-0 before:h-[80px] before:w-0 before:-translate-y-1/2 before:border-r md:py-8 md:px-[25px]">
           <img
             src="https://italic.com/static/images/star.png"
             alt="img"
@@ -34,7 +34,7 @@ function SmallInfo() {
             </p>
           </div>
         </div>
-        <div className="relative flex items-start justify-center px-[25px] py-8 ">
+        <div className="relative flex items-start justify-center  px-4 py-2 before:absolute before:top-1/2 before:right-0 before:h-[80px] before:w-0 before:-translate-y-1/2 before:border-r md:py-8 md:px-[25px]">
           <img
             src="https://italic.com/static/images/oliveleaf.png"
             alt="img"

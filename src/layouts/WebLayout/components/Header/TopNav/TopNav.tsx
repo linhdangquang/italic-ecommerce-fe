@@ -6,7 +6,7 @@ import User from './User';
 
 function TopNav() {
   return (
-    <div className="flex items-center border-b bg-base-100 py-2 px-20">
+    <div className="flex flex-col items-center border-b bg-base-100 py-2 px-4 sm:flex-row md:px-20">
       <div className="pr-2">
         <NavLink
           to="/"
@@ -16,7 +16,7 @@ function TopNav() {
         </NavLink>
       </div>
       <SearchForm />
-      <div className="flex items-center">
+      <div className="flex w-full items-center justify-end sm:w-fit md:w-fit md:justify-center">
         <Cart />
         <div>
           <User />

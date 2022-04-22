@@ -39,7 +39,7 @@ function SearchForm() {
   };
   const optimisedVersion = useCallback(debounce(handleChange), []);
   return (
-    <div className="  w-full flex-1 items-center px-2 ">
+    <div className=" w-full flex-1 items-center px-2 ">
       <form action="">
         <div className="form-control relative w-full border-0 ">
           <div className="input-group relative  ">

@@ -6,7 +6,7 @@ import SignUpForm from '../components/SignUpForm';
 function SignUpPage() {
   return (
     <>
-      <div className="breadcrumbs px-20 text-xs text-gray-500">
+      <div className="breadcrumbs px-4 text-xs text-gray-500 md:px-20">
         <ul>
           <li>
             <Link to="/">
@@ -19,7 +19,7 @@ function SignUpPage() {
           </li>
         </ul>
       </div>
-      <div className="hero  min-h-full bg-base-200  py-16 pb-40">
+      <div className="hero  min-h-full bg-base-200 py-2 pb-40 md:py-16">
         <div className="hero-content w-full  flex-col  justify-end lg:flex-row-reverse ">
           <div className="min-w-xl pl-4 text-center lg:text-left">
             <h1 className="text-5xl font-bold text-blacklight">Sign up now!</h1>

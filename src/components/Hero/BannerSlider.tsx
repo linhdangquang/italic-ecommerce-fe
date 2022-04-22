@@ -32,6 +32,7 @@ function BannerSlider() {
       }}
       lazy
       modules={[Autoplay, EffectFade, Lazy, Pagination]}
+      className="hidden md:block"
     >
       {activeBanners?.map((banner: BannerType) => (
         <SwiperSlide key={banner._id}>

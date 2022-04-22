@@ -36,7 +36,7 @@ function User() {
               <p className="text-base font-medium ">{user.user?.name}</p>
               <p className="text-xs text-gray-500">{user.user?.email}</p>
             </div>
-            {user.user.role === 'admin' && (
+            {user?.user?.role === 'admin' && (
               <li>
                 <Link
                   className="justify-between active:bg-teal-500"

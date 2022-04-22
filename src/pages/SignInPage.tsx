@@ -6,7 +6,7 @@ import SignInForm from '../components/SignInForm';
 function SignInPage() {
   return (
     <>
-      <div className="breadcrumbs px-20 text-xs text-gray-500">
+      <div className="breadcrumbs px-4 text-xs text-gray-500 md:px-20">
         <ul>
           <li>
             <Link to="/">
@@ -19,11 +19,11 @@ function SignInPage() {
           </li>
         </ul>
       </div>
-      <div className="hero  min-h-full bg-base-200  py-16 pb-40">
-        <div className="hero-content w-full  flex-col  justify-end lg:flex-row-reverse ">
+      <div className="hero  min-h-full bg-base-200 py-2  pb-40 md:py-16">
+        <div className="hero-content w-full  flex-col justify-end sm:flex-col lg:flex-row-reverse ">
           <div className="min-w-xl pl-4 text-center lg:text-left">
             <h1 className="text-5xl font-bold text-blacklight">Login now!</h1>
-            <p className="pt-6 pb-2">
+            <p className="hidden pt-6 pb-2 md:block">
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui,
               quas aspernatur similique quidem aperiam itaque repellat,
               voluptatibus minima dignissimos fuga, vitae eligendi deleniti

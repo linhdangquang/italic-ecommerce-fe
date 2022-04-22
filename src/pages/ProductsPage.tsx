@@ -20,7 +20,7 @@ function ProductsPage() {
     document.title = 'Products';
   }, []);
   return (
-    <div className="min-h-screen py-2 px-20 pb-20">
+    <div className="min-h-screen py-2 px-4 pb-20 md:px-20">
       <div className="breadcrumbs text-xs text-gray-500">
         <ul>
           <li>

@@ -11,11 +11,11 @@ function Menu() {
     dispatch(fetchCategories());
   }, [dispatch]);
   return (
-    <ul className="flex gap-6 ">
+    <ul className="flex flex-wrap gap-x-6 ">
       <li>
         <NavLink
           to="products"
-          className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+          className="NavLink inline-block border-b-2 border-transparent py-2  text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90 2xl:text-base"
         >
           Products
         </NavLink>
@@ -24,7 +24,7 @@ function Menu() {
         <li key={idx + 1}>
           <NavLink
             to={`/categories/${category._id}`}
-            className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+            className="NavLink inline-block border-b-2 border-transparent py-2 text-sm  transition-transform hover:border-b-2 hover:border-black active:scale-90 2xl:text-base"
           >
             {category.name}
           </NavLink>
@@ -33,7 +33,7 @@ function Menu() {
       <li>
         <NavLink
           to="about"
-          className="NavLink inline-block border-b-2 border-transparent py-2 text-sm transition-transform hover:border-b-2 hover:border-black active:scale-90"
+          className="NavLink inline-block border-b-2 border-transparent py-2 text-sm  transition-transform hover:border-b-2 hover:border-black active:scale-90 2xl:text-base"
         >
           About
         </NavLink>

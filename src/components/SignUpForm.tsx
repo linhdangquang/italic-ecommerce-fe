@@ -131,7 +131,7 @@ function SignUpForm() {
               </Collapse>
             )}
           </div>
-          <div className="form-control grid grid-cols-2 gap-x-2">
+          <div className="form-control grid grid-cols-1 gap-x-2 sm:grid-cols-2">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
@@ -164,11 +164,6 @@ function SignUpForm() {
                   </Alert>
                 </Collapse>
               )}
-              <label className="label">
-                <Link to="/signin" className="link link-hover label-text-alt">
-                  Sign in
-                </Link>
-              </label>
             </div>
             <div className="form-control">
               <label className="label">
@@ -201,6 +196,14 @@ function SignUpForm() {
                   </Alert>
                 </Collapse>
               )}
+              <label className="label">
+                <Link
+                  to="/signin"
+                  className="link link-hover label-text-alt ml-auto text-right"
+                >
+                  Sign in
+                </Link>
+              </label>
             </div>
           </div>
           {message && (

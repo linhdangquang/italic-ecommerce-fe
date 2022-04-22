@@ -6,14 +6,14 @@ function Footer() {
   return (
     <div className="bg-blacklight">
       <div className=" mx-auto w-auto">
-        <div className="xs:px-[25px] xs:py-[60px] lg:px-20 lg:py-20">
-          <div className="grid grid-cols-3 gap-x-16 border-b border-grayMirage pb-[70px]">
+        <div className="p-4 md:px-20 lg:px-20 lg:py-20">
+          <div className="grid grid-cols-1 border-b border-grayMirage pb-[70px] md:grid-cols-3 md:gap-x-16">
             <div>
               <div>
                 <p className="mb-[10px] font-medium text-blueSage">
                   Our Mission
                 </p>
-                <p className="mb-4 text-sm leading-5 text-white">
+                <p className="mb-2 text-sm leading-5 text-white md:mb-4">
                   To source, develop, and curate the highest quality products at
                   the lowest prices.
                 </p>
@@ -29,7 +29,7 @@ function Footer() {
                 <p className="mb-[10px] font-medium text-blueSage">
                   Request a Product
                 </p>
-                <p className="mb-4 text-sm leading-5 text-white">
+                <p className="mb-2 text-sm leading-5 text-white md:mb-4">
                   Don't see what you're looking for? All you have to do is ask —
                   we'll do our best to track down your request.
                 </p>
@@ -45,7 +45,7 @@ function Footer() {
                 <p className="mb-[10px] font-medium text-blueSage">
                   Share Site Feedback
                 </p>
-                <p className="mb-4 text-sm leading-5 text-white">
+                <p className="mb-2 text-sm leading-5 text-white md:mb-4">
                   We're always looking for ways to improve our site. We'll send
                   you credits if we implement your feedback.
                 </p>
@@ -57,7 +57,7 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div className="mt-[70px] grid sm:grid-cols-2 md:grid-cols-4 xl:gap-x-24">
+          <div className="mt-[70px]  grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 xl:gap-x-24">
             <div>
               <h2 className="font-DancingScript text-3xl font-bold italic text-white">
                 LINHDQ
