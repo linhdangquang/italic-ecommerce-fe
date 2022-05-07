@@ -37,7 +37,7 @@ function SearchForm() {
       setSearch([]);
     }
   };
-  const optimisedVersion = useCallback(debounce(handleChange), []);
+  const optimizedVersion = useCallback(debounce(handleChange), []);
   return (
     <div className=" w-full flex-1 items-center px-2 ">
       <form action="">
@@ -47,12 +47,11 @@ function SearchForm() {
               type="search"
               placeholder="Search for products, categories, brands and more"
               className="input h-[40px] w-full !rounded-full border-2 bg-gray-100 pr-8 !outline-0 ring-0  placeholder:text-slate-600 focus:border-sky-700 focus:bg-inherit "
-              onChange={optimisedVersion}
+              onChange={optimizedVersion}
             />
             <button
               type="button"
               className=" absolute right-2 h-full border-0  bg-transparent"
-              onClick={() => console.log('clicked')}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

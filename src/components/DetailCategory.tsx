@@ -77,12 +77,14 @@ function DetailCategory() {
   const { category, loading, status } = useSelector(
     (state: any) => state.category
   );
-  const rows = category?.category?.products?.map((product: any, idx) => {
-    return {
-      ...product,
-      id: idx + 1,
-    };
-  });
+  const rows = category?.category?.products?.map(
+    (product: any, idx: number) => {
+      return {
+        ...product,
+        id: idx + 1,
+      };
+    }
+  );
   useEffect(() => {
     dispatch(getCategoryDetails(id));
   }, [dispatch, status, id]);
