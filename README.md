@@ -22,17 +22,6 @@ https://github.com/linhdangquang/italic-ecommerce-api
 - Admin Dashboard
 
 
-## 🛠 Technology
-### Frontend :
-React Typescript, Tailwind CSS, MUI, Some libararies.
-### Backend :
-Node JS, Express JS, JWT, Mongoose.
-### Database :
-MongoDB
-### State Management:
-Redux Persist, React Redux, Redux Toolkit.
-
-
 ## Installation
 
 Install packed with npm
@@ -44,5 +33,18 @@ Run Dev
 ```bash
   npm run dev
 ```
+
+## 🛠 Technology
+### Frontend :
+React Typescript, Tailwind CSS, MUI, Some libararies.
+### Backend :
+Node JS, Express JS, JWT, Mongoose.
+### Database :
+MongoDB
+### State Management:
+Redux Persist, React Redux, Redux Toolkit.
+
+
+
 
 
