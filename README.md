@@ -34,15 +34,15 @@ Run Dev
   npm run dev
 ```
 
-## 🛠 Technology
-### Frontend :
-React Typescript, Tailwind CSS, MUI, Some libararies.
-### Backend :
-Node JS, Express JS, JWT, Mongoose.
-### Database :
-MongoDB
-### State Management:
-Redux Persist, React Redux, Redux Toolkit.
+## 🛠 Tech Stack
+
+**Frontend:** React Typescript, Tailwind CSS, MUI.
+
+**State Management:** Redux Persist, React Redux, Redux Toolkit.
+
+**Backend:** Node JS, Express JS, JWT, Mongoose.
+
+**Database:** MongoDB
 
 
 
