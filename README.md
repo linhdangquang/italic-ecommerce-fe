@@ -33,3 +33,16 @@ MongoDB
 Redux Persist, React Redux, Redux Toolkit.
 
 
+## Installation
+
+Install packed with npm
+
+```bash
+  npm install
+```
+Run Dev
+```bash
+  npm run dev
+```
+
+
