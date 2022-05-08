@@ -21,6 +21,10 @@ https://github.com/linhdangquang/italic-ecommerce-api
 - Cart, Checkout
 - Admin Dashboard
 
+## Demo
+
+https://italic-ecommerce.herokuapp.com/
+
 
 ## Installation
 
