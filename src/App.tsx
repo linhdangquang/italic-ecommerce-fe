@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
@@ -35,11 +35,12 @@ import OrderDetails from './components/OrderAdmin/OrderDetails';
 import UserDetailOrder from './components/UserOrders/UserDetailOrder';
 
 function App() {
+  const location = useLocation();
   return (
     <div className="mx-auto">
       <main>
         <ScrollToTop>
-          <Routes>
+          <Routes location={location} key={location.pathname}>
             <Route path="/" element={<WebLayout />}>
               <Route index element={<HomePage />} />
               <Route path="products" element={<ProductsPage />} />
