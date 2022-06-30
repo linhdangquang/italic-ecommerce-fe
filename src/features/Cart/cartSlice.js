@@ -13,10 +13,11 @@ const cartSlice = createSlice({
   reducers: {
     getCartTotal: (state) => {
       const { totalAmount, totalCount } = state.items.reduce(
-        (acc, item) => {
-          acc.totalAmount += item.price * item.count;
-          acc.totalCount += item.count;
-          return acc;
+        (cartTotal, cartItem) => {
+          const { price, amount } = cartItem;
+          const itemTotal = price * amount;
+          cartTotal.totalAmount += itemTotal;
+          return { ...cartTotal, totalCount: cartTotal.totalCount + amount };
         },
         { totalAmount: 0, totalCount: 0 }
       );

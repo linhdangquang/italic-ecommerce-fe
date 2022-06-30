@@ -7,8 +7,11 @@ import { getCartTotal } from '../../../../../features/Cart/cartSlice.js';
 import { USDFormat } from '../../../../../utils/currencyFormat';
 
 function Cart() {
-  const { totalAmount, items } = useSelector((state: any) => state.cart);
+  const { totalAmount, items, totalCount } = useSelector(
+    (state: any) => state.cart
+  );
   const dispatch = useDispatch();
+  console.log(totalAmount, totalCount);
   useEffect(() => {
     dispatch(getCartTotal());
   }, [items]);
