@@ -34,6 +34,6 @@ export const deleteFile = async (fileName: string) => {
 
   const deleteRef = ref(storage, `products/${fileName}`);
   await deleteObject(deleteRef).then(() => {
-    console.log('File deleted');
+    
   });
 };
